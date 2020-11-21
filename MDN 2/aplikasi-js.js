@@ -4,8 +4,8 @@ function buatParagraf() {
   document.body.appendChild(bagian);
 }
 
-const buttons = document.querySelectorAll('button');
+const tombol = document.querySelectorAll('button');
 
-for(let i = 0; i < buttons.length ; i++) {
-  buttons[i].addEventListener('click', buatParagraf);
+for(let i = 0; i < tombol.length ; i++) {
+  tombol[i].addEventListener('click', buatParagraf);
 }

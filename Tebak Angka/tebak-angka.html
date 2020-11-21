@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Permainan Tebak Angka</title>
+    <link rel="stylesheet" href="wawa.css"
+  </head>
+
+  <body>
+    <h1>Permainan Tebak Angka</h1>
+    <p>Coba tebak angka antara 1 sampai dengan 100 dalam 10 kesempatan.</p>
+
+    <div class="kotakIsian">
+      <label for="fieldTebak">Masukkan angka: </label>
+      <input type="text" id="fieldTebak" class="fieldTebak">
+      <input type="submit" value="Cek benar/salah" class="cek">
+    </div>
+
+    <div class="hasil">
+      <p class="angkaSebelum"></p>
+      <p class="hasilAkhir"></p>
+      <p class="rendahAtauTinggi"></p>
+    </div>
+
+    <script>
+      let angkaTerpilih = Math.floor(Math.random() * 100) + 1;
+
+      const angkaSebelum = document.querySelector('.angkaSebelum');
+      const hasilAkhir = document.querySelector('.hasilAkhir');
+      const rendahAtauTinggi = document.querySelector('.rendahAtauTinggi')
+
+      const cek = document.querySelector('.cek');
+      const fieldTebak = document.querySelector('.fieldTebak');
+
+      let kesempatan = 1;
+      let tombolUlang;
+
+      function cekTebak() {
+        let angkaInput = Number(fieldTebak.value);
+
+        if (kesempatan === 1) {
+          angkaSebelum.textContent = 'Angka sebelumnya: ';
+        }
+        angkaSebelum.textContent += angkaInput + ', ';
+
+        if (angkaInput === angkaTerpilih) {
+          hasilAkhir.textContent = 'Selamat! Kamu menang!';
+          hasilAkhir.style.backgroundColor = 'green';
+          rendahAtauTinggi.textContent = '';
+          tamat();
+        } else if (kesempatan === 10) {
+          hasilAkhir.textContent = '!! Kamu Kalah !!';
+          tamat();
+        } else {
+          hasilAkhir.textContent = 'Salah!';
+          hasilAkhir.style.backgroundColor = 'red';
+          if (angkaInput < angkaTerpilih) {
+            rendahAtauTinggi.textContent = 'Angka tebakanmu terlalu rendah!';
+          } else if (angkaInput > angkaTerpilih) {
+            rendahAtauTinggi.textContent = 'Angka tebakanmu terlalu tinggi!';
+          }
+        }
+
+        kesempatan++;
+        fieldTebak.value = '';
+        fieldTebak.focus();
+      }
+
+      cek.addEventListener('click', cekTebak);
+
+    </script>
+
+  </body>
+</html>
