@@ -34,10 +34,10 @@
 
       let kesempatan = 1;
       let tombolUlang;
+      fieldTebak.focus();
 
       function cekTebak() {
         let angkaInput = Number(fieldTebak.value);
-
         if (kesempatan === 1) {
           angkaSebelum.textContent = 'Angka sebelumnya: ';
         }
@@ -60,7 +60,6 @@
             rendahAtauTinggi.textContent = 'Angka tebakanmu terlalu tinggi!';
           }
         }
-
         kesempatan++;
         fieldTebak.value = '';
         fieldTebak.focus();
@@ -68,6 +67,31 @@
 
       cek.addEventListener('click', cekTebak);
 
+      function tamat() { 
+        fieldTebak.disabled = true;
+        cek.disabled = true;
+        tombolUlang = document.createElement('button');
+        tombolUlang.textContent = 'Mulai lagi';
+        document.body.append(tombolUlang);
+        tombolUlang.addEventListener('click', ulang);
+      }
+
+      function ulang() {
+        kesempatan = 1;
+        const kosongkan = document.querySelectorAll('.hasil p');
+
+        for (let i = 0; i < kosongkan.length; i++) {
+          kosongkan[i].textContent = '';
+        }
+
+        tombolUlang.parentNode.removeChild(tombolUlang);
+        fieldTebak.disabled = false;
+        cek.disabled = false;
+        fieldTebak.value = '';
+        fieldTebak.focus();
+        hasilAkhir.style.backgroundColor = 'white';
+        angkaTerpilih = Math.floor(Math.random() * 100) + 1;
+      }
     </script>
 
   </body>
