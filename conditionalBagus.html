@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Conditionals: Task 2</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section>
+      <label for="mesin">Aktifkan mesin atau tidak: </label>
+        <select id="mesin">
+          <option value="tidakAktif">Tidak Aktif</option>
+          <option value="aktif">Aktif</option>
+
+        </select>
+        <div>
+          <label for="nilai">Masukkan nilai:</label>
+          <input type="text" placeholder="Range = 0-100" id="nilai" class="nilai">
+          <input type="submit" value="Cek nilai" class="periksa">
+        </div>
+    </section>
+
+    <script>
+      let response;
+      let machineActive = document.getElementById('mesin');
+      let score = document.querySelector('.nilai');
+      const cek = document.querySelector('.periksa');
+      score.focus();
+
+      let para1 = document.createElement('p');
+      let para2 = document.createElement('p');
+
+      function generateNilai() {
+        let raport = score.value;
+        let generator = machineActive.value;
+        if(generator === 'aktif') {
+          if(raport >= 0 && raport < 101) {
+            response = 'Mantab';
+          } else {
+            response = 'Salah input nilai, mohon dikoreksi. Masukkan nilai antara 1 s.d. 100.';
+            raport = '?';
+          }
+        } else {
+          response = 'Aktifkan mesin untuk mendapatkan komentar.';
+          if(raport !== Number) {
+            raport = '?';
+          }
+        }
+        para1.textContent = `Nilaimu adalah ${ raport }`;
+        para2.textContent = response;
+      }
+
+      cek.addEventListener('click', generateNilai);
+      const section = document.querySelector('section');
+      section.appendChild(para1);
+      section.appendChild(para2);
+    </script>
+
+  </body>
+
+</html>
