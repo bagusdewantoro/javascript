@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Flex 1</title>
+
+  <style>
+
+    .kotak1 {
+      display: flex;
+      align-items: flex-start;
+      background-color: grey;
+      padding: 5px;
+      border-bottom: 10px solid cyan;
+    }
+    .kotak1 .satu {
+      width: 200px;
+      height: 100px;
+      background-color: black;
+      color: white;
+      border-right: 10px solid white;
+    }
+    .kotak1 .dua {
+      width: 100px;
+      height: 150px;
+      background-color: red;
+      color: white;
+      border-right: 20px solid yellow;
+    }
+    .kotak1 .tiga {
+      background-color: green;
+      color: white;
+    }
+    .kotak1 .tiga p{
+      background-color: blue;
+      color: white;
+    }
+
+    .kotak2 {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      background-color: grey;
+      padding: 5px;
+      border-bottom: 15px solid cyan;
+    }
+    .kotak2 .satu {
+      width: 200px;
+      height: 100px;
+      background-color: black;
+      color: white;
+      border-right: 10px solid white;
+    }
+    .kotak2 .dua {
+      width: 100px;
+      height: 150px;
+      background-color: red;
+      color: white;
+      border-right: 20px solid yellow;
+    }
+    .kotak2 .tiga {
+      background-color: green;
+      color: white;
+    }
+
+    .kotak3 {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      background-color: grey;
+      padding: 5px;
+      border-bottom: 15px solid cyan;
+    }
+    .kotak3 .satu {
+      width: 200px;
+      height: 100px;
+      background-color: black;
+      color: white;
+      border-right: 10px solid white;
+    }
+    .kotak3 .dua {
+      width: 100px;
+      height: 150px;
+      background-color: red;
+      color: white;
+      border-right: 20px solid yellow;
+    }
+    .kotak3 .tiga {
+      background-color: green;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="kotak1">
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="tiga"><p>Tanpa width & height. Tanpa width & height. Tanpa width & height. Tanpa width & height. Tanpa width & height. Tanpa width & height.
+    Tanpa width & height. Tanpa width & height. Tanpa width & height. Tanpa width & height. Tanpa width & height. Tanpa width & height.Tanpa width & height.
+    Tanpa width & height.Tanpa width & height.Tanpa width & height.</p></div>
+  </div>
+
+  <div class="kotak1">
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="tiga"><p>Tanpa width & height. Tanpa width & height.</p></div>
+  </div>
+
+  <div class="kotak2">
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="tiga">Tanpa width & height dan tidak pakai &lt;p&gt dan &lt;/p&gt;.</div>
+  </div>
+
+  <div class="kotak3">
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="satu">SATU</div>
+    <div class="dua">DUA</div>
+    <div class="tiga">Tanpa width & height dan tidak pakai &lt;p&gt dan &lt;/p&gt;.</div>
+  </div>
+</body>
