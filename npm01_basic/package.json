@@ -1,0 +1,17 @@
+{
+  "name": "npm01_basic",
+  "version": "1.0.0",
+  "description": "Belajar npm dasar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hello": "echo \"Halo semua, ini coba script\"",
+    "server": "node index.js"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "bagus",
+  "license": "ISC",
+  "dependencies": {}
+}
