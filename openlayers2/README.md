@@ -32,8 +32,10 @@ The following modules will be covered in this workshop:
 NPM Global vs Local
 
 Local:
+
     npm install ol
 
 Global:
+
     npm install ol -g
     npm link ol
