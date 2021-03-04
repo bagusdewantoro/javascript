@@ -38,4 +38,5 @@ Local:
 Global:
 
     npm install ol -g
+    
     npm link ol
