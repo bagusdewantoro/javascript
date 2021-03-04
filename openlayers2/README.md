@@ -4,7 +4,9 @@ Based on official OpenLayers workshops.
 ## Setup
 After clone this repositories, install packages and dependencies:
 
-    npm install
+    npm install ol
+
+    npm install colormap
 
 Now you're ready to start the workshop development server.
 
@@ -25,3 +27,13 @@ The following modules will be covered in this workshop:
 * [Vector Tiles](vectortile/README.md) - Create beautiful maps with vector tiles.
 * [Raster Operations](raster/README.md) - Manipulating pixels with a raster source.
 * [Deploying](deploying/README.md) - Building applications for production.
+
+## Personal Notes
+NPM Global vs Local
+
+Local:
+    npm install ol
+
+Global:
+    npm install ol -g
+    npm link ol
