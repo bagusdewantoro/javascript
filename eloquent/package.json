@@ -4,10 +4,11 @@
   "description": "'Learn from eloquent javascript book'",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "1": "node ch01values.js",
-    "2": "node ch02structures.js"
+    "2": "node ch02structures.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

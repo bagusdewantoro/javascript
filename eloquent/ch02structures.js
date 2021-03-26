@@ -1,3 +1,7 @@
+// Run this file by one of these two ways:
+// node ch02structures.js
+// npm run 2
+
 // loop
 
 // input

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Permainan Klik Huruf</title>
+  </head>
+
+  <body>
+    <div class="angka">
+      <p class="hurufBaru"></p>
+    </div>
+
+    <div id="kotakBesar">
+    </div>
+
+    <script>
+      // generate random item dari daftar1
+      const daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
+      let hurufAcak = Math.floor(Math.random() * daftar1.length);
+      const hurufBaru = document.querySelector('.hurufBaru');
+      hurufBaru.textContent = daftar1[hurufAcak];
+
+      // generete list dari seluruh item di daftar1
+      const uls = document.createElement('ul');
+      const kotakBesar = document.getElementById('kotakBesar');
+      kotakBesar.appendChild(uls);
+      daftar1.forEach(function(huruf){
+        const lis = document.createElement('li');
+        
+        // ubah list jadi tombol
+        const tombol = document.createElement('BUTTON');
+        uls.appendChild(lis);
+        lis.appendChild(tombol);
+        teks = document.createTextNode(huruf);
+        tombol.appendChild(teks);
+        lis.innerHTML;
+      });
+
+    </script>
+  </body>
+</html>
