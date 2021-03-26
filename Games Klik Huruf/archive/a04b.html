@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -19,30 +19,40 @@
 
     <script>
       // generate random item dari daftar1
-      const daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
+      let daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
       let hurufAcak = Math.floor(Math.random() * daftar1.length);
       const hurufBaru = document.querySelector('.hurufBaru');
       hurufBaru.textContent = daftar1[hurufAcak];
+      const kotakBesar = document.getElementById('kotakBesar');
+      
 
-      // generate hasil setelah di-klik
       const generateHasil = function(isi) {
         let hasil = document.querySelector('.hasil');
         hasil.textContent = isi;
+        kotakBesar.removeChild(lis);
+        daftar1.splice(hurufAcak, 1);console.log(daftar1);
+        generateList();
       }
 
       // generete list dari seluruh item di daftar1
-      const kotakBesar = document.getElementById('kotakBesar');
-      // bikin tombol
-      const listTombol = function() {
-        for (let i = 0; i < daftar1.length; i++) {
-          const tombol = document.createElement("button");
-          let teks = document.createTextNode(daftar1[i]);
-          tombol.appendChild(teks);
-          kotakBesar.appendChild(tombol);
-          tombol.onclick = function() {generateHasil(daftar1[i])};
-        }
+      const generateList = function() {
+        
+        daftar1.forEach(function(huruf){
+          const lis = document.createElement('BUTTON');
+          kotakBesar.appendChild(lis);
+          
+          lis.textContent = huruf;
+          lis.onclick = function() {generateHasil(huruf)};
+
+        });
       }
-      listTombol()
+
+      generateList();
+
+      //for (let i = daftar1.length; i > 0; i--){
+        //generateList();
+      //}
+
     </script>
   </body>
 </html>

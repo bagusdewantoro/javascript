@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -18,41 +18,40 @@
     </div>
 
     <script>
-      // generate random item dari daftar1
+      // generate random item dari daftar1 (let)
       let daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
       let hurufAcak = Math.floor(Math.random() * daftar1.length);
+      console.log(hurufAcak);
       const hurufBaru = document.querySelector('.hurufBaru');
       hurufBaru.textContent = daftar1[hurufAcak];
-      const kotakBesar = document.getElementById('kotakBesar');
-      
 
+      // ambil div untuk container tombol2 huruf
+      const kotakBesar = document.getElementById('kotakBesar');
+
+      // generate hasil setelah di-klik
       const generateHasil = function(isi) {
         let hasil = document.querySelector('.hasil');
         hasil.textContent = isi;
-        kotakBesar.removeChild(lis);
-        daftar1.splice(hurufAcak, 1);console.log(daftar1);
-        generateList();
+        while (kotakBesar.firstChild) {
+          kotakBesar.removeChild(kotakBesar.firstChild);
+        }
+        console.log(hurufAcak);
+        daftar1.splice(hurufAcak, 1);
+        listTombol()
       }
 
       // generete list dari seluruh item di daftar1
-      const generateList = function() {
-        
-        daftar1.forEach(function(huruf){
-          const lis = document.createElement('BUTTON');
-          kotakBesar.appendChild(lis);
-          
-          lis.textContent = huruf;
-          lis.onclick = function() {generateHasil(huruf)};
-
-        });
+      // bikin tombol
+      const listTombol = function() {
+        for (let i = 0; i < daftar1.length; i++) {
+          const tombol = document.createElement("button");
+          let teks = document.createTextNode(daftar1[i]);
+          tombol.appendChild(teks);
+          kotakBesar.appendChild(tombol);
+          tombol.onclick = function() {generateHasil(daftar1[i])};
+        }
       }
-
-      generateList();
-
-      //for (let i = daftar1.length; i > 0; i--){
-        //generateList();
-      //}
-
+      listTombol()
     </script>
   </body>
 </html>
