@@ -18,10 +18,9 @@
     </div>
 
     <script>
-      // generate random item dari daftar1 (let)
-      let daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
+      // generate random item dari daftar1
+      const daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
       let hurufAcak = Math.floor(Math.random() * daftar1.length);
-      console.log(hurufAcak);
       const hurufBaru = document.querySelector('.hurufBaru');
       hurufBaru.textContent = daftar1[hurufAcak];
 
@@ -31,12 +30,15 @@
       // generate hasil setelah di-klik
       const generateHasil = function(isi) {
         let hasil = document.querySelector('.hasil');
-        hasil.textContent = isi;
+        hasil.textContent += isi + ' ';
+        // hapus tombol yang ada
         while (kotakBesar.firstChild) {
           kotakBesar.removeChild(kotakBesar.firstChild);
         }
-        console.log(hurufAcak);
         daftar1.splice(hurufAcak, 1);
+        hurufAcak = Math.floor(Math.random() * daftar1.length);
+        hurufBaru.textContent = daftar1[hurufAcak];
+        // bikin tombol baru
         listTombol()
       }
 
@@ -48,7 +50,9 @@
           let teks = document.createTextNode(daftar1[i]);
           tombol.appendChild(teks);
           kotakBesar.appendChild(tombol);
-          tombol.onclick = function() {generateHasil(daftar1[i])};
+          if (daftar1[i] === daftar1[hurufAcak]) {
+            tombol.onclick = function() {generateHasil(daftar1[i])};
+          }
         }
       }
       listTombol()

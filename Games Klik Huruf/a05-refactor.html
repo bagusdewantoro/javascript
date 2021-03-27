@@ -10,7 +10,7 @@
       <p class="hurufBaru"></p>
     </div>
 
-    <div id="kotakBesar">
+    <div class="kotakBesar">
     </div>
 
     <div class="kotakHasil">
@@ -20,18 +20,33 @@
     <script>
       // generate random item dari daftar1
       const daftar1 = ['A','B','C','D','E','F','G','H','I','J'];
-      let hurufAcak = Math.floor(Math.random() * daftar1.length);
+      let hurufAcak;
       const hurufBaru = document.querySelector('.hurufBaru');
-      hurufBaru.textContent = daftar1[hurufAcak];
+      const kotakBesar = document.querySelector('.kotakBesar');
 
-      // generate hasil setelah di-klik
+      // fungsi generate sembarang huruf dari list
+      const generateHurufAcak = function(list) {
+        hurufAcak = Math.floor(Math.random() * daftar1.length);
+        hurufBaru.textContent = daftar1[hurufAcak];
+      }
+      generateHurufAcak(daftar1);
+
+      // fungsi generate hasil setelah di-klik
       const generateHasil = function(isi) {
         let hasil = document.querySelector('.hasil');
-        hasil.textContent = isi;
+        hasil.textContent += isi + ' ';
+        // hapus tombol yang ada
+        while (kotakBesar.firstChild) {
+          kotakBesar.removeChild(kotakBesar.firstChild);
+        }
+        daftar1.splice(hurufAcak, 1);
+        // ulang lagi untuk generate sembarang huruf dari list baru
+        generateHurufAcak(daftar1);
+        // bikin tombol baru
+        listTombol()
       }
 
       // generete list dari seluruh item di daftar1
-      const kotakBesar = document.getElementById('kotakBesar');
       // bikin tombol
       const listTombol = function() {
         for (let i = 0; i < daftar1.length; i++) {
