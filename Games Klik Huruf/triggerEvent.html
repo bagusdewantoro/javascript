@@ -7,42 +7,51 @@
 
   <body>
     <div class="masukkanHuruf">
-      Ketik jika ingin mengganti: <input type="text" id="gantiArray" value=''>
+      Ketik jika ingin mengganti: <input type="text" id="gantiArray" value='awal'>
     </div>
+    <div class="kotakBesar"></div>
 
-    <div class="angka">
-      <p class="hurufBaru"></p>
-    </div>
-
-    <div class="kotakBesar">
-    </div>
-
-    <div class="kotakHasil">
-      <p class="hasil"></p>
-    </div>
 
     <script>
-      // generate random item dari daftar1
-      // generate random item dari daftar1
-      let daftar1 = 11;
-      let element = document.getElementById('gantiArray');
-      element.addEventListener('input', function() {
-          console.log(element.value);
+      let daftar1 = document.getElementById('gantiArray').value.split("");
+      const kotakBesar = document.querySelector('.kotakBesar');
+      let gantiArray = document.getElementById('gantiArray');
+
+      // masukkan event pada text input
+      gantiArray.addEventListener('input', function() {
+        // ambil array & split
+        daftar1 = gantiArray.value.split("");
+        // hapus konten di kotakBesar (Jika Ada)
+        while (kotakBesar.firstChild) {
+          kotakBesar.removeChild(kotakBesar.firstChild);
+        }
+        // generate tombol
+        listTombol();
       });
 
-      triggerInput();
-      function triggerInput() {
-          let event = new Event('input', {
-              'bubbles': true,
-              'cancelable': true
-          });
-
-          element.dispatchEvent(event);
+      // fungsi generate tombol
+      const listTombol = function() {
+        for (let i = 0; i < daftar1.length; i++) {
+          const tombol = document.createElement("button");
+          let teks = document.createTextNode(daftar1[i]);
+          tombol.appendChild(teks);
+          kotakBesar.appendChild(tombol);
+        }
       }
 
+      // fungsi trigger event dari input tanpa enter atau click submit
+      const triggerInput = function() {
+        let event = new Event('input', {
+            'bubbles': true,
+            'cancelable': true
+        });
+        // dispatch
+        gantiArray.dispatchEvent(event);
+      }
 
-      console.log(element.value);
-      console.log(daftar1)
+      // jalankan fungsi trigger event tersebut
+      triggerInput();
     </script>
+
   </body>
 </html>

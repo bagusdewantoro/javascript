@@ -7,7 +7,7 @@
 
   <body>
     <div class="masukkanHuruf">
-      Ketik jika ingin mengganti: <input type="text" id="gantiArray" value='ABCDEFGHIJ'>
+      Ketik jika ingin mengganti: <input type="text" id="gantiArray" value="GAMESTEBAKHURUF">
     </div>
 
     <div class="angka">
@@ -19,45 +19,36 @@
 
     <div class="kotakHasil">
       <p class="hasil"></p>
+      <p class="salahKlik"></p>
     </div>
 
     <script>
-      // generate random item dari daftar1
-      let daftar1 ='';
+      // ambil array dari input
+      daftar1 = document.getElementById("gantiArray").value.split("");
+      // tombol submit array
       const masukkanHuruf = document.querySelector('.masukkanHuruf');
-      const mulai = document.createElement("button");
-      let keterangan = document.createTextNode("Mulai");
-      mulai.appendChild(keterangan);
-      masukkanHuruf.appendChild(mulai);
-      mulai.onclick = function() {ambilNilai};
+      let tombolMasukkan = document.createElement("button");
+      tombolMasukkan.appendChild(document.createTextNode('Mulai'));
+      masukkanHuruf.appendChild(tombolMasukkan);
 
-
-
-      const ambilNilai = function() {
-        daftar1 = document.getElementById("gantiArray").value;
-      }
-
-
-
-
-
-
-      daftar1 = mulai.value;
-      let hurufAcak;
+      // Init. binding
       const hurufBaru = document.querySelector('.hurufBaru');
       const kotakBesar = document.querySelector('.kotakBesar');
+      let salahKlik = document.querySelector('.salahKlik');
+      let hasil = document.querySelector('.hasil');
+      let hurufAcak;
 
       // fungsi generate sembarang huruf dari list
       const generateHurufAcak = function(list) {
         hurufAcak = Math.floor(Math.random() * daftar1.length);
-        hurufBaru.textContent = daftar1[hurufAcak];
+        hurufBaru.textContent = 'Hayo, coba cari yang manakah huruf ' + daftar1[hurufAcak] + ' ?';
       }
       generateHurufAcak(daftar1);
 
       // fungsi generate hasil setelah di-klik
       const generateHasil = function(isi) {
-        let hasil = document.querySelector('.hasil');
         hasil.textContent += isi + ' ';
+        salahKlik.textContent = '';
         // hapus tombol yang ada
         while (kotakBesar.firstChild) {
           kotakBesar.removeChild(kotakBesar.firstChild);
@@ -66,11 +57,15 @@
         // ulang lagi untuk generate sembarang huruf dari list baru
         generateHurufAcak(daftar1);
         // bikin tombol baru
-        listTombol()
+        listTombol();
       }
 
-      // generete list dari seluruh item di daftar1
-      // bikin tombol
+      // fungsi salah
+      const salah = function() {
+        salahKlik.textContent = 'Coba cari huruf yang benar ya';
+      }
+
+      // generete list tombol dari seluruh item di daftar1
       const listTombol = function() {
         for (let i = 0; i < daftar1.length; i++) {
           const tombol = document.createElement("button");
@@ -79,10 +74,24 @@
           kotakBesar.appendChild(tombol);
           if (daftar1[i] === daftar1[hurufAcak]) {
             tombol.onclick = function() {generateHasil(daftar1[i])};
+          } else {
+            tombol.onclick = function() {salah()};
           }
         }
       }
       listTombol()
+
+      // fungsi ambil array value dari text input
+      const ambilNilai = function() {
+        while (kotakBesar.firstChild) {
+          kotakBesar.removeChild(kotakBesar.firstChild);
+        }
+        daftar1 = document.getElementById("gantiArray").value.split("");
+        generateHurufAcak(daftar1);
+        listTombol();
+        hasil.textContent = '';
+      }
+      tombolMasukkan.addEventListener('click', ambilNilai);
     </script>
   </body>
 </html>

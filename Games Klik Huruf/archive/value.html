@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div class='masukkan'>
+  First Name: <input type="text" id="myText" value="Mickey">
+</div>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<div class='hasil'></div>
+
+<script>
+  let x;
+  let y;
+  const hasil = document.querySelector('.hasil');
+
+  function myFunction() {
+    x = document.getElementById("myText").value;
+    document.getElementById("demo").innerHTML = x;
+  }
+
+  let tombol = document.createElement("button");
+  tombol.appendChild(document.createTextNode('Mulai'));
+  hasil.appendChild(tombol);
+
+  const ambilNilai = function() {
+    y = document.getElementById("myText").value;
+  }
+
+  tombol.addEventListener('click', ambilNilai);
+
+
+  console.log(y);
+
+</script>
+
+
+
+</body>
+</html>
