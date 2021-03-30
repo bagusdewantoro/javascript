@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Permainan Klik Huruf</title>
+  </head>
+
+  <body>
+    <div class="masukkanHuruf">
+      Ketik jika ingin mengganti: <input type="text" id="gantiArray" value="GamesTebakHuruf">
+    </div>
+
+    <div class="angka">
+      <p class="hurufBaru"></p>
+    </div>
+
+    <div class="kotakBesar">
+    </div>
+
+    <div class="kotakHasil">
+      <p class="hasil"></p>
+      <p class="salahKlik"></p>
+    </div>
+
+    <script>
+      // initialize binding
+      let gantiArray = document.getElementById("gantiArray");
+      let daftar1 = gantiArray.value.split("");
+      const hurufBaru = document.querySelector('.hurufBaru');
+      const kotakBesar = document.querySelector('.kotakBesar');
+      let salahKlik = document.querySelector('.salahKlik');
+      let hasil = document.querySelector('.hasil');
+      let hurufAcak;
+
+
+
+      // fungsi generate sembarang huruf dari list
+      const generateHurufAcak = function(list) {
+        hurufAcak = Math.floor(Math.random() * daftar1.length);
+        hurufBaru.textContent = 'Hayo, coba cari yang manakah huruf ' + daftar1[hurufAcak] + ' ?';
+      }
+
+      // fungsi generate hasil setelah di-klik
+      const generateHasil = function(isi) {
+        hasil.textContent += isi + ' ';
+        salahKlik.textContent = '';
+        // hapus tombol yang ada
+        while (kotakBesar.firstChild) {
+          kotakBesar.removeChild(kotakBesar.firstChild);
+        }
+        daftar1.splice(hurufAcak, 1);
+        // ulang lagi untuk generate sembarang huruf dari list baru
+        generateHurufAcak(daftar1);
+        // bikin tombol baru
+        listTombol();
+      }
+
+      // fungsi salah
+      const salah = () => {
+        salahKlik.textContent = 'Coba cari huruf yang benar ya';
+      }
+
+      // fungsi generete list tombol dari seluruh item di daftar1
+      const listTombol = () => {
+        for (let i = 0; i < daftar1.length; i++) {
+          const tombol = document.createElement("button");
+          let teks = document.createTextNode(daftar1[i]);
+          tombol.appendChild(teks);
+          kotakBesar.appendChild(tombol);
+          if (daftar1[i] === daftar1[hurufAcak]) {
+            tombol.onclick = function() {generateHasil(daftar1[i])};
+          } else {
+            tombol.onclick = function() {salah()};
+          }
+        }
+      }
+
+      // masukkan event pada input array
+      gantiArray.addEventListener('input', function() {
+        daftar1 = gantiArray.value.split("");
+        while (kotakBesar.firstChild) {
+          kotakBesar.removeChild(kotakBesar.firstChild);
+        }
+        generateHurufAcak(daftar1);
+        listTombol();
+        hasil.textContent = "";
+      })
+
+      // fungsi trigger input tanpa perlu enter atau click submit
+      const triggerInput = () => {
+        let event = new Event('input', {
+          'bubbles': true,
+          'cancelable': true,
+        });
+        // dispatch
+        gantiArray.dispatchEvent(event);
+      }
+
+      // run the program
+      generateHurufAcak(daftar1);
+      listTombol();
+      triggerInput();
+    </script>
+  </body>
+</html>
