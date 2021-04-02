@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>querySelector</title>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <form>
+      <input type="checkbox" id="Konfirmasi" checked> Konfirmasi
+      <input type="button" id="Tombol" value="OK">
+    </form>
+
+    <script>
+      const konfirmasi = document.querySelector("#Konfirmasi");
+      const tombol = document.querySelector("#Tombol");
+      tombol.onclick = () => {
+        const hasil = konfirmasi.value;
+        alert(hasil);
+      };
+    </script>
+  </body>
+<html>
