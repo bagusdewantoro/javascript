@@ -2,20 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Belajar Huruf & Angka</title>
+    <title>Dhira Belajar Huruf</title>
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
-    <h1>Belajar Huruf & Angka</h1>
+    <h1>Dhira Belajar Huruf</h1>
     <div class="masukkanHuruf">
-      Ketik jika ingin mengganti: <input type="text" id="gantiArray" value="BelajarHurufDanAngka"><br>
+      <p>Ketik di bawah yaa kalau mau ganti: </p><input type="text" id="gantiArray" value="Dominikus">
       <!-- Di bawah ini masih gagal caranya
       Aktifkan jika ingin mengacak: <input type="checkbox" id="acak">
       -->
     </div>
 
     <div class="generateHuruf">
-      <p>Hayo, coba cari yang manakah huruf  <strong><a id="hurufBaru" style="font-size:1.3rem;" ></a></strong>  ?</p>
+      <p>Hayo, coba cari yang mana ya huruf  <strong><a id="hurufBaru" style="font-size:1.3rem;" ></a></strong>  ?</p>
     </div>
 
     <div class="kotakBesar"></div>
@@ -36,6 +37,7 @@
       let salahKlik = document.querySelector('.salahKlik');
       let hasil = document.querySelector('.hasil');
       let hurufAcak;
+      let kotakHasil = document.querySelector('.kotakHasil');
 
       /* checkbox untuk acak array (MASIH GAGAL)
       let checkbox = document.querySelector("#acak");
@@ -66,18 +68,22 @@
           generateHurufAcak(daftar1);
           listTombol();
         } else {
-          let para = document.createElement('p')
-          let menang = document.createTextNode("Sudah Habis");
+          let para = document.createElement('p');
+          let menang = document.createTextNode("Selesai!");
           para.appendChild(menang);
           while (generateHuruf.firstChild) generateHuruf.removeChild(generateHuruf.firstChild);
           generateHuruf.appendChild(para);
-          kotakBesar.textContent = "Well Done! Selamat!!";
+          let tombol2 = document.createElement('button');
+          let tombolulang = document.createTextNode("Ulang");
+          tombol2.appendChild(tombolulang);
+          tombol2.onclick = function() {location.reload()};
+          kotakHasil.appendChild(tombol2);
         }
       };
 
       // fungsi salah
       const salah = () => {
-        salahKlik.textContent = 'Coba cari huruf yang benar ya';
+        salahKlik.textContent = 'Hihi salah, hayo mandi...';
       };
 
       // fungsi generete list tombol dari seluruh item di daftar1

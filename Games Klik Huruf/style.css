@@ -1,0 +1,72 @@
+html {
+  font-family: Tahoma, Helvetica, sans-serif;
+}
+
+body {
+  margin-left: 20px;
+  max-width: 460px;
+  font-size: 25px;
+  background-color: #EDEFFB;
+}
+
+h1 {
+  font-size: 30px;
+  color: white;
+  height: 70px;
+  line-height: 70px;
+  vertical-align: middle;
+  background-color: #9889F6;
+  border-radius: 10px;
+  text-indent: 10px;
+}
+
+.generateHuruf,
+.generateHasil {
+  height: 30px;
+  line-height: 10px;
+  vertical-align: text-bottom;
+}
+
+.masukkanHuruf {
+  height: 60px;
+  line-height: 10px;
+  vertical-align: text-bottom;
+}
+
+.masukkanHuruf input {
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.kotakHasil .salahKlik {
+  color: red;
+  font-weight: bold;
+}
+
+.kotakBesar {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: #E32475;
+  max-width: 450px;
+  min-height: 200px;
+  padding: 2px;
+  border-radius: 10px;
+}
+
+.kotakBesar button {
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  background-color: #D1D5F2;
+  border: 2px solid #E32475;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 25px;
+
+}
+
+.kotakBesar button:hover {
+  color: #FFF;
+	background: #019be3;
+  font-size: 40px;
+}
