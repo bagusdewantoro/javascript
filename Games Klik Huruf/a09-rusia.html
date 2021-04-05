@@ -28,9 +28,33 @@
     </div>
 
     <script>
+      const kamus = [
+        {id: 'A', rus: 'А'}, {id: 'B', rus: 'Б'}, {id: 'C', rus: 'Ч'}, {id: 'D', rus: 'Д'}, {id: 'E', rus: 'Э'}, {id: 'F', rus: 'Ф'},
+        {id: 'G', rus: 'Г'}, {id: 'H', rus: 'Х'}, {id: 'I', rus: 'И'}, {id: 'J', rus: 'ДЖ'}, {id: 'K', rus: 'К'}, {id: 'L', rus: 'Л'},
+        {id: 'M', rus: 'М'}, {id: 'N', rus: 'Н'}, {id: 'O', rus: 'О'}, {id: 'P', rus: 'П'}, {id: 'Q', rus: 'КИ'}, {id: 'R', rus: 'Р'},
+        {id: 'S', rus: 'С'}, {id: 'T', rus: 'Т'}, {id: 'U', rus: 'У'}, {id: 'V', rus: 'В'}, {id: 'W', rus: 'В'}, {id: 'X', rus: 'КС'},
+        {id: 'Y', rus: 'Е'}, {id: 'Z', rus: 'З'},
+        {id: 'a', rus: 'а'}, {id: 'b', rus: 'б'}, {id: 'c', rus: 'ч'}, {id: 'd', rus: 'д'}, {id: 'e', rus: 'э'}, {id: 'f', rus: 'ф'},
+        {id: 'g', rus: 'г'}, {id: 'h', rus: 'х'}, {id: 'i', rus: 'и'}, {id: 'j', rus: 'дж'}, {id: 'k', rus: 'к'}, {id: 'l', rus: 'л'},
+        {id: 'm', rus: 'м'}, {id: 'n', rus: 'н'}, {id: 'o', rus: 'о'}, {id: 'p', rus: 'п'}, {id: 'q', rus: 'ки'}, {id: 'r', rus: 'р'},
+        {id: 's', rus: 'с'}, {id: 't', rus: 'т'}, {id: 'u', rus: 'у'}, {id: 'v', rus: 'в'}, {id: 'w', rus: 'в'}, {id: 'x', rus: 'кс'},
+        {id: 'y', rus: 'е'}, {id: 'z', rus: 'з'}
+      ]
+
       // initialize binding
       let gantiArray = document.getElementById("gantiArray");
-      let daftar1 = gantiArray.value.split("");
+      let daftarAsli = gantiArray.value.split("");
+      let daftar1 = [];
+      for (let k=0; k<daftarAsli.length; k++) {
+        daftar1.push(daftarAsli[k]);
+      };
+      for (let j=0; j<daftar1.length; j++) {
+        for (let i=0; i<kamus.length; i++) {
+          if (kamus[i].id === daftar1[j]) {
+            daftar1[j] = kamus[i].rus;
+          }
+        }
+      };
       let urutan = daftar1.length;
       let generateHuruf = document.querySelector('.generateHuruf');
       let hurufBaru = document.querySelector('#hurufBaru');
@@ -38,6 +62,7 @@
       let salahKlik = document.querySelector('.salahKlik');
       let hasil = document.querySelector('.hasil');
       let hurufAcak;
+      let hurufAcakRus;
       let kotakHasil = document.querySelector('.kotakHasil');
 
       /* checkbox untuk acak array (MASIH GAGAL)
@@ -51,22 +76,48 @@
 
       // fungsi generate sembarang huruf dari list
       const generateHurufAcak = (list) => {
-        hurufAcak = Math.floor(Math.random() * daftar1.length);
-        hurufBaru.textContent = daftar1[hurufAcak];
+        hurufAcak = Math.floor(Math.random() * list.length);
+        hurufBaru.textContent = list[hurufAcak];
+      };
+
+      // fungsi betul
+      const betul = () => {
+        const choice = [
+          "Yeay, boleh guling-guling",
+          "Asli lhoo,, tuuttt,, hebat",
+          "Nanti dielus-elus yaa",
+          "Dapet cium dari ibi",
+          "Hemmm, wangi melatii",
+          "Dape cium dari bake"
+        ];
+        const kontenBetul = Math.floor(Math.random() * choice.length)
+        salahKlik.textContent = choice[kontenBetul];
       };
 
       // fungsi generate hasil setelah di-klik
       const generateHasil = (isi) => {
         hasil.textContent += isi + ' ';
-        salahKlik.textContent = '';
+        salahKlik.style.color = 'blue';
+        betul();
         // hapus tombol yang ada
         while (kotakBesar.firstChild) {
           kotakBesar.removeChild(kotakBesar.firstChild);
         }
-        daftar1.splice(hurufAcak, 1);
+        daftarAsli.splice(hurufAcak, 1);
         // generate huruf acak dan generate tombol (jika belum habis)
         if (urutan > 0) {
-          generateHurufAcak(daftar1);
+          generateHurufAcak(daftarAsli);
+          daftar1 = [];
+          for (let k=0; k<daftarAsli.length; k++) {
+            daftar1.push(daftarAsli[k]);
+          };
+          for (let j=0; j<daftar1.length; j++) {
+            for (let i=0; i<kamus.length; i++) {
+              if (kamus[i].id === daftar1[j]) {
+                daftar1[j] = kamus[i].rus;
+              }
+            }
+          };
           listTombol();
         } else {
           let para = document.createElement('p');
@@ -79,6 +130,7 @@
           tombol2.appendChild(tombolulang);
           tombol2.onclick = function() {location.reload()};
           kotakHasil.appendChild(tombol2);
+          gantiArray.disabled = true;
         }
       };
 
@@ -86,12 +138,13 @@
       const salah = () => {
         const pilihan = [
           "Hihi salah, hayo mandi...",
-          "Asli lhoo,, tuuttt,, coba lagi ya",
+          "Coba lagi ya",
           "Pijitin bapak yaa..",
           "Dihirup yaa",
           "Hemmm, aroma lemonn"
         ];
-        const kontenSalah = Math.floor(Math.random() * pilihan.length)
+        const kontenSalah = Math.floor(Math.random() * pilihan.length);
+        salahKlik.style.color = 'red';
         salahKlik.textContent = pilihan[kontenSalah];
       };
 
@@ -136,12 +189,23 @@
 
       // masukkan event pada input array
       gantiArray.addEventListener('input', function() {
-        daftar1 = gantiArray.value.split("");
+        daftarAsli = gantiArray.value.split("");
+        daftar1 = [];
+        for (let k=0; k<daftarAsli.length; k++) {
+          daftar1.push(daftarAsli[k]);
+        };
+        for (let j=0; j<daftar1.length; j++) {
+          for (let i=0; i<kamus.length; i++) {
+            if (kamus[i].id === daftar1[j]) {
+              daftar1[j] = kamus[i].rus;
+            }
+          }
+        };
         urutan = daftar1.length;
         while (kotakBesar.firstChild) kotakBesar.removeChild(kotakBesar.firstChild);
-        generateHurufAcak(daftar1);
+        generateHurufAcak(daftarAsli);
         listTombol();
-        hasil.textContent = "Huruf yang telah kamu klik adalah: ";;
+        hasil.textContent = "Huruf yang telah kamu klik adalah: ";
       });
 
       // fungsi trigger input tanpa perlu enter atau click submit
@@ -155,7 +219,7 @@
       };
 
       // run the program
-      generateHurufAcak(daftar1);
+      generateHurufAcak(daftarAsli);
       listTombol();
       triggerInput();
     </script>
