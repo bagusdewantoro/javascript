@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bouncing Balls</title>
+    <link rel="stylesheet" href="objectCanvas.css">
+  </head>
+
+  <body>
+    <h1>Bouncing Balls</h1>
+    <canvas></canvas>
+
+    <script>
+    // setup canvas
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = window.innerWidth;
+    const height = canvas.height = window.innerHeight;
+
+    // function to generate random number
+    function random(min, max) {
+      const num = Math.floor(Math.random() * (max - min + 1)) + min;
+      return num;
+    }
+
+    // object for Ball
+    function Ball(x, y, velX, velY, color, size) {
+      this.x = x;
+      this.y = y;
+      this.velX = velX;
+      this.velY = velY;
+      this.color = color;
+      this.size = size;
+    }
+
+    // method for drawing the Ball
+    Ball.prototype.draw = function() {
+      ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.arc(this.x, this.y, this.size, 0, 2*Math.PI);
+      ctx.fill();
+    }
+
+    // test the ball
+    let size = random(10, 20)
+    let ball = new Ball(
+      random(0 + size, width - size),  // x coordinate
+      random(0 + size, height - size),  // y coordinate
+      random(-7, 7),  // velocity x
+      random(-7, 7),  // velocity y
+      'rgb(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +')',  // color RGB
+      size  // size
+    );
+
+    /* RUN IN CONSOLE
+    ball;  // check the data inside the ball
+    ball.draw();  // see the result
+    */
+
+    </script>
+  </body>
+</html>
