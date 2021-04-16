@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "1": "node ch01values.js",
-    "2": "node ch02structures.js",
+    "2": "node ch02programStructures.js",
+    "4": "node ch04dataStructure.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
