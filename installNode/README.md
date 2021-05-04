@@ -23,3 +23,6 @@ node bin/npm-cli.js install npm -gf
 **Step 7:** Execute the following commands to verify the installation of nodeJS and npm.
 node -v
 npm -v
+
+
+https://medium.com/@github.gkarthiks/how-to-install-nodejs-and-npm-in-non-admin-access-windows-machines-102fd461b54c
