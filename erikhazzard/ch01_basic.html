@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Openlayers - Basic</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/samples.css" type="text/css" />
+  </head>
+
+  <body>
+    <div id="map" class="map"></div>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+
+    <!-- script sesuai di buku, dengan sedikit edit var menjadi const & let -->
+    <script>
+      const osmLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+      const jakarta = ol.proj.transform([106.816666, -6.200000], 'EPSG:4326', 'EPSG:3857');
+      const view = new ol.View({
+        center: jakarta,
+        zoom: 11
+      });
+      const map = new ol.Map({
+        target: 'map'
+      });
+      map.addLayer(osmLayer);
+      map.setView(view);
+    </script>
+
+    <!-- script lain yang sama seperti di atas, tapi versi official website openlayers.org -->
+    <!--
+    <script type="text/javascript">
+      const map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.transform([106.816666, -6.200000], 'EPSG:4326', 'EPSG:3857'),
+          zoom: 11
+        })
+      });
+    </script>
+    -->
+
+  </body>
+</html>

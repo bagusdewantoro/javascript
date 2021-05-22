@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Membuat Scene-Flex</title>
+    <style>
+      html {box-sizing: border-box;}
+      *, *:before, *:after {box-sizing: inherit;}
+      body {margin: 0;}
+      .boxAnimasi {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+      }
+      .boxAnimasi>* {flex: 1 1 50%;}
+      #tulisan {
+        font-family: monospace;
+        padding: .5em;
+        background: #444;
+        color: white;
+      }
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="boxAnimasi">
+      <div>
+        <canvas id="animasi"></canvas>
+      </div>
+      <div id="tulisan">
+        Coba masukkan boxAnimasi ke dalam flex box
+      </div>
+    </div>
+
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
+      const layar = new THREE.Scene();
+      // Tidak perlu melakukan set aspect, karena set akan dilakukan dalam setiap layer
+      // Set = 2, karena 2 adalah aspect untuk default canvas size (300w/150h = 2)
+      const kamera = new THREE.PerspectiveCamera(70, 2, 1, 1000);
+      kamera.position.z = 400;
+      const perender = new THREE.WebGLRenderer({canvas: document.getElementById("animasi")});
+
+      const geometri = new THREE.BoxGeometry(200, 200, 200);
+      const material = new THREE.MeshPhongMaterial({
+        color: 0x555555,
+        specular: 0xffffff,
+        shininess: 50,
+        shading: THREE.SmoothShading
+      });
+
+      const kubus = new THREE.Mesh(geometri, material);
+      layar.add(kubus);
+
+      const cahaya = new THREE.PointLight(0xff80C0, 2, 0);
+      cahaya.position.set(200, 100, 300);
+      layar.add(cahaya);
+
+      function resizeCanvasToDisplaySize() {
+        const kanvas = perender.domElement;
+        const lebar = kanvas.clientWidth;
+        const tinggi = kanvas.clientHeight;
+        if (kanvas.width !== lebar ||kanvas.height !== tinggi) {
+          // harus false supaya three.js tidak konflik dengan browser
+          perender.setSize(lebar, tinggi, false);
+          kamera.aspect = lebar / tinggi;
+          kamera.updateProjectionMatrix();
+          // set render target sizes
+        }
+      }
+
+      function animate(time) {
+        time *= 0.001;  // detik
+        resizeCanvasToDisplaySize();
+        kubus.rotation.x = time * 0.5;
+        kubus.rotation.y = time * 1;
+        perender.render(layar, kamera);
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
+    </script>
+  </body>
+
+</html>

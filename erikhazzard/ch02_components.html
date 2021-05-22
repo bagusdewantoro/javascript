@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Openlayers Components</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/samples.css" type="text/css" />
+  </head>
+
+  <body>
+    <!-- tampilkan peta -->
+    <div id="map" class="map"></div>
+    <!-- overlay -->
+    <div id="overlay" style="background-color: yellow; width: 20px; height: 20px; border-radius: 10px;">
+
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+
+
+    <!-- METODE 1 = membuat const untuk menambahkan default interaction & control dengan komponen baru kita
+                    Advantage: memberi kontrol penuh terhadap mana interactions dan controls yang akan dipakai -->
+    <script>
+      // layer untuk menampilkan peta kita:
+      const lapisan = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      // membuat komponen interactive supaya bisa drag, rotate dan zoom:
+      const interaksi = new ol.interaction.DragRotateAndZoom(); // Pencet SHIFT + KLIK DRAG
+      // menambahkannya ke dalam default interaction:
+      const interaksiGabung = ol.interaction.defaults().extend([interaksi]);
+
+      // membuat komponen control untuk full screen:
+      const kontrol = new ol.control.FullScreen();
+      // menambahkannya ke dalam default control:
+      const kontrolGabung = ol.control.defaults().extend([kontrol]);
+
+      // membuat code untuk overlay:
+      const tengah = ol.proj.transform([106.816666, -6.200000], 'EPSG:4326', 'EPSG:3857');
+      const overlay = new ol.Overlay({
+        position: tengah,
+        element: document.getElementById('overlay')
+      });
+      // membuat view:
+      const view = new ol.View({
+        center: tengah,
+        zoom: 10
+      });
+      // membuat peta dan memberi reference untuk seluruh komponen kita:
+      const peta = new ol.Map({
+        target: 'map',
+        layers: [lapisan],
+        interactions: interaksiGabung,
+        controls: kontrolGabung,
+        overlays: [overlay],
+        view: view
+      });
+    </script>
+
+
+    <!-- METODE 2 = menambahkan komponen baru kita ke dalam peta, setelah memanggil constructor.
+                    Advantage: Ini lebih simpel jika kita ingin menambahkan ke set interactions dan controls yang sudah ada -->
+    <!--
+    <script>
+      const lapisan = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+      const interaksi = new ol.interaction.DragRotateAndZoom(); // Pencet SHIFT + KLIK DRAG
+      const kontrol = new ol.control.FullScreen();
+      const tengah = ol.proj.transform([106.816666, -6.200000], 'EPSG:4326', 'EPSG:3857');
+      const overlay = new ol.Overlay({
+        position: tengah,
+        element: document.getElementById('overlay')
+      });
+      const view = new ol.View({
+        center: tengah,
+        zoom: 10
+      });
+      const peta = new ol.Map();
+      peta.setTarget('map');
+      peta.addLayer(lapisan);
+      peta.setView(view);
+      peta.addInteraction(interaksi);
+      peta.addControl(kontrol);
+      peta.addOverlay(overlay);
+    </script>
+    -->
+
+  </body>
+</html>

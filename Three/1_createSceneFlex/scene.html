@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Membuat Scene</title>
+    <style>
+      body {margin: 0;}
+    </style>
+  </head>
+  <body>
+    <!-- <script src="js/three.js"></script> -->
+    <!-- kode di atas untuk load library dari folder "js" dengan nama file "three.js" -->
+    <script type="module">
+
+      // untuk install module utama dengan melakukan import dari existing CDN
+      import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
+      // jika ingin menambahkan fitur lain seperti controls, loaders dan post-processing effects,
+      // maka lakukan import terpisah (pisah script-nya di bawah)
+
+      // membuat layar, kamera dan perender
+      const layar = new THREE.Scene();
+      const kamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const perender = new THREE.WebGLRenderer();
+      perender.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(perender.domElement);
+
+      // membuat mesh dari geometri dan material
+      const geometri = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial( {color: 0xfcdb03} );
+      const kubus = new THREE.Mesh(geometri, material);
+      layar.add(kubus)
+      kamera.position.z = 5; // supaya kameranya ngga di dalam object kubus (0,0,0)
+
+      // melakukan rendering dengan render atau loop animasi
+      const tampilkan = function () {
+        requestAnimationFrame(tampilkan);
+        //meggerakkan kubus
+        kubus.rotation.x += 0.01;
+        kubus.rotation.y += 0.01;
+        perender.render(layar, kamera);
+      }
+      tampilkan();
+
+    </script>
+
+    <script>
+      // menambahkan fitur dari example (import terpisah dari script di atas)
+      import { OrbitControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
+      const controls = new OrbitControls();
+    </script>
+
+  </body>
+</html>
