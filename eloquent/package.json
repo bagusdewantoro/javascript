@@ -7,6 +7,7 @@
     "1": "node ch01values.js",
     "2": "node ch02programStructures.js",
     "4": "node ch04dataStructure.js",
+    "7": "node ch07robot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
