@@ -2,9 +2,25 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Dhira Belajar Huruf</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h1>Dhira Belajar Huruf</h1>
+    <div class="masukkanHuruf">
+      <p>Ketik di bawah yaa kalau mau ganti: </p><input type="text" id="gantiArray" value="DHIRA">
+    </div>
+
+    <div class="generateHuruf">
+      <p>Hayo, coba cari yang mana ya huruf  <strong><a id="hurufBaru" style="font-size:1.3rem;" ></a></strong>  ?</p>
+    </div>
+
+    <div class="kotakBesar"></div>
+
+    <div class="kotakHasil">
+      <p class="hasil"></p>
+      <p class="salahKlik"></p>
+    </div>
 
     <script>
       const pair = {
@@ -15,18 +31,16 @@
         'Y': 'Е', 'Z': 'З'
       }
 
-      const body = document.getElementsByTagName('body')[0];
+      const buttonBox = document.querySelector('generateHuruf');
       const input = 'DHIRA';
       const para = document.createElement('P');
       const arrayFromString = Array.from(input);
       const randomNum = Math.floor(Math.random() * arrayFromString.length);
-      para.innerHTML = arrayFromString[randomNum];
 
       const componentArray = arrayFromString.map((character) =>
         `<button>${pair[character]}</button>`);
       const componentString = componentArray.join('');
-      body.innerHTML = componentString;
-      document.body.append(para);
+      document.buttonBox.innerHTML = componentString;
 
 
     </script>
