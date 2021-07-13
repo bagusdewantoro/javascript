@@ -1,30 +1,14 @@
-function isEqual(one, two) {
-  if (one.length === 0 && two.length === 0) {
-    console.log('\ncondition 1');
-    return true;
-  } else if ((one.length && two.length !== 0) && one.length === two.length) {
-    for (elem of one) {
-      if (two.includes(elem)) {
-        console.log('\ncondition 2');
-        return true;
-      }
-    }
-  } else {
-    console.log('\ncondition 3');
-    return false;
+function ownMap(array, fn) {
+  let newArray = [];
+  for (let elem of array) {
+    let newElem = fn(elem);
+    newArray.push(newElem);
   }
+  return newArray;
 }
 
-console.log(isEqual([], []));
+let result = ownMap([1,2,3], num => num * 2);
+console.log(result);
 
-console.log(isEqual(['a', 'b'], ['a']));
-
-console.log(isEqual(['a'], ['a', 'b']));
-
-console.log(isEqual(['a', 'b', 'c'], ['b', 'a', 'c']));
-
-let a = [];
-let b = [];
-
-console.log(a === b);
-console.log(isEqual(a, b));
+let b = [0, 1, 2];
+console.log(ownMap(b, num => num * 3));
