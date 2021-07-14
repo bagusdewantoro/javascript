@@ -1,3 +1,5 @@
+// npm run 1equal
+
 function isEqual(one, two) {
   if (one.length === 0 && two.length === 0) {
     console.log('\ncondition 1');

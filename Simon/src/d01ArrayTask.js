@@ -1,3 +1,5 @@
+// npm run 1array
+
 function ownMap(array, fn) {
   let newArray = [];
   for (let elem of array) {

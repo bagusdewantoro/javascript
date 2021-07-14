@@ -1,3 +1,5 @@
+// npm run 1pluck
+
 let students = [
   {name: 'Bagus', university: 'UAJY-FT'},
   {name: 'Anka', university: 'UAJY-FISIP'},
