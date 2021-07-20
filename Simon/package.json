@@ -1,17 +1,27 @@
 {
-  "name": "simon",
+  "name": "testing101",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "parcel index.html",
+    "test": "jest --watchAll",
     "1equal": "node src/d01EqualTask.js",
     "1array": "node src/d01ArrayTask.js",
     "1pluck": "node src/d01PluckTask.js",
-    "test": "jest"
+    "2object": "node src/d02ObjectTask.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^27.0.6"
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.3",
+    "parcel-bundler": "^1.7.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost:1234/"
   }
 }
