@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// change directory to change which react app
+import './hope/index.css';
+import App from './hope/App';
+
 
 ReactDOM.render(
   <React.StrictMode>
