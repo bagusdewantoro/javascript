@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './tracker2-style/index.css';
-import App from './tracker2-style/App';
+import './tracker4-map/index.css';
+import App from './tracker4-map/App';
 
 
 ReactDOM.render(
