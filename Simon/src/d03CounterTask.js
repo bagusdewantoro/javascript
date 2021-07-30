@@ -17,13 +17,13 @@ function createCounter() {
 }
 
 let counter = createCounter();
-console.log(counter);
+//console.log(counter);
 
-console.log(counter.get());
-counter.inc();
-counter.inc();
-console.log(counter.get());
-counter.dec();
-console.log(counter.get());
+//console.log(counter.get());
+//counter.inc();
+//counter.inc();
+//console.log(counter.get());
+//counter.dec();
+//console.log(counter.get());
 
 export default createCounter;

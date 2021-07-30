@@ -1,4 +1,8 @@
-import Menu from './Menu'
+const Menu = ({ menu }) => {
+  return (
+    <a className={menu.style} href="#0">{menu.text}</a>
+  )
+};
 
 const Nav = ({ nav }) => {
   return (

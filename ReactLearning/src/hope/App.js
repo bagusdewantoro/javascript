@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import Nav from './components/Nav';
+import Main from './components/Main';
 
 const App = () => {
   const [nav, setNav] = useState([
@@ -35,6 +36,7 @@ const App = () => {
     <div>
       <Header />
       <Nav nav={nav}/>
+      <Main />
     </div>
   )
 };

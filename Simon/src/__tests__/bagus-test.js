@@ -1,6 +1,7 @@
 import {getNames, pluck, pluck2} from "../d01PluckTask";
 import compareObjects from "../d02ObjectTask";
 import createCounter from "../d03CounterTask";
+import checkPassword from "../d04Password";
 
 // test getNames
 it('should get values', () => {
@@ -57,3 +58,5 @@ it('should start at zero', () => {
   let counter=createCounter();
   expect(counter.get()).toEqual(0);
 });
+
+// test password

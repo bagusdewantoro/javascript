@@ -23,5 +23,6 @@
   "jest": {
     "verbose": true,
     "testURL": "http://localhost:1234/"
-  }
+  },
+  "dependencies": {}
 }
