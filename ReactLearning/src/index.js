@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './tracker6-events/index.css';
-import App from './tracker6-events/App';
+import './tracker8-styleCond/index.css';
+import App from './tracker8-styleCond/App';
 
 
 ReactDOM.render(

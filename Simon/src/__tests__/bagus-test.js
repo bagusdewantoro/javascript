@@ -1,5 +1,6 @@
 import {getNames, pluck, pluck2} from "../d01PluckTask";
 import compareObjects from "../d02ObjectTask";
+import createCounter from "../d03CounterTask";
 
 // test getNames
 it('should get values', () => {
@@ -31,7 +32,7 @@ it('should pluck values', () => {
 it('should consider empty objects to be equal', () => {
   let result = compareObjects({}, {});
   expect(result).toEqual(true);
-})
+});
 
 // test compareObjects
 it('should consider same objects', () => {
@@ -40,7 +41,7 @@ it('should consider same objects', () => {
     {two: 2, one: 1}
   );
   expect(result).toEqual(true);
-})
+});
 
 // test compareObjects
 it('should consider different objects', () => {
@@ -49,4 +50,10 @@ it('should consider different objects', () => {
     {one: 2, two: undefined}
   );
   expect(result).toEqual(false);
-})
+});
+
+// test Counter
+it('should start at zero', () => {
+  let counter=createCounter();
+  expect(counter.get()).toEqual(0);
+});

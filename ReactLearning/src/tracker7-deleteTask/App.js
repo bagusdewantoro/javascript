@@ -1,10 +1,9 @@
-import { useState } from 'react';
-
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import { useState } from 'react';
 
 const App = () => {
-  const [tasks, setTasks] = useState([
+  const [taskGlobal, setTasks] = useState([
     {
       id: 1,
       text: 'Shopping',
@@ -25,12 +24,24 @@ const App = () => {
     },
   ]);
 
+  // Delete Tasks
+  const deleteTask = (id) => {
+    setTasks(taskGlobal.filter(
+      (task) => task.id !== id)
+    )
+  };
+
   return (
     <div className='container'>
       <Header />
-      <Tasks tasks={tasks}/>
+      {taskGlobal.length > 0 ? (
+        <Tasks taskList={taskGlobal}
+        onDelete={deleteTask} />
+      ) : (
+        'No Tasks To Show'
+      )}
     </div>
-  );
-}
+  )
+};
 
 export default App;
