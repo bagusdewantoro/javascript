@@ -1,7 +1,7 @@
 {
   "name": "jestflow",
   "version": "1.0.0",
-  "description": "",
+  "description": "```sh\r npm i -g flow\r npm init\r npm install --save-dev @babel/core @babel/cli @babel/preset-flow\r ```",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,12 +15,13 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.14.8",
     "@babel/preset-flow": "^7.14.5",
-    "flow-bin": "^0.156.0",
     "babel-preset-env": "^1.6.1",
+    "flow-bin": "^0.156.0",
     "jest": "^27.0.6"
   },
   "jest": {
     "verbose": true,
     "testURL": "http://localhost:1234/"
-  }
+  },
+  "dependencies": {}
 }
