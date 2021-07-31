@@ -82,7 +82,6 @@ flow-typed
     ...
 
     "babel-preset-env": "^1.6.1",
-    "jest": "^27.0.6"
   },
   "jest": {
     "verbose": true,
@@ -91,7 +90,20 @@ flow-typed
 }
 ```
 
-> Create `src` directory at the root of your project 
+> Add this to the .babelrc files
+```
+{
+  ...
+
+  "env": {
+    "test": {
+      "presets": ["env"]
+    }
+  }
+}
+```
+
+> Create `src` directory at the root of your project
 
 ```
 npm install
