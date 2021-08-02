@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './hope/index.css';
-import App from './hope/App';
+import './MDN-props/index.css';
+import App from './MDN-props/App';
 
 
 ReactDOM.render(
