@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './MDN-props/index.css';
-import App from './MDN-props/App';
+import './MDN-state/index.css';
+import App from './MDN-state/App';
 
 
 ReactDOM.render(
@@ -13,6 +13,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
