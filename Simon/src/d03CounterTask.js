@@ -26,4 +26,10 @@ let counter = createCounter();
 //counter.dec();
 //console.log(counter.get());
 
-export default createCounter;
+let c = createCounter();
+let {inc, get} = c;
+inc();
+inc();
+console.log(get())
+
+//export default createCounter;

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './MDN-state/index.css';
-import App from './MDN-state/App';
+import './tracker9-addTask/index.css';
+import App from './tracker9-addTask/App';
 
 
 ReactDOM.render(

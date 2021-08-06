@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask'
 
 const App = () => {
   const [taskGlobal, setTasks] = useState([
@@ -24,6 +25,11 @@ const App = () => {
     },
   ]);
 
+  // Add Task
+  const addTask = (task) => {
+    console.log(task)
+  }
+
   // Delete Tasks
   const deleteTask = (id) => {
     setTasks(taskGlobal.filter(
@@ -44,6 +50,7 @@ const App = () => {
   return (
     <div className='container'>
       <Header />
+      <AddTask onAdd={addTask} />
       {taskGlobal.length > 0 ? (
           <Tasks
             taskList={taskGlobal}
