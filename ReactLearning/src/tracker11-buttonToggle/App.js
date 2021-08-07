@@ -4,6 +4,9 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask'
 
 const App = () => {
+  // toggle Add Task Form
+  const [showAddTask, setShowAddTask] = useState(false);
+
   const [taskGlobal, setTasks] = useState([]);
 
   // Add Task
@@ -32,8 +35,10 @@ const App = () => {
 
   return (
     <div className='container'>
-      <Header />
-      <AddTask onAdd={addTask} />
+      <Header onAdd = {() => setShowAddTask(!showAddTask) }/>
+      {/* Ternary operator without else: */}
+      {showAddTask && <AddTask onAddClick={addTask} />}
+      {/* Ternary operator: */}
       {taskGlobal.length > 0 ? (
           <Tasks
             taskList={taskGlobal}
