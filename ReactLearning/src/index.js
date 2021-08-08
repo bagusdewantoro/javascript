@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './tracker11-buttonToggle/index.css';
-import App from './tracker11-buttonToggle/App';
+import './color/index.css';
+import App from './color/App';
 
 
 ReactDOM.render(
