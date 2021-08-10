@@ -113,6 +113,29 @@ footer {
 
 .color-box {
   width: 80px;
-  height: 30px;
+  height: 40px;
   background-color: #d7d7d7;
+  margin: 0px 20px;
+}
+
+.btn-generate {
+  width: 85px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.btn-generate:active {
+  transform: scale(0.98);
+}
+
+.pallete {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: solid black 1px;
+}
+
+.close {
+  color: red;
+  cursor: pointer;
+  margin-left: auto; /* push flex item to the right */
 }

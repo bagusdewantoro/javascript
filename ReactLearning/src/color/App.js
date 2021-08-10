@@ -1,31 +1,33 @@
 import { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
 
-const Palette = ({ number, palette }) => {
+const Palette = ({ palette, close }) => {
   return (
-    <div>
-      <button>Color {number}</button>
+    <div className='pallete'>
+      <button className='btn-generate'>
+        Color {palette.number ? palette.number : 'default'}
+      </button>
       <div
         className='color-box'
-        style={{ backgroundColor: palette }}>
+        style={{ backgroundColor: palette.color }}>
       </div>
-      <p>{palette}</p>
+      <p>{palette.color}</p>
+      <FaTimes
+        className='close'
+        onClick={() => close(palette.id)}
+      />
     </div>
   )
 }
 
-Palette.defaultProps = {
-  number: 'default',
-  palette: '#000000',
-}
-
-const Palettes = ({ generator }) => {
+const Palettes = ({ generator, close }) => {
   return (
     <div>
       {generator.map((palette) => (
         <Palette
           key={palette.id}
-          number={palette.number}
-          palette={palette.color}
+          palette={palette}
+          close={close}
         />
       ))}
     </div>
@@ -48,29 +50,36 @@ const Header = () => {
 };
 
 const App = () => {
-  const [generator] = useState([
+  const id = () => Math.floor(Math.random() * 1000 + 1);
+
+  const [generator, setGenerator] = useState([
     {
-      id: 1,
+      id: id(),
       number: 1,
       color: '#d39b23',
     },
     {
-      id: 2,
+      id: id(),
       number: 2,
       color: '#cbcbbc',
     },
     {
-      id: 3,
+      id: id(),
       number: 3,
       color: '#737373',
     },
-    {},
-    {},
+    {id: id()},
+    {id: id()},
   ]);
+
+  const close = (num) => {
+    console.log(num);
+  }
+
   return (
     <div className='container'>
       <Header />
-      <Palettes generator={generator}/>
+      <Palettes generator={generator} close={close}/>
     </div>
   )
 };
