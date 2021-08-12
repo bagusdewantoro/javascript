@@ -1,20 +1,37 @@
 import { useState } from 'react';
 import { FiMinusCircle } from 'react-icons/fi';
 
-const Palette = ({ palette, close }) => {
+
+const Generate = ({ palette, close }) => {
+  let [color, setColor] = useState('d7d7d7');
   const link = 'https://www.color-hex.com/color/';
+  const genColor = () => {
+    let newColor;
+    newColor = [...Array(6)].map(
+      () => Math.floor(Math.random() * 16).toString(16)
+    ).join('');
+    console.log(newColor);
+    setColor(color = newColor);
+  };
   return (
-    <div className='pallete'>
-      <button className='btn-generate'>
-        Color {palette.number ? palette.number : 'default'}
+    <div className='palette'>
+      <button
+        className='btn-generate'
+        onClick={() => palette.color = genColor()}
+      >
+        Color {palette.number}
       </button>
       <div
         className='color-box'
-        style={{ backgroundColor: '#' + palette.color }}
+        style={{ backgroundColor: '#' + color }}
       >
       </div>
-      <a href={palette.color ? link + palette.color : link + 'd7d7d7'}>
-        {palette.color ? '#' + palette.color : '#d7d7d7'}
+      <a
+        href={ link + color }
+        target='_blank'
+        rel="noreferrer"
+      >
+        #{color}
       </a>
       <FiMinusCircle
         size={22}
@@ -29,7 +46,7 @@ const Palettes = ({ generator, close }) => {
   return (
     <div>
       {generator.map((palette) => (
-        <Palette
+        <Generate
           key={palette.id}
           palette={palette}
           close={close}
