@@ -10,6 +10,20 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+a {
+  color: black;
+  text-decoration: underline;
+  padding: 0;
+}
+
+a:hover {
+  color: blue;
+}
+
+a:active {
+  color: black;
+}
+
 .container {
   max-width: 500px;
   margin: 30px auto;
@@ -122,6 +136,7 @@ footer {
   width: 85px;
   height: 40px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-generate:active {
@@ -135,7 +150,14 @@ footer {
 }
 
 .close {
-  color: red;
   cursor: pointer;
   margin-left: auto; /* push flex item to the right */
+}
+
+.close:hover {
+  color: grey;
+}
+
+.close:active {
+  transform: scale(0.9);
 }

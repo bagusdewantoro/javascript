@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { FiMinusCircle } from 'react-icons/fi';
 
 const Palette = ({ palette, close }) => {
+  const link = 'https://www.color-hex.com/color/';
   return (
     <div className='pallete'>
       <button className='btn-generate'>
@@ -9,10 +10,14 @@ const Palette = ({ palette, close }) => {
       </button>
       <div
         className='color-box'
-        style={{ backgroundColor: palette.color }}>
+        style={{ backgroundColor: '#' + palette.color }}
+      >
       </div>
-      <p>{palette.color}</p>
-      <FaTimes
+      <a href={palette.color ? link + palette.color : link + 'd7d7d7'}>
+        {palette.color ? '#' + palette.color : '#d7d7d7'}
+      </a>
+      <FiMinusCircle
+        size={22}
         className='close'
         onClick={() => close(palette.id)}
       />
@@ -34,17 +39,22 @@ const Palettes = ({ generator, close }) => {
   )
 };
 
-const BtnGenerate = () => {
+const BtnGenerate = ({ addButton }) => {
   return (
-    <button className='btn'>Add</button>
+    <button
+      className='btn'
+      onClick={addButton}
+    >
+      Add Color
+    </button>
   )
 }
 
-const Header = () => {
+const Header = ({ addButton }) => {
   return (
     <header>
       <h1>Random Color Generator</h1>
-      <BtnGenerate />
+      <BtnGenerate addButton={addButton}/>
     </header>
   )
 };
@@ -52,34 +62,35 @@ const Header = () => {
 const App = () => {
   const id = () => Math.floor(Math.random() * 1000 + 1);
 
-  const [generator, setGenerator] = useState([
-    {
+  const [generator, setGenerator] = useState([]);
+
+  const addButton = () => {
+    let newItem = {
       id: id(),
-      number: 1,
-      color: '#d39b23',
-    },
-    {
-      id: id(),
-      number: 2,
-      color: '#cbcbbc',
-    },
-    {
-      id: id(),
-      number: 3,
-      color: '#737373',
-    },
-    {id: id()},
-    {id: id()},
-  ]);
+      number: generator.length + 1,
+    }
+    setGenerator([...generator,
+      newItem
+    ]);
+    console.log(newItem.number);
+  }
 
   const close = (num) => {
+    setGenerator(generator.filter((element) => element.id !== num));
     console.log(num);
-  }
+  };
 
   return (
     <div className='container'>
-      <Header />
-      <Palettes generator={generator} close={close}/>
+      <Header addButton={addButton} />
+      {generator.length > 0 ? (
+        <Palettes
+          generator={generator}
+          close={close}
+        />
+      ) : (
+        'Click the button to generate new pallete'
+      )}
     </div>
   )
 };
