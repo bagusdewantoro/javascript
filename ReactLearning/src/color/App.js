@@ -19,7 +19,7 @@ const Generate = ({ palette, close }) => {
         className='btn-generate'
         onClick={() => palette.color = genColor()}
       >
-        Color {palette.number}
+        Generate
       </button>
       <div
         className='color-box'
@@ -84,12 +84,10 @@ const App = () => {
   const addButton = () => {
     let newItem = {
       id: id(),
-      number: generator.length + 1,
     }
     setGenerator([...generator,
       newItem
     ]);
-    console.log(newItem.number);
   }
 
   const close = (num) => {
