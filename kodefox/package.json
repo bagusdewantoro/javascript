@@ -1,14 +1,19 @@
 {
   "name": "kodefox",
   "version": "1.0.0",
-  "description": "",
+  "description": "kfstart",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src/ -d lib/",
+    "prepublish": "yarn run build",
   },
-  "author": "",
+  "author": "bagus",
   "license": "ISC",
   "dependencies": {
     "kfstart": "^0.19.1"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.157.0"
   }
 }
