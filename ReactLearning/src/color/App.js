@@ -19,7 +19,7 @@ const Generate = ({ palette, close }) => {
         className='btn-generate'
         onClick={() => palette.color = genColor()}
       >
-        Generate
+        {palette.numss} | click this
       </button>
       <div
         className='color-box'
@@ -42,7 +42,7 @@ const Generate = ({ palette, close }) => {
   )
 }
 
-const Palettes = ({ generator, close }) => {
+const Palettes = ({ generator, close, buttonNumber }) => {
   return (
     <div>
       {generator.map((palette) => (
@@ -50,6 +50,7 @@ const Palettes = ({ generator, close }) => {
           key={palette.id}
           palette={palette}
           close={close}
+
         />
       ))}
     </div>
@@ -80,19 +81,22 @@ const App = () => {
   const id = () => Math.floor(Math.random() * 1000 + 1);
 
   const [generator, setGenerator] = useState([]);
+  let [buttonNumber, setButtonNumber] = useState(1);
 
   const addButton = () => {
+
     let newItem = {
       id: id(),
+      numss: buttonNumber,
     }
-    setGenerator([...generator,
-      newItem
-    ]);
+    setGenerator([...generator, newItem]);
+    setButtonNumber(buttonNumber += 1);
+    console.log(`buttonNumber: ${buttonNumber}`);
   }
 
   const close = (num) => {
     setGenerator(generator.filter((element) => element.id !== num));
-    console.log(num);
+    console.log(`close id: ${num}`);
   };
 
   return (
@@ -102,6 +106,7 @@ const App = () => {
         <Palettes
           generator={generator}
           close={close}
+
         />
       ) : (
         'Click the button to generate new pallete'
