@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './ToDoState/index.css';
-import App from './ToDoState/App';
+import './ToDoStateAdd/index.css';
+import App from './ToDoStateAdd/App';
 
 
 ReactDOM.render(
