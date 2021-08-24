@@ -1,17 +1,9 @@
-const posts = [
-  {title: 'Post One', body: 'This is post one'},
-  {title: 'Post Two', body: 'This is post two'},
-  {title: 'Post Three', body: 'This is post three'},
-];
+// choose one/more of the imports below
 
-function getPosts() {
-  setTimeout(() => {
-    let output = '';
-    posts.forEach((post, index) => {
-      output += `<li>${post.title}</li>`;
-    });
-    document.body.innerHTML = output;
-  }, 1000);
-}
-
-getPosts();
+// import * as basic from './basic.js';
+// import * as callbacks from './callback.js';
+// import * as promises from './promises.js';
+// import * as promises from './promisesAll.js';
+// import * as promises from './promisesFetch.js';
+// import * as async from './async.js';
+import * as async from './asyncFetch.js';
