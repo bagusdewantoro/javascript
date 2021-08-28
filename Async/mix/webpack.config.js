@@ -15,4 +15,13 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     // clean: true,
   },
+  // for import text
+  module: {
+    rules: [
+      {
+        test: /\.txt/,
+        type: 'asset/source',
+      }
+    ]
+  }
 };
