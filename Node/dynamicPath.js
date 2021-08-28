@@ -31,13 +31,19 @@ const server = http.createServer((req, res) => {
       break;
   }
 
+  // Check if contentType is text/html but no .html file extension
+  if (contentType == "text/html" && extname == "") filePath += ".html";
+
+  // log the filePath
+  console.log(filePath);
+
   // Read file
   fs.readFile(filePath, (err, content) => {
     if (err) {
       if (err.code === 'ENOENT') {
         // Page not found
         fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
-          res.writeHead(200, { 'Content-Type': 'text/html'});
+          res.writeHead(404, { 'Content-Type': 'text/html'});
           res.end(content, 'utf8');
         })
       } else {
@@ -47,7 +53,7 @@ const server = http.createServer((req, res) => {
       }
     } else {
       // Success
-      res.writeHead(200, { 'Content-Type': 'text/html'});
+      res.writeHead(200, { 'Content-Type': contentType });
       res.end(content, 'utf8');
     }
   });
