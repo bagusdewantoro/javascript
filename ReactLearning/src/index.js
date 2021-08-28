@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './backgroundColor/index.css';
-import App from './backgroundColor/App';
+import './tracker12-fetch/index.css';
+import App from './tracker12-fetch/App';
 
 
 ReactDOM.render(

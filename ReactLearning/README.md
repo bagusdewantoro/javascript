@@ -22,3 +22,65 @@
 >#### [src/tracker6-stateEvents](https://react-traversy-stateevents.netlify.app).
 >#### [src/tracker7-deleteTask](https://react-traversy-deletetask.netlify.app).
 >#### [src/tracker8-styleCond](https://react-traversy-conditional.netlify.app/).
+>#### [src/tracker11-buttontoggle](https://react-traversy-buttontoggle.netlify.app/).
+
+
+* Development server for production (build) version:
+```
+npm run build
+npm i -g serve
+```
+```
+serve -s build
+```
+or to chose port:
+```
+serve -s build -p 8000
+```
+
+* Create a mock RestAPI with our onw data using json-server:
+```
+npm i json-server
+```
+package.json:
+```
+"scripts": {
+  ...
+  "server": "json-server --watch db.json --port 5000"
+},
+```
+```
+npm run server
+```
+While server is running, open new shell:
+```
+npm start
+```
+Open db.json and edit its content as you like.
+For example:
+```
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Shopping",
+      "day": "Feb 5th at 2:30pm",
+      "reminder": true
+    },
+    {
+      "id": 2,
+      "text": "Study",
+      "day": "Feb 7th at 5:30pm",
+      "reminder": false
+    },
+    {
+      "id": 3,
+      "text": "Playing",
+      "day": "Jan 1st at 1:30am",
+      "reminder": true
+    }
+  ]
+}
+```
+You can check it in http://localhost:5000/tasks
+And update app.js using useEffect

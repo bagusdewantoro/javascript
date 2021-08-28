@@ -2,18 +2,38 @@ import React, { Component } from 'react';
 import { FiMinusCircle } from 'react-icons/fi';
 
 class Generate extends Component {
+  state = {
+    color: 'd7d7d7'
+  }
+  genColor = () => {
+    let newColor;
+    newColor = [...Array(6)].map(
+      () => Math.floor(Math.random() * 16).toString(16)
+    ).join('');
+    console.log(newColor);
+    this.setState({
+      color: newColor,
+    });
+  }
   render() {
     const link = 'https://www.color-hex.com/color/';
     return (
       <div className='palette'>
-        <button className='btn-generate'>
+        <button
+          className='btn-generate'
+          onClick={() => this.genColor()}
+        >
           {this.props.palette.numss} | click this
         </button>
-        <div className='color-box' style={{ backgroundColor: '#' + this.props.palette.color }}></div>
-        <a href={ link + this.props.palette.color } target='_blank' rel='noreferrer'>
-          #{ this.props.palette.color }
+        <div className='color-box' style={{ backgroundColor: '#' + this.state.color }}></div>
+        <a href={ link + this.state.color } target='_blank' rel='noreferrer'>
+          #{ this.state.color }
         </a>
-        <FiMinusCircle size={22} className='close' />
+        <FiMinusCircle
+          size={22}
+          className='close'
+          onClick = {() => this.props.close(this.props.palette.id)}
+        />
       </div>
     )
   }
@@ -26,51 +46,70 @@ const Palettes = (props) => {
         <Generate
           key={palette.id}
           palette={palette}
+          close={props.close}
         />
       ))}
     </div>
   )
 };
 
-const BtnGenerate = () => {
+const BtnGenerate = (props) => {
   return (
     <button
       className='btn'
+      onClick={props.addButton}
     >
       AddColor
     </button>
   )
 };
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
       <h1>Random Color Generator</h1>
-      <BtnGenerate />
+      <BtnGenerate addButton={props.addButton} />
     </header>
   )
 };
 
 class App extends Component {
+  id = () => Math.floor(Math.random() * 1000 + 1);
+
   state = {
-    generator: [
-      {
-        id: '1',
-        numss: '1',
-        color: 'c4c4c4',
-      },
-      {
-        id: '2',
-        numss: '2',
-        color: 'fff333',
-      },
-    ]
+    generator: [],
+    buttonNumber: 1,
+  };
+
+  addButton = () => {
+    const newItem = {
+      id: this.id(),
+      numss: this.state.buttonNumber,
+    };
+    this.setState({
+      generator: [...this.state.generator, newItem],
+    })
+    this.setState({
+      buttonNumber : this.state.buttonNumber + 1
+    })
+    console.log(`buttonNumber: ${this.state.buttonNumber}`);
   }
+
+  close = (num) => {
+    this.setState({
+      generator: this.state.generator.filter((element) => element.id !== num)
+    })
+    console.log(`close id: ${num}`);
+  };
+
   render() {
     return (
       <div className='container'>
-        <Header />
-        <Palettes generator={this.state.generator} />
+        <Header addButton={this.addButton}/>
+        <Palettes
+          generator={this.state.generator}
+          close={this.close}
+        />
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Header from './components/Header';
-import Tasks from './components/Tasks';
-import AddTask from './components/AddTask'
+import Header from './Header';
+import Tasks from './Tasks';
+import AddTask from './AddTask'
 
 const App = () => {
   // toggle Add Task Form

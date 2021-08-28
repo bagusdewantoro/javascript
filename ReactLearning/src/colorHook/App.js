@@ -90,7 +90,7 @@ const App = () => {
       numss: buttonNumber,
     }
     setGenerator([...generator, newItem]);
-    setButtonNumber(buttonNumber += 1);
+    setButtonNumber(buttonNumber + 1);
     console.log(`buttonNumber: ${buttonNumber}`);
   }
 
