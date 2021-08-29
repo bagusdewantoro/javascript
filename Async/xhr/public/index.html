@@ -3,34 +3,28 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./style.css" />
-    <title>Home</title>
+    <style>
+      .user {
+        display: flex;
+        background: black;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .user ul {
+        list-style: none;
+      }
+    </style>
+    <title>JSON Local</title>
   </head>
   <body>
-    <h1>Homepage Bagus</h1>
+    <h1>Learn AJAX</h1>
 
-    <script>
-      const button = document.createElement("button");
-      button.appendChild(document.createTextNode("Get Text File"));
-      button.setAttribute("id", "button-1")
-      document.body.appendChild(button);
+    <!-- Choose one below -->
+    <!-- <script src="./xhr1-status1.js"></script> -->
+    <!-- <script src="./xhr1-status2.js"></script> -->
+    <!-- <script src="./xhr2-jsonLocal.js"></script> -->
+    <script src="./xhr3-externalAPI.js"></script>
+    <!-- -->
 
-      // Create event listener
-      button.addEventListener('click', loadText);
-
-      function loadText() {
-        // Create XHR Object
-        const xhr = new XMLHttpRequest();
-        // OPEN - type, url/file, async
-        xhr.open('GET', 'sample.txt', true);
-        xhr.onload = function() {
-          if (this.status === 200) {
-            console.log(this.responseText);
-          }
-        }
-        // Send request
-        xhr.send();
-      }
-    </script>
-    
   </body>
 </html>

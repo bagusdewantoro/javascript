@@ -1,1 +1,6 @@
+<br>
 XHR learning
+<br>
+Sample <strong><u>bold</u></strong> text
+<br>
+Success man
