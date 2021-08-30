@@ -1,5 +1,11 @@
 ## Traversy Media - AJAX / XHR
 
+>#### [xhr1-txtFile](https://traversy-xhr1.netlify.app/).
+>#### [xhr2-jsonLocal](https://traversy-xhr2.netlify.app/).
+>#### [xhr3-externalAPI](https://traversy-xhr3.netlify.app/).
+
+
+
 ```
 npm init
 ```
@@ -22,5 +28,3 @@ npm run dev
 ```
 
 Open http://localhost:5000/
-
->#### [xhr1](https://traversy-xhr1.netlify.app/).
