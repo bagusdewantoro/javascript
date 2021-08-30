@@ -1,7 +1,6 @@
-## MDN fetching data from server - XHR vs Fetch Part 1
+## MDN fetching data from server - XHR vs Fetch part 2
 
->#### [xhrVsFetch1 - XHR Version](https://mdn-xhr1.netlify.app/).
->#### [xhrVsFetch1 - Fetch Version](https://mdn-fetch1.netlify.app/).
+>#### [xhrVsFetch2 - Fetch Version](https://mdn-fetch2.netlify.app/).
 
 ```
 npm init
