@@ -1,0 +1,1 @@
+const dynamic = require('./dynamicPath');

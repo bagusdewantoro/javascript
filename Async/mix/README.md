@@ -1,4 +1,4 @@
-## Traversy Media - Async
+## Traversy Media - Async (mix)
 
 ## Install webpack & webpack-cli
 
@@ -82,7 +82,7 @@ scripts: {
 }
 ```
 
-* Run development development server
+* Run development server
 ```
 npm start
 ```
