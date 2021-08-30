@@ -1,14 +1,25 @@
 ## Live Preview
 
-### My project (HOPE) - on progress
+### HOPE - on progress
 
 >#### [src/hope](https://react-hope.netlify.app/).   
 
 <br/>
 
+### Random Color Generator
+* Two versions: Hook & Class
+
+>#### [src/colorHook](https://react-colorhook.netlify.app/).  
+>#### [src/colorClass](https://react-colorclass.netlify.app/).  
+
+<br/>
+
 ### To do app by Tania Rascia
 
->#### [src/ToDo](https://react-tania-todo.netlify.app/).   
+>#### [src/ToDoProps](https://react-tania-todoprops.netlify.app/).
+>#### [src/ToDoStateDelete](https://react-tania-statedelete.netlify.app/).
+>#### [src/ToDoStateAdd](https://react-tania-stateadd.netlify.app/).
+>#### [src/ToDoFinal](https://react-tania-todo.netlify.app/).   
 
 <br/>
 
@@ -22,7 +33,10 @@
 >#### [src/tracker6-stateEvents](https://react-traversy-stateevents.netlify.app).
 >#### [src/tracker7-deleteTask](https://react-traversy-deletetask.netlify.app).
 >#### [src/tracker8-styleCond](https://react-traversy-conditional.netlify.app/).
+>#### [src/tracker9-addTask](https://react-traversy-addtask.netlify.app/).
+>#### [src/tracker10-formToggle](https://react-traversy-formtoggle.netlify.app/).
 >#### [src/tracker11-buttontoggle](https://react-traversy-buttontoggle.netlify.app/).
+
 
 
 * Development server for production (build) version:
