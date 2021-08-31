@@ -184,5 +184,6 @@ function initialize(products) {
     section.appendChild(heading);
     section.appendChild(para);
     section.appendChild(image);
+
   }
 }
