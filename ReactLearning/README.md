@@ -97,4 +97,5 @@ For example:
 }
 ```
 You can check it in http://localhost:5000/tasks
+If accessing each tasks, add its id http://localhost:5000/tasks/1
 And update app.js using useEffect
