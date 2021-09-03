@@ -4,7 +4,7 @@ npm init
 
 Watch development
 ```
-npm i nodemon
+npm i nodemon -D
 ```
 
 package.json
