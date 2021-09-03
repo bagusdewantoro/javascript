@@ -1,0 +1,1 @@
+mongodb+srv://netninja:<password>@nodetuts.y6vzw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
