@@ -7,36 +7,47 @@ text = document.getElementById('text');
 amount = document.getElementById('amount');
 
 // dummy transactions
-let transactions = [
-  {id: 1, text: 'kamera', amount: "-2000"},
-  {id: 2, text: 'jual', amount: "10000"}
-];
+// let transactions = [
+//   {id: 1, text: 'kamera', amount: "-2000"},
+//   {id: 2, text: 'jual', amount: "10000"}
+// ];
 
 // function 1000 separator
 const thousands = (num) => {
-  /*
   // with cent decimal
-  const num_parts = num.toString().split(".");
-  num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return num_parts.join(".");
-  */
+  // const num_parts = num.toString().split(".");
+  // num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // return num_parts.join(".");
   // withount cent decimal
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-// function create li, append to ul
+// set initial local Storage
+let transactions = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+localStorage.setItem('items', JSON.stringify(transactions));
+
+// function update local storage
+const updateLocalStorage = () => {
+  localStorage.setItem('items', JSON.stringify(transactions));
+  transactions = JSON.parse(localStorage.getItem('items'));
+};
+
+// function generate DOM list history
 const listHistory = (transItem) => {
   const item = document.createElement('li');
   item.classList.add(transItem.amount < 0 ? 'minus' : "plus");
   item.innerHTML = `
-    <button id="${transItem.id}" class="delete-btn">x</button>
+    <button
+      id="${transItem.id}"
+      class="delete-btn"
+      onclick="removeTransaction(${transItem.id})">x</button>
     ${transItem.text}
     <span>${transItem.amount < 0 ? "-" : "+"} Rp ${thousands(Math.abs(transItem.amount))}</span>
   `;
   list.appendChild(item);
 }
 
-// function calculate
+// function calculate all value & update DOM calculation
 const calculateValue = () => {
   // balance
   const totalAmount = transactions.reduce((current, next) => current + Number(next.amount), 0);
@@ -53,9 +64,20 @@ const calculateValue = () => {
     return current + Number(next.amount);
   }, 0);
   expense.textContent = `- Rp ${thousands(Math.abs(minusAmount))}`;
+};
+
+// function delete button
+const removeTransaction = (id) => {
+  transactions = transactions.filter(transaction => transaction.id !== id);
+  list.innerHTML = '';
+  // add data to local storage, update transactions from local storage
+  updateLocalStorage();
+  // update all DOM
+  transactions.map(eachItem => listHistory(eachItem));
+  calculateValue();
 }
 
-// get text & amount value, store in history list
+// get input value, then update all DOM
 const addTransaction = (e) => {
   if (text.value.trim() !== ''  && amount.value !== '') {
     e.preventDefault();
@@ -66,14 +88,16 @@ const addTransaction = (e) => {
       amount: amount.value
     };
     transactions.push(transaction);
-
+    // add data to local storage, update transactions from local storage
+    updateLocalStorage();
+    // update all DOM
     listHistory(transaction);
     calculateValue();
-
-    // refresh
+    // refresh input
     text.value = '';
     amount.value = '';
     console.log(transactions);
+    // if incorrect input
   } else (
     alert('Please fill the data')
   )
