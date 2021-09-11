@@ -12,7 +12,7 @@ const App = () => {
   const [history, setHistory] = useState([
     {
       id: 1,
-      text: 'eat',
+      text: 'drink',
       value: -1000
     },
     {
