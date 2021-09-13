@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './expense1Basic/index.css';
-import App from './expense1Basic/App';
+import './expense3Context/index.css';
+import App from './expense3Context/App';
 
 
 ReactDOM.render(
