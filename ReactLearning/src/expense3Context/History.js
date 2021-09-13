@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { GlobalContext } from './context/GlobalState';
 
-const List = ({ list }) => {
+const List = ({ list, thousands }) => {
   const { deleteList } = useContext(GlobalContext);
   return (
     <li className={ list.amount > 0 ? 'plus' : 'minus' }>
@@ -12,12 +12,12 @@ const List = ({ list }) => {
         x
       </button>
       { list.text }:
-      <span> Rp { list.amount }</span>
+      <span> Rp { thousands(list.amount) }</span>
     </li>
   )
 };
 
-const History = () => {
+const History = ({ thousands }) => {
   // pull global state from GlobalContext
   const {transactions} = useContext(GlobalContext);
   // console.log(context);
@@ -29,8 +29,7 @@ const History = () => {
         <List
           key={ list.id }
           list={ list }
-          // deleteList={ deleteList }
-          // thousands={ thousands }
+          thousands={ thousands }
         />
       ))}
       </ul>

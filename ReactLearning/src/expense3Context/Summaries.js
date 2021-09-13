@@ -10,7 +10,7 @@ const Summary = ({ title, amount }) => {
   )
 }
 
-const Summaries = () => {
+const Summaries = ({ thousands }) => {
   const {transactions} = useContext(GlobalContext);
   const income = transactions
     .filter((item) => item.amount > 0)
@@ -20,8 +20,8 @@ const Summaries = () => {
     .reduce((current, acc) => current + acc.amount, 0);
   return (
     <div className='inc-exp-container'>
-      <Summary title='Income' amount={ (income) } />
-      <Summary title='Expense' amount={ (expense)} />
+      <Summary title='Income' amount={ thousands(income) } />
+      <Summary title='Expense' amount={ thousands(expense)} />
     </div>
   )
 };

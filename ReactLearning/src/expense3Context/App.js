@@ -58,19 +58,19 @@ const App = () => {
   //   );
   // };
   //
-  // const thousands = (num) => {
-  //   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // };
-  //
+  const thousands = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   // useEffect(() => calculate());
 
   return (
-    <GlobalProvider>
+    <GlobalProvider >
       <Header />
       <div className='container'>
-        <Balance />
-        <Summaries />
-        <History />
+        <Balance thousands={thousands} />
+        <Summaries thousands={thousands} />
+        <History thousands={thousands} />
         <AddTransaction />
       </div>
     </GlobalProvider>
