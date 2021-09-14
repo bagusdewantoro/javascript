@@ -9,7 +9,26 @@ import About from './About';
 const App = () => {
   // toggle Add Task Form
   const [showAddTask, setShowAddTask] = useState(false);
-  const [taskGlobal, setTasks] = useState([]);
+  const [taskGlobal, setTasks] = useState([
+    {
+      id: 11,
+      text: 'Learn',
+      day: 'Feb 5th at 2:30pm',
+      reminder: true,
+    },
+    {
+      id: 12,
+      text: 'Party',
+      day: 'Feb 7th at 5:30pm',
+      reminder: false,
+    },
+    {
+      id: 13,
+      text: 'Coding',
+      day: 'Jan 1st at 1:30am',
+      reminder: true,
+    },
+  ]);
 
   // Load db.json content to the page, using fetch API with async
   useEffect(() => {

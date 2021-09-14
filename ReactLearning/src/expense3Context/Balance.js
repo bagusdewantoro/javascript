@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { GlobalContext } from './context/GlobalState';
+import { GlobalContext, numberFormat } from './context/GlobalState';
 
-const Balance = ({ thousands }) => {
+const Balance = () => {
   const {transactions} = useContext(GlobalContext);
   const balance = transactions.reduce((current, acc) => {
     return current + acc.amount;
@@ -9,7 +9,7 @@ const Balance = ({ thousands }) => {
   return (
     <div>
       <h4>Your Balance</h4>
-      <h1>Rp { thousands(balance) }</h1>
+      <h1>Rp { numberFormat(balance) }</h1>
     </div>
   )
 };

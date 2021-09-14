@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { GlobalContext } from './context/GlobalState';
+import { GlobalContext, numberFormat } from './context/GlobalState';
 
 const Summary = ({ title, amount }) => {
   return (
@@ -10,7 +10,7 @@ const Summary = ({ title, amount }) => {
   )
 }
 
-const Summaries = ({ thousands }) => {
+const Summaries = () => {
   const {transactions} = useContext(GlobalContext);
   const income = transactions
     .filter((item) => item.amount > 0)
@@ -20,8 +20,8 @@ const Summaries = ({ thousands }) => {
     .reduce((current, acc) => current + acc.amount, 0);
   return (
     <div className='inc-exp-container'>
-      <Summary title='Income' amount={ thousands(income) } />
-      <Summary title='Expense' amount={ thousands(expense)} />
+      <Summary title='Income' amount={ numberFormat(income) } />
+      <Summary title='Expense' amount={ numberFormat(expense)} />
     </div>
   )
 };

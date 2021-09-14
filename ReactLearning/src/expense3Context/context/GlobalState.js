@@ -46,4 +46,9 @@ const GlobalProvider = ({ children }) => {
   )
 };
 
-export {GlobalContext, GlobalProvider};
+// format number
+const numberFormat = (num) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+export {GlobalContext, GlobalProvider, numberFormat};
