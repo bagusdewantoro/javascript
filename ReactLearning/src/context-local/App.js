@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Home from "./Home";
 import EditDetails from "./EditDetails";
+import { InfoProvider } from './InfoContext';
 
 const styles = {
   header: {
@@ -31,11 +32,13 @@ function App() {
 
   return (
     <div className="App">
-      <div style={styles.header}>
-        <h2 style={styles.headerTitle}>My Website</h2>
-        <EditButton />
-      </div>
-      {!isEditing ? <Home /> : <EditDetails />}
+      <InfoProvider>
+        <div style={styles.header}>
+          <h2 style={styles.headerTitle}>My Website</h2>
+          <EditButton />
+        </div>
+        {!isEditing ? <Home /> : <EditDetails />}
+      </InfoProvider>
     </div>
   );
 }
