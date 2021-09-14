@@ -14,6 +14,7 @@ const initialState = {
 // create context
 const GlobalContext = createContext(initialState);
 
+// ============================================================
 // in order for other components to have access to..
 // ..our global state, we need a provider
 // PROVIDER COMPONENT
@@ -45,10 +46,12 @@ const GlobalProvider = ({ children }) => {
     </GlobalContext.Provider>
   )
 };
+// ============================================================
 
 // format number
 const numberFormat = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
+
 
 export {GlobalContext, GlobalProvider, numberFormat};
