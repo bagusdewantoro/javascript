@@ -6,6 +6,12 @@
 >#### [src/expense1Basic](https://expense-basic.netlify.app/).  
 >#### Local Storage
 >#### [src/expense2Local](https://expense-local-storage.netlify.app/).  
+>#### Using Context
+>#### [src/expense3Context](https://expense-context.netlify.app/).  
+>#### Using Context & Local Storage
+>#### [src/expense4Local](https://expense-context-and-local.netlify.app/).  
+>#### Add negative for expense
+>#### [src/expense5Negative](https://expense-add-negative.netlify.app/).  
 
 <br/>
 
@@ -29,6 +35,12 @@
 ### HOPE - on progress
 
 >#### [src/hope](https://react-hope.netlify.app/).   
+
+<br/>
+
+### Reducer by Alex Krush
+
+>#### [src/context-local](https://context-local.netlify.app/).   
 
 <br/>
 
