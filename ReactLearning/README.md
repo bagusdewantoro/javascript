@@ -2,16 +2,11 @@
 
 ### Expense Tracker
 * Based on Vanilla JS version by Travery, I created react version.
->#### Without storage
->#### [src/expense1Basic](https://expense-basic.netlify.app/).  
->#### Local Storage
->#### [src/expense2Local](https://expense-local-storage.netlify.app/).  
->#### Using Context
->#### [src/expense3Context](https://expense-context.netlify.app/).  
->#### Using Context & Local Storage
->#### [src/expense4Local](https://expense-context-and-local.netlify.app/).  
->#### Add negative for expense
->#### [src/expense5Negative](https://expense-add-negative.netlify.app/).  
+>#### Without storage [src/expense1Basic](https://expense-basic.netlify.app/).  
+>#### Local Storage [src/expense2Local](https://expense-local-storage.netlify.app/).  
+>#### Using Context [src/expense3Context](https://expense-context.netlify.app/).  
+>#### Using Context & Local Storage [src/expense4Local](https://expense-context-and-local.netlify.app/).  
+>#### Add negative for expense [src/expense5Negative](https://expense-add-negative.netlify.app/).  
 
 <br/>
 
