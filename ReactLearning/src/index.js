@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './tabs2/index.css';
-import App from './tabs2/App';
+import './spaceX/index.css';
+import App from './spaceX/App';
 
 
 ReactDOM.render(
