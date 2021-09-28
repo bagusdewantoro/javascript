@@ -1,9 +1,9 @@
-const Tabs = ({ title, deleteTab, getID }) => {
+const Tabs = ({ tabContent, deleteTab }) => {
   return (
     <div>
-      <h2>Content {title}</h2>
-      <p>This is content number {title}</p>
-      <button onClick={() => deleteTab(getID)}>
+      <h2>Content {tabContent.label}</h2>
+      <p>{tabContent.content}</p>
+      <button onClick={() => deleteTab(tabContent.id)}>
         Delete Tab
       </button>
     </div>

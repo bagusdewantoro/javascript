@@ -8,22 +8,20 @@ const App = () => {
   const [tabList, setTabList] = useState([]);
   let [tabNumber, setTabNumber] = useState(1);
   const deleteTab = (id) => {
-    const newTabList = tabList.filter((tab) => tab.id !== id)
-    setTabList(newTabList);
-    newTabList.length !== 0
-      ? setCurrentTab(newTabList[newTabList.length - 1].id)
-      : setCurrentTab('');
-    // console.log(newTabList);
+    setTabList(tabList.filter((tab) => tab.id !== id));
+    tabList.length !== 0 ? setCurrentTab(tabList[tabList.length - 1].id) : setCurrentTab('');
+    // console.log(id);
+    // console.log(tabList);
   };
   const addTab = () => {
     const getID = randomId();
     const newItem = {
       id: getID,
-      label: `Tab ${tabNumber}`,
-      content: `This is content number ${tabNumber}`
+      label: `Tab ${tabList.length + 1}`,
+      content: <Tabs title={tabList.length + 1} deleteTab={deleteTab} getID={getID} />
     };
     setTabList([...tabList, newItem]);
-    setCurrentTab(newItem.id);
+    setCurrentTab(getID);
     setTabNumber(tabNumber + 1)
   }
   return (
@@ -44,11 +42,9 @@ const App = () => {
       {tabList.map((tab) => {
         if (tab.id === currentTab) {
           return (
-            <Tabs
-              key={tab.id}
-              tabContent={tab}
-              deleteTab={deleteTab}
-            />
+            <div key={ tab.id }>
+              { tab.content }
+            </div>
           )
         } else {
             return null
