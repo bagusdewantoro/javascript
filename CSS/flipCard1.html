@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Flip Card 1</title>
+    <style>
+      .card {
+        transform: translate(+50%, 0);
+        height: 400px; width: 300px;
+        perspective: 600px;
+      }
+      .card-front {
+        color: #DDDDDD;
+        height: 100%; width: 100%;
+        background-color: #161616;
+        position: absolute;
+        transition: 1s;
+      }
+      .card:hover .card-front {
+        transform: rotateX(-180deg);
+      }
+      /* .card-back {
+        height: 100%; width: 100%;
+        background-color: #CCCCCC;
+        backface-visibility: hidden;
+        position: absolute;
+        transform: rotateX(180deg);
+        transition: 1s;
+      }
+      .card:hover .card-back {
+        transform: rotateX(0deg);
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="card-front"><h2>Front</h2></div>
+      <!-- <div class="card-back"><h2>Back</h2></div> -->
+    </div>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Flip Card Final</title>
+    <style>
+      * {
+        color: #FF4A54;
+      }
+      body {
+        margin: 0; padding: 0;
+        font-family: sans-serif;
+        background-color: #FF4A54;
+      }
+      .card {
+        position: absolute;
+        top: 50%; left: 50%;
+        height: 400px; width: 300px;
+        transform: translate(-50%, -50%);
+        transform-style: preserve-3d;
+        perspective: 600px;
+        transition: 1s;
+      }
+      .card:hover .card-front {
+        transform: rotateX(-180deg);
+      }
+      .card:hover .card-back {
+        transform: rotateX(0deg);
+      }
+      .card-back h2 {
+        margin: 60% auto 35% auto;
+      }
+      .card-front {
+        height: 100%;
+        width: 100%;
+        background-image: url(./flipCard.jfif);
+        background-color: #161616;
+        background-size: cover;
+        position: absolute;
+        top: 0; left: 0;
+        transition: 1s;
+      }
+      .card-back {
+        height: 100%; width: 100%;
+        position: absolute;
+        top: 0; left: 0;
+        background-color: #161696;
+        backface-visibility: hidden;
+        transform: rotateX(180deg);
+        transition: 1s;
+        color: #FF4A54;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <div class="card-front"></div>
+      <div class="card-back">
+        <h2>Test<br><span>Card</span></h2>
+      </div>
+    </div>
+  </body>
+</html>

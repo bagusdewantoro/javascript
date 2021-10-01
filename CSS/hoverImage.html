@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Image Hover</title>
+    <style>
+      * {
+        margin: 0; padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        position: absolute;
+        top: 50%; left: 50%;
+        overflow: hidden;
+        display: flex;
+        transform: translate(-50%, -50%);
+      }
+      img {
+        width: 250px; height: 250px;
+        transition: 1s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="text">
+        <h4>Lagu</h4>
+        <p>Kasih ibu, kepada beta, tak terhingga
+        sepanjang masa, hanya memberi, tak harap kembali,
+        bagai sang surya menyinari dunia</p>
+      </div>
+      <div class="img one"></div>
+      <div class="img two"></div>
+    </div>
+  </body>
+</html>
