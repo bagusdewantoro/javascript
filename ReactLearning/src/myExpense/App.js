@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Tabs from './Tabs';
 import AddTab from './AddTab';
 
 const App = () => {
   const randomId = () => Math.floor(Math.random() * 100000 + 1);
-  const [currentTab, setCurrentTab] = useState('');
-  const [tabList, setTabList] = useState([]);
-  const [tabNumber, setTabNumber] = useState(1);
+  const [currentTab, setCurrentTab] = useState(
+    localStorage.getItem('currentTab') ? JSON.parse(localStorage.getItem('currentTab')) : ''
+  );
+  const [tabList, setTabList] = useState(
+    localStorage.getItem('tabs') ? JSON.parse(localStorage.getItem('tabs')) : []
+  );
+  const [tabNumber, setTabNumber] = useState(
+    localStorage.getItem('tabNumber') ? JSON.parse(localStorage.getItem('tabNumber')) : 1
+  );
+  // const confirmDelete = () => {
+  //   let confirmDelete = confirm('Are you sure?');
+  //   confirmDelete ? alert('Success') : alert('Cancelled');
+  // };
   const deleteTab = (id) => {
     const newTabList = tabList.filter((tab) => tab.id !== id)
     setTabList(newTabList);
@@ -26,10 +36,18 @@ const App = () => {
     setCurrentTab(newItem.id);
     setTabNumber(tabNumber + 1)
   }
+  const tabsData = () => {
+    // set local storage
+    localStorage.setItem('tabs', JSON.stringify(tabList));
+    localStorage.setItem('tabNumber', JSON.stringify(tabNumber));
+    localStorage.setItem('currentTab', JSON.stringify(currentTab));
+  };
+  useEffect(() => tabsData());
+
   return (
     <div>
-      <h1>With State Hook</h1>
-      <AddTab addTab={ addTab }/>
+      <h1>My Expenses</h1>
+      <AddTab addTab={ addTab } />
       <p></p>
       <div>
         {tabList.map((tab) => (
