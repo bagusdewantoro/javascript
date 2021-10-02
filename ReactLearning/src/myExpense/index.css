@@ -1,0 +1,12 @@
+
+
+.month {
+  margin-top: 10px;
+  border: 0;
+  font-size: 30px;
+  background-color: #FFFFFF;
+}
+
+.month::placeholder {
+  color: black;
+}

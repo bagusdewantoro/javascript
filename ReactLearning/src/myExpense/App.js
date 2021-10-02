@@ -4,11 +4,12 @@ import AddTab from './AddTab';
 
 const App = () => {
   const randomId = () => Math.floor(Math.random() * 100000 + 1);
+  // get local storage for state
   const [currentTab, setCurrentTab] = useState(
     localStorage.getItem('currentTab') ? JSON.parse(localStorage.getItem('currentTab')) : ''
   );
   const [tabList, setTabList] = useState(
-    localStorage.getItem('tabs') ? JSON.parse(localStorage.getItem('tabs')) : []
+    localStorage.getItem('tabList') ? JSON.parse(localStorage.getItem('tabList')) : []
   );
   const [tabNumber, setTabNumber] = useState(
     localStorage.getItem('tabNumber') ? JSON.parse(localStorage.getItem('tabNumber')) : 1
@@ -23,7 +24,6 @@ const App = () => {
     newTabList.length !== 0
       ? setCurrentTab(newTabList[newTabList.length - 1].id)
       : setCurrentTab('');
-    // console.log(newTabList);
   };
   const addTab = () => {
     const getID = randomId();
@@ -38,7 +38,7 @@ const App = () => {
   }
   const tabsData = () => {
     // set local storage
-    localStorage.setItem('tabs', JSON.stringify(tabList));
+    localStorage.setItem('tabList', JSON.stringify(tabList));
     localStorage.setItem('tabNumber', JSON.stringify(tabNumber));
     localStorage.setItem('currentTab', JSON.stringify(currentTab));
   };

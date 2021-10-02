@@ -24,10 +24,12 @@ const Tabs = ({ tabContent, deleteTab }) => {
     localStorage.setItem(`${month}`, JSON.stringify(transactions));
   };
   useEffect(() => calculate());
-  
+
   return (
     <div>
-      <h2>{ month }</h2>
+      <form>
+        <input className="month" type="text" id="item" placeholder={month} />
+      </form>
       {transactions.map((transaction) => (
         <ExpenseList
           key={ transaction.id }
