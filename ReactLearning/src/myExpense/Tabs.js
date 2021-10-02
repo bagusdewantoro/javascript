@@ -11,6 +11,11 @@ const ExpenseList = ({ transaction }) => {
 
 const Tabs = ({ tabContent, deleteTab }) => {
   const [month, setMonth] = useState(tabContent.label);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsDisabled(!isDisabled)
+  }
   const [transactions, setTransactions] = useState(
     localStorage.getItem(`${month}`) ? JSON.parse(localStorage.getItem(`${month}`)) : []
   );
@@ -27,8 +32,8 @@ const Tabs = ({ tabContent, deleteTab }) => {
 
   return (
     <div>
-      <form>
-        <input className="month" type="text" id="item" placeholder={month} />
+      <form onDoubleClick={()=>setIsDisabled(!isDisabled)} onSubmit={handleSubmit}>
+        <input className="month" type="text" id="item" placeholder={month} disabled={isDisabled} onChange={(e) => setMonth(e.target.value)}/>
       </form>
       {transactions.map((transaction) => (
         <ExpenseList
