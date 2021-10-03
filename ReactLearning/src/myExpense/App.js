@@ -1,23 +1,25 @@
 import { useState, useEffect } from 'react';
-import Tabs from './Tabs';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import MonthlyExpense from './MonthlyExpense';
 import AddTab from './AddTab';
+import Categories from './Categories';
 
 const App = () => {
   const randomId = () => Math.floor(Math.random() * 100000 + 1);
   // get local storage for state
-  const [currentTab, setCurrentTab] = useState(
-    localStorage.getItem('currentTab') ? JSON.parse(localStorage.getItem('currentTab')) : ''
-  );
-  const [tabList, setTabList] = useState(
-    localStorage.getItem('tabList') ? JSON.parse(localStorage.getItem('tabList')) : []
-  );
-  const [tabNumber, setTabNumber] = useState(
-    localStorage.getItem('tabNumber') ? JSON.parse(localStorage.getItem('tabNumber')) : 1
-  );
-  // const confirmDelete = () => {
-  //   let confirmDelete = confirm('Are you sure?');
-  //   confirmDelete ? alert('Success') : alert('Cancelled');
-  // };
+  const [currentTab, setCurrentTab] = useState(localStorage.getItem('currentTab') ? JSON.parse(localStorage.getItem('currentTab')) : '');
+  const [tabList, setTabList] = useState(localStorage.getItem('tabList') ? JSON.parse(localStorage.getItem('tabList')) : []);
+  const [tabNumber, setTabNumber] = useState(localStorage.getItem('tabNumber') ? JSON.parse(localStorage.getItem('tabNumber')) : 1);
+  const [categories, setCategories] = useState(localStorage.getItem('categories') ? JSON.parse(localStorage.getItem('categories')) : [
+    {id: 1, desc: 'Not specified', display: 'Not specified'}, {id: 2, desc: 'Income', display: 'Income'}
+  ]);
+  // handle disabled input tab
+  const [isDisabled, setIsDisabled] = useState(true)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsDisabled(!isDisabled);
+  }
+  // delete & add tab
   const deleteTab = (id) => {
     const newTabList = tabList.filter((tab) => tab.id !== id)
     setTabList(newTabList);
@@ -36,43 +38,60 @@ const App = () => {
     setCurrentTab(newItem.id);
     setTabNumber(tabNumber + 1)
   }
-  const tabsData = () => {
-    // set local storage
+  // set local storage
+  const storeData = () => {
     localStorage.setItem('tabList', JSON.stringify(tabList));
     localStorage.setItem('tabNumber', JSON.stringify(tabNumber));
     localStorage.setItem('currentTab', JSON.stringify(currentTab));
+    localStorage.setItem('categories', JSON.stringify(categories));
   };
-  useEffect(() => tabsData());
+  useEffect(() => storeData());
 
   return (
-    <div>
-      <h1>My Expenses</h1>
-      <AddTab addTab={ addTab } />
-      <p></p>
+    <Router>
       <div>
-        {tabList.map((tab) => (
-          <button
-            key={ tab.id }
-            onClick={() => setCurrentTab(tab.id)}
-          >
-            { tab.label }
-          </button>
-        ))}
+        <h1>My Expenses</h1>
+        <Route path='/categories'>
+          <Categories categories={categories} />
+        </Route>
+        <Route
+          path='/'
+          exact
+          render={(props) => (
+            <>
+              <AddTab addTab={addTab} />
+              <Link to='/categories'>
+                <button>Add Category</button>
+              </Link>
+              <p></p>
+              <div>
+                {tabList.map((tab) => (
+                  <button key={tab.id} onClick={() => setCurrentTab(tab.id)}>
+                    <form onDoubleClick={()=>setIsDisabled(!isDisabled)} onSubmit={handleSubmit}>
+                      <input placeholder={tab.label} type='text' disabled={isDisabled} onChange={(e)=>tab.label=e.target.value}/>
+                    </form>
+                  </button>
+                ))}
+              </div>
+              {tabList.map((tab) => {
+                if (tab.id === currentTab) {
+                  return (
+                    <MonthlyExpense
+                      key={tab.id}
+                      tabContent={tab}
+                      deleteTab={deleteTab}
+                      categories={categories}
+                    />
+                  )
+                } else {
+                  return null
+                };
+              })}
+            </>
+          )}
+        />
       </div>
-      {tabList.map((tab) => {
-        if (tab.id === currentTab) {
-          return (
-            <Tabs
-              key={tab.id}
-              tabContent={tab}
-              deleteTab={deleteTab}
-            />
-          )
-        } else {
-            return null
-        };
-      })}
-    </div>
+    </Router>
   );
 };
 

@@ -4,37 +4,33 @@ import AddTransaction from './AddTransaction';
 const ExpenseList = ({ transaction }) => {
   return (
     <div>
-      <p>{ transaction.text } { transaction.amount }</p>
+      <p>{ transaction.text } { transaction.amount } { transaction.type }</p>
     </div>
   )
 };
 
-const Tabs = ({ tabContent, deleteTab }) => {
-  const [month, setMonth] = useState(tabContent.label);
-  const [isDisabled, setIsDisabled] = useState(true);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsDisabled(!isDisabled)
-  }
+const MonthlyExpense = ({ tabContent, deleteTab, categories }) => {
   const [transactions, setTransactions] = useState(
-    localStorage.getItem(`${month}`) ? JSON.parse(localStorage.getItem(`${month}`)) : []
+    localStorage.getItem(`${tabContent.label}`) ? JSON.parse(localStorage.getItem(`${tabContent.label}`)) : []
   );
   const addList = (transaction) => {
     const id = Math.floor(Math.random() * 10000) + 1;
     const newTransaction = { id, ...transaction };
     setTransactions([...transactions, newTransaction]);
   };
-  const calculate = () => {
+  const storeContent = () => {
     // set local storage
-    localStorage.setItem(`${month}`, JSON.stringify(transactions));
+    localStorage.setItem(`${tabContent.label}`, JSON.stringify(transactions));
   };
-  useEffect(() => calculate());
+  useEffect(() => storeContent());
+  // const confirmDelete = () => {
+  //   let confirmDelete = confirm('Are you sure?');
+  //   confirmDelete ? alert('Success') : alert('Cancelled');
+  // };
 
   return (
     <div>
-      <form onDoubleClick={()=>setIsDisabled(!isDisabled)} onSubmit={handleSubmit}>
-        <input className="month" type="text" id="item" placeholder={month} disabled={isDisabled} onChange={(e) => setMonth(e.target.value)}/>
-      </form>
+      <h2>{tabContent.label}</h2>
       {transactions.map((transaction) => (
         <ExpenseList
           key={ transaction.id }
@@ -43,9 +39,10 @@ const Tabs = ({ tabContent, deleteTab }) => {
       ))}
       <AddTransaction
         addList={ addList }
+        categories={ categories}
       />
       <button onClick={() => {
-        delete localStorage[`${month}`];
+        delete localStorage[`${tabContent.label}`];
         deleteTab(tabContent.id)
       }}>
         Delete Tab
@@ -54,4 +51,4 @@ const Tabs = ({ tabContent, deleteTab }) => {
   )
 };
 
-export default Tabs;
+export default MonthlyExpense;
