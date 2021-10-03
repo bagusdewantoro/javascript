@@ -3,18 +3,17 @@ import { useState } from 'react';
 const AddTransaction = ({ addList, categories }) => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Not specified');
 
   const submitList = (e) => {
     e.preventDefault();
-    if (!text || !amount || type==='') {
+    if (!text || !amount ) {
       alert('Please fill in the form');
       return;
     }
     addList({ text, amount, type });
     setText('');
     setAmount('');
-    setType('');
   }
 
   return (
@@ -36,8 +35,7 @@ const AddTransaction = ({ addList, categories }) => {
         </div>
         <div>
           <label htmlFor='category'>Category</label>
-          <select defaultValue='choose' id='category' onChange={(e) => setType(e.target.value)}>
-            <option value='choose'>...</option>
+          <select defaultValue={type} id='category' onChange={(e) => setType(e.target.value)}>
             {categories.map((category) => (
               <option key={category.id} value={category.desc}>{category.display}</option>
             ))}
