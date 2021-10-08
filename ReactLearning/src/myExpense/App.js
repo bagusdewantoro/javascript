@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import MonthlyExpense from './MonthlyExpense';
-import AddTab from './AddTab';
 import Categories from './Categories';
 
 const App = () => {
@@ -49,7 +48,7 @@ const App = () => {
 
   return (
     <Router>
-      <div>
+      <div className='container'>
         <h1>My Expenses</h1>
         <Route path='/categories'>
           <Categories categories={categories} />
@@ -59,20 +58,20 @@ const App = () => {
           exact
           render={(props) => (
             <>
-              <AddTab addTab={addTab} />
               <Link to='/categories'>
                 <button>Add Category</button>
               </Link>
-              <p></p>
-              <div>
+              <div className='tab-list'>
                 {tabList.map((tab) => (
                   <button key={tab.id} onClick={() => setCurrentTab(tab.id)}>
-                    <form onDoubleClick={()=>setIsDisabled(!isDisabled)} onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                       <input placeholder={tab.label} type='text' disabled={isDisabled} onChange={(e)=>tab.label=e.target.value}/>
                     </form>
                   </button>
                 ))}
+                <button onClick={addTab}><strong>+</strong></button>
               </div>
+              <button onClick={()=>setIsDisabled(!isDisabled)}><i>Edit Tab Content</i></button>
               {tabList.map((tab) => {
                 if (tab.id === currentTab) {
                   return (

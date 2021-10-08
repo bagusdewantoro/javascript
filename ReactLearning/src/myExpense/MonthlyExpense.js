@@ -1,11 +1,43 @@
 import { useState, useEffect } from 'react';
 import AddTransaction from './AddTransaction';
 
-const ExpenseList = ({ transaction }) => {
+const ExpenseList = ({ tabContent, transaction, categories }) => {
+  const [text, setText] = useState(
+    // localStorage.getItem(`${transaction[text]}`) ? JSON.parse(localStorage.getItem(`${transaction[text]}`)) : transaction.text
+    tabContent.label
+  );
+  const [amount, setAmount] = useState(transaction.amount);
+  const [type, setType] = useState('Not specified');
+  const updateList = (e) => {
+    // e.preventDefault();
+    // if (!text || !amount ) {
+    //   alert('Please fill in the form');
+    //   return;
+    // }
+    setText('');
+    setAmount('');
+  }
+  const storeData = () => {
+    // set local storage
+    localStorage.setItem(`${transaction[text]}`, JSON.stringify(text));
+  };
+  useEffect(() => storeData());
   return (
-    <div>
-      <p>{ transaction.text } { transaction.amount } { transaction.type }</p>
-    </div>
+    <tbody>
+      <tr>
+        <td>
+          <input value={text} onChange={(e) => setText(e.target.value)}/>
+        </td>
+        <td><input placeholder={transaction.amount}/></td>
+        <td>
+          <select defaultValue={type} id='category' onChange={(e) => setType(e.target.value)}>
+            {categories.map((category) => (
+              <option key={category.id} value={category.desc}>{category.display}</option>
+            ))}
+          </select>
+        </td>
+      </tr>
+    </tbody>
   )
 };
 
@@ -31,12 +63,23 @@ const MonthlyExpense = ({ tabContent, deleteTab, categories }) => {
   return (
     <div>
       <h2>{tabContent.label}</h2>
-      {transactions.map((transaction) => (
-        <ExpenseList
-          key={ transaction.id }
-          transaction={ transaction }
-        />
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th><button>Text</button></th>
+            <th><button>Price</button></th>
+            <th><button>Category</button></th>
+          </tr>
+        </thead>
+        {transactions.map((transaction) => (
+          <ExpenseList
+            key={ transaction.id }
+            transaction={ transaction }
+            categories={ categories }
+            tabContent={ tabContent }
+          />
+        ))}
+      </table>
       <AddTransaction
         addList={ addList }
         categories={ categories}

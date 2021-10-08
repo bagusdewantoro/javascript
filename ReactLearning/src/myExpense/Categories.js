@@ -5,14 +5,14 @@ const Categories = ({ categories }) => {
   return (
     <div>
       <AddCategory />
+      <Link to='/'>
+        <button>Back to Home</button>
+      </Link>
       <ul>
         {categories.map((category) => (
           <li key={category.id}>{category.desc}</li>
         ))}
       </ul>
-      <Link to='/'>
-        <button>Back</button>
-      </Link>
     </div>
   )
 };

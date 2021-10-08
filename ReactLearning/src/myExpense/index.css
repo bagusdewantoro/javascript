@@ -1,12 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-
-.month {
-  margin-top: 10px;
-  border: 0;
-  font-size: 30px;
-  background-color: #FFFFFF;
+* {
+  box-sizing: border-box;
+  font-family: var(--main-font-family);
 }
 
-.month::placeholder {
+:root {
+  --main-font-family: Helvetica, sans-serif;
+  --main-bg-color: #f7f5ed;
+}
+
+body {
+  background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 10px;
+  margin: 30px 0 20px 0;
+}
+
+h3 {
+  margin: 10px 0;
+}
+
+.container {
+  margin: 30px 10px;
+  width: 500px;
+}
+
+.tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.tab-list button {
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 5px;
+  border: 0;
+  display: block;
+  font-size: 1em;
+  margin: 0 2px 2px 0;
+  padding: 4px;
+  min-width: 30px;
+}
+
+.tab-list button:hover {
+  background-color: #aaa;
+}
+
+.tab-list input {
   color: black;
+  background-color: rgba(0,0,0,0);
+  border: 0;
+  outline: none;
+  cursor: inherit;
+  width: 50px;
+}
+
+.tab-list input::placeholder {
+  color: black;
+  font-size: 1em;
+}
+
+.tab-list input:focus {
+  cursor: text;
+}
+
+.tab-list button:hover input::placeholder {
+  color: black;
+  font-weight: 600;
+}
+
+
+table input {
+  width: 100px
 }
