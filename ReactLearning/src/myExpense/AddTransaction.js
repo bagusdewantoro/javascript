@@ -4,13 +4,8 @@ const AddTransaction = ({ addList, categories }) => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState('');
 
-
   const submitList = (e) => {
     e.preventDefault();
-    if (!text || !amount ) {
-      alert('Please fill in the form');
-      return;
-    }
     addList({ text, amount });
     setText('');
     setAmount('');
@@ -27,8 +22,7 @@ const AddTransaction = ({ addList, categories }) => {
           />
         </div>
         <div className='form-control'>
-          <label htmlFor='amount'>Amount<br />(negative - expense, positive - income)
-          </label>
+          <label htmlFor='amount'>Amount</label>
           <input type='number' id='amount' placeholder='Enter amount...' value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
           />

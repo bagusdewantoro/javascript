@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 // change directory to change which react app
-import './EditState/index.css';
-import App from './EditState/App';
+import './Edit2bagus/index.css';
+import App from './Edit2bagus/App';
 
 
 ReactDOM.render(

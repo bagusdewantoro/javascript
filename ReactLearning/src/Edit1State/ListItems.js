@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ListItems = ({ items, deleteItem, setUpdate }) => {
+
   return (
     <div>
       {items.map(item => (

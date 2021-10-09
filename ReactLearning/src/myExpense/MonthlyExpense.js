@@ -1,34 +1,31 @@
 import { useState, useEffect } from 'react';
 import AddTransaction from './AddTransaction';
 
-const ExpenseList = ({ tabContent, transaction, categories }) => {
+const ExpenseList = ({ tabContent, transaction, categories, editList }) => {
   const [text, setText] = useState(
-    // localStorage.getItem(`${transaction[text]}`) ? JSON.parse(localStorage.getItem(`${transaction[text]}`)) : transaction.text
-    tabContent.label
-  );
-  const [amount, setAmount] = useState(transaction.amount);
+    localStorage.getItem(`${transaction.id}`) ? JSON.parse(localStorage.getItem(`${transaction.id}`)) :
+    transaction.text);
+  // const [amount, setAmount] = useState(transaction.amount);
   const [type, setType] = useState('Not specified');
+
   const updateList = (e) => {
-    // e.preventDefault();
-    // if (!text || !amount ) {
-    //   alert('Please fill in the form');
-    //   return;
-    // }
-    setText('');
-    setAmount('');
+    setText(e.target.value);
+    editList(text, transaction.id);
   }
+
   const storeData = () => {
-    // set local storage
-    localStorage.setItem(`${transaction[text]}`, JSON.stringify(text));
+    localStorage.setItem(`${transaction.id}`, JSON.stringify(text));
   };
   useEffect(() => storeData());
   return (
     <tbody>
       <tr>
         <td>
-          <input value={text} onChange={(e) => setText(e.target.value)}/>
+          <input value={text} onChange={updateList}/>
         </td>
-        <td><input placeholder={transaction.amount}/></td>
+        <td>
+          <input placeholder={transaction.amount}/>
+        </td>
         <td>
           <select defaultValue={type} id='category' onChange={(e) => setType(e.target.value)}>
             {categories.map((category) => (
@@ -45,20 +42,20 @@ const MonthlyExpense = ({ tabContent, deleteTab, categories }) => {
   const [transactions, setTransactions] = useState(
     localStorage.getItem(`${tabContent.label}`) ? JSON.parse(localStorage.getItem(`${tabContent.label}`)) : []
   );
+
   const addList = (transaction) => {
     const id = Math.floor(Math.random() * 10000) + 1;
     const newTransaction = { id, ...transaction };
     setTransactions([...transactions, newTransaction]);
   };
+  const editList = (text, id) => {
+    transactions.map(each => each.id === id ? each.text = text : null)
+  }
+
   const storeContent = () => {
-    // set local storage
     localStorage.setItem(`${tabContent.label}`, JSON.stringify(transactions));
   };
   useEffect(() => storeContent());
-  // const confirmDelete = () => {
-  //   let confirmDelete = confirm('Are you sure?');
-  //   confirmDelete ? alert('Success') : alert('Cancelled');
-  // };
 
   return (
     <div>
@@ -76,7 +73,8 @@ const MonthlyExpense = ({ tabContent, deleteTab, categories }) => {
             key={ transaction.id }
             transaction={ transaction }
             categories={ categories }
-            tabContent={ tabContent }
+            tabContent = { tabContent }
+            editList={ editList }
           />
         ))}
       </table>
