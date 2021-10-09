@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [todo, setTodo] = useState("");
+  const [number, setNumber] = useState(0);
   const [todoEditing, setTodoEditing] = useState(null);
   const [editingText, setEditingText] = useState("");
+  const [editingNumber, setEditingNumber] = useState(0);
 
   useEffect(() => {
     const json = localStorage.getItem("todos");
@@ -24,9 +26,11 @@ const App = () => {
     const newTodo = {
       id: new Date().getTime(),
       text: todo,
+      number:number
     };
     setTodos(todos.concat(newTodo));
     setTodo("");
+    setNumber(0);
   }
 
   function deleteTodo(id) {
@@ -38,14 +42,13 @@ const App = () => {
     const updatedTodos = [...todos].map((todo) => {
       if (todo.id === id) {
         todo.text = editingText;
+        todo.number = editingNumber;
       }
       return todo;
     });
     setTodos(updatedTodos);
     setTodoEditing(null);
   }
-
-  function combos(){};
 
   return (
     <div id="todo-list">
@@ -56,44 +59,39 @@ const App = () => {
           onChange={(e) => setTodo(e.target.value)}
           value={todo}
         />
+        <input
+          type="number"
+          onChange={(e) => setNumber(e.target.value)}
+          value={number}
+        />
         <button type="submit">Add Todo</button>
       </form>
       {todos.map((todo) => (
         <div key={todo.id} className="todo">
           <div className="todo-text">
-            {/* {todo.id === todoEditing ? ( */}
-            {/* <form onSubmit={(e) => {e.preventDefault();submitEdits(todo.id);}}> */}
-            <input
-              type="text"
-              placeholder={todo.text}
-              onChange={function(e) {
-                setEditingText(e.target.value);
-                console.log(editingText);
-                function ya(){
-                  const updatedTodos = [...todos].map((each) => {
-                    if (each.id === todo.id) {
-                      each.text = editingText;
-                    }
-                    return each;
-                  });
-                  setTodos(updatedTodos);
-                  setTodoEditing(null);
-                };
-                ya();
-              }}
-              onFocus={() => setTodoEditing(todo.id)}
-            />
-            {/* </form> */}
-
-            {/* ) : (
-              <div>{todo.text}</div>
-            )} */}
+            {todo.id === todoEditing ? (
+              <>
+                <input
+                  type="text"
+                  onChange={(e) => setEditingText(e.target.value)}
+                />
+                <input
+                  type="number"
+                  onChange={(e) => setEditingNumber(e.target.value)}
+                />
+              </>
+            ) : (
+              <>
+                <input type="text" placeholder={todo.text} disabled/>
+                <input type="number" placeholder={todo.number} disabled/>
+              </>
+            )}
           </div>
           <div className="todo-actions">
             {todo.id === todoEditing ? (
               <button onClick={() => submitEdits(todo.id)}>Submit Edits</button>
             ) : (
-              <div></div>
+              <button onClick={() => setTodoEditing(todo.id)}>Edit</button>
             )}
 
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
