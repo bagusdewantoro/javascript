@@ -3,15 +3,18 @@ import { useState } from 'react';
 const ExpenseList = ({ tabContent, transaction, categories, editList, deleteList }) => {
   const [isEditing, setEditing] = useState(false);
   const [newText, setNewText] = useState('');
-  const [category, setCategory] = useState('Not specified');
+  const [newAmount, setNewAmount] = useState(0);
+  const [newCategory, setNewCategory] = useState('Not specified');
 
   const handleChange = (e) => {
     setNewText(e.target.value)
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    editList(newText, transaction.id);
-    setNewText('');
+    editList(transaction.id, newText, newAmount, newCategory);
+    setNewText(newText);
+    setNewAmount(newAmount);
+    setNewCategory(newCategory);
     setEditing(false);
   }
 
@@ -21,10 +24,10 @@ const ExpenseList = ({ tabContent, transaction, categories, editList, deleteList
         <input className='cellEdit' id={transaction.id} value={newText} onChange={handleChange}/>
       </div>
       <div className='cell'>
-        <input className='cellEdit' placeholder={transaction.amount}/>
+        <input className='cellEdit' onChange={(e) => setNewAmount(e.target.value)} value={newAmount}/>
       </div>
       <div className='cell'>
-        <select id='category' onChange={(e) => setCategory(e.target.value)}>
+        <select id='category' onChange={(e) => setNewCategory(e.target.value)} value={newCategory}>
           {categories.map((type) => (
             <option key={type.id} value={type.desc}>{type.display}</option>
           ))}

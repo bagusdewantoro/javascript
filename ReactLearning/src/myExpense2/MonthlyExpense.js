@@ -13,10 +13,10 @@ const MonthlyExpense = ({ tabContent, deleteTab, categories }) => {
     const newTransaction = { id, ...transaction };
     setTransactions([...transactions, newTransaction]);
   };
-  const editList = (newText, id) => {
+  const editList = (id, newText, newAmount, newCategory) => {
     const editedTransactions = transactions.map(transaction => {
       if (transaction.id === id) {
-        return {...transaction, text: newText }
+        return {...transaction, text: newText, amount: newAmount, category: newCategory }
       }
       return transaction;
     });

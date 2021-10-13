@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const AddTransaction = ({ addList, categories }) => {
   const [text, setText] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('Not specified');
 
   const submitList = (e) => {
@@ -26,7 +26,7 @@ const AddTransaction = ({ addList, categories }) => {
         />
       </div>
       <div className='cell'>
-        <select id='category' onChange={(e) => setCategory(e.target.value)}>
+        <select id='category' onChange={(e) => setCategory(e.target.value)} value={category}>
           {categories.map((type) => (
             <option key={type.id} value={type.desc}>{type.display}</option>
           ))}
