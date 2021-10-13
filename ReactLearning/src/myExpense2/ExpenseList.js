@@ -2,12 +2,18 @@ import { useState } from 'react';
 
 const ExpenseList = ({ tabContent, transaction, categories, editList, deleteList }) => {
   const [isEditing, setEditing] = useState(false);
-  const [newText, setNewText] = useState('');
-  const [newAmount, setNewAmount] = useState(0);
-  const [newCategory, setNewCategory] = useState('Not specified');
+  const [newText, setNewText] = useState(transaction.text);
+  const [newAmount, setNewAmount] = useState(transaction.amount);
+  const [newCategory, setNewCategory] = useState(transaction.category);
 
   const handleChange = (e) => {
     setNewText(e.target.value)
+  }
+  const handleCancel = () => {
+    setNewText(transaction.text);
+    setNewAmount(transaction.amount);
+    setNewCategory(transaction.category);
+    setEditing(false);
   }
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +39,7 @@ const ExpenseList = ({ tabContent, transaction, categories, editList, deleteList
           ))}
         </select>
       </div>
-      <button onClick={() => setEditing(false)}>Cancel</button>
+      <button type='button' onClick={handleCancel}>Cancel</button>
       <button type='submit'>Save</button>
     </form>
   );

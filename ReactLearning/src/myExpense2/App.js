@@ -55,6 +55,15 @@ const App = () => {
     setIsDisabled(true);
   }
 
+  const addCategory = (description) => {
+    const id = randomId();
+    const newCategory = { id, ...description };
+    setCategories([...categories, newCategory]);
+  };
+  const deleteCategory = (id) => {
+    setCategories(categories.filter(category => category.id !== id))
+  };
+
   // set local storage
   const storeData = () => {
     localStorage.setItem('tabList', JSON.stringify(tabList));
@@ -69,7 +78,11 @@ const App = () => {
       <div className='container'>
         <h1>My Expenses</h1>
         <Route path='/categories'>
-          <Categories categories={categories} />
+          <Categories
+            categories={categories}
+            addCategory={addCategory}
+            deleteCategory={deleteCategory}
+          />
         </Route>
         <Route
           path='/'
@@ -77,7 +90,7 @@ const App = () => {
           render={(props) => (
             <>
               <Link to='/categories'>
-                <button>Add Category</button>
+                <button>Categories</button>
               </Link>
               <div className='tab-list'>
                 {tabList.map((tab) => (

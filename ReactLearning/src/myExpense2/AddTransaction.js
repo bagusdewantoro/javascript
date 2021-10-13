@@ -9,7 +9,7 @@ const AddTransaction = ({ addList, categories }) => {
     e.preventDefault();
     addList({ text, amount, category });
     setText('');
-    setAmount(0);
+    setAmount('');
     setCategory('Not specified');
   }
 

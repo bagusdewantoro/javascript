@@ -1,18 +1,22 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddCategory from './AddCategory';
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, addCategory, deleteCategory }) => {
+  const [addMode, setAddMode] = useState(false);
   return (
     <div>
-      <AddCategory />
+      <button onClick={() => setAddMode(!addMode)}>Add Category</button>
       <Link to='/'>
         <button>Back to Home</button>
       </Link>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>{category.desc}</li>
-        ))}
-      </ul>
+      {categories.map((category) => (
+        <div key={category.id}>
+          {category.desc}
+          <button onClick={() => deleteCategory(category.id)}>x</button>
+        </div>
+      ))}
+      {addMode && <AddCategory addCategory={addCategory} />}
     </div>
   )
 };
