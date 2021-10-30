@@ -1,0 +1,19 @@
+{
+  "name": "express-tutorial",
+  "version": "1.0.0",
+  "description": "From Traversy Media",
+  "main": "05_middleware.js",
+  "scripts": {
+    "start": "node 05_middleware",
+    "dev": "nodemon 05_middleware"
+  },
+  "author": "Bagus",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
