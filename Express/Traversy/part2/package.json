@@ -1,0 +1,20 @@
+{
+  "name": "express-tutorial",
+  "version": "1.0.0",
+  "description": "From Traversy Media",
+  "main": "09_modifyMembers.js",
+  "scripts": {
+    "start": "node 09_modifyMembers",
+    "dev": "nodemon 09_modifyMembers"
+  },
+  "author": "Bagus",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
