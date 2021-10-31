@@ -2,16 +2,18 @@
   "name": "express-tutorial",
   "version": "1.0.0",
   "description": "From Traversy Media",
-  "main": "07_noMember.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node 07_noMember",
-    "dev": "nodemon 07_noMember"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "Bagus",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "moment": "^2.29.1"
+    "express-handlebars": "^5.3.4",
+    "moment": "^2.29.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
