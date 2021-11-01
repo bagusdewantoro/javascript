@@ -1,3 +1,6 @@
+// Controllers are functions that handle incoming HTTP requests and send response back to the caller
+
+// import Todo Model
 const Todo = requre('../models/todoModel');
 
 // Get all todos
