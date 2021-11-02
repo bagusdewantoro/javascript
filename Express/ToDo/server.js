@@ -3,7 +3,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// Import DB connection
+require('./config/db');
+
 const app = express();
+
+// Import API route
+const routes = require('./api/routes/todoRoutes');
+routes(app);
 
 const port = process.env.PORT || 3000;
 
