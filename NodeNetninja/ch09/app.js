@@ -29,9 +29,9 @@ app.use(morgan('dev'));
 // add blog (find)
 app.get('/add-blog', (req, res) => {
   const blog = new Blog({
-    title: 'new blog 2',
-    snippet: 'about my new blog 2',
-    body: 'more about my new blog 2'
+    title: 'Title added by request',
+    snippet: 'Snippet added by request',
+    body: 'Body added by request'
   });
   blog.save()
     .then((result) => {
