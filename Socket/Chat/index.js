@@ -17,6 +17,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
+  socket.on('pesan', (msg) => {
+    console.log(`Pesan baru: ${msg}`);
+    io.emit('pesan', msg);
+  });
 });
 
 server.listen(PORT, () => {
