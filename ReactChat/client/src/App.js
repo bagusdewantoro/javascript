@@ -1,6 +1,6 @@
 import React from 'react';
-import Chat from './components/Chat';
-import Join from './components/Join';
+import Chat from './Chat';
+import Join from './Join';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // react-router-dom version 6 (different with version 5)
