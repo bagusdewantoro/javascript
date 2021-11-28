@@ -11,7 +11,8 @@ const App = () => {
         }}
       >
         <Link to='/invoices'>Invoices</Link> | {' '}
-        <Link to='/expenses'>Expenses</Link>
+        <Link to='/expenses'>Expenses</Link> | {' '}
+        <Link to='/other/layout'>Other Layout</Link>
       </nav>
       <Outlet />
     </div>
