@@ -9,63 +9,100 @@ const jalan = [
 ];
 
 for (let jalur of jalan.map(r => r.split("-"))) {
-  console.log(jalur);
+  // console.log(jalur);
 }
-// [ 'Setiabudi', 'Mb. Pipit' ]
-// [ 'Setiabudi', 'Om Dul' ]
-// [ 'Setiabudi', 'Nanat' ]
-// [ 'Mb. Pipit', 'Asem' ]
-// [ 'SMP DP', 'Puskesmas DP' ]
-// [ 'SMP DP', 'Asem' ]
-// [ 'Puskesmas DP', 'Boncel' ]
-// [ 'Boncel', 'Kampung Betawi' ]
-// [ 'Boncel', 'Pasar Lenteng' ]
-// [ 'SD DP', 'Kampung Betawi' ]
-// [ 'SD DP', 'Nanat' ]
-// [ 'SD DP', 'Pasar Lenteng' ]
-// [ 'SD DP', 'Asem' ]
-// [ 'Pasar Lenteng', 'Asem' ]
+  // [ 'Setiabudi', 'Mb. Pipit' ]
+  // [ 'Setiabudi', 'Om Dul' ]
+  // [ 'Setiabudi', 'Nanat' ]
+  // [ 'Mb. Pipit', 'Asem' ]
+  // [ 'SMP DP', 'Puskesmas DP' ]
+  // [ 'SMP DP', 'Asem' ]
+  // [ 'Puskesmas DP', 'Boncel' ]
+  // [ 'Boncel', 'Kampung Betawi' ]
+  // [ 'Boncel', 'Pasar Lenteng' ]
+  // [ 'SD DP', 'Kampung Betawi' ]
+  // [ 'SD DP', 'Nanat' ]
+  // [ 'SD DP', 'Pasar Lenteng' ]
+  // [ 'SD DP', 'Asem' ]
+  // [ 'Pasar Lenteng', 'Asem' ]
 
 for (let [dari, menuju] of jalan.map(r => r.split("-"))) {
-  console.log(`${dari}, ${menuju}`);
+  // console.log(`${dari}, ${menuju}`);
 }
-// Setiabudi, Mb. Pipit
-// Setiabudi, Om Dul
-// Setiabudi, Nanat
-// Mb. Pipit, Asem
-// SMP DP, Puskesmas DP
-// SMP DP, Asem
-// Puskesmas DP, Boncel
-// Boncel, Kampung Betawi
-// Boncel, Pasar Lenteng
-// SD DP, Kampung Betawi
-// SD DP, Nanat
-// SD DP, Pasar Lenteng
-// SD DP, Asem
-// Pasar Lenteng, Asem
+  // Setiabudi, Mb. Pipit
+  // Setiabudi, Om Dul
+  // Setiabudi, Nanat
+  // Mb. Pipit, Asem
+  // SMP DP, Puskesmas DP
+  // SMP DP, Asem
+  // Puskesmas DP, Boncel
+  // Boncel, Kampung Betawi
+  // Boncel, Pasar Lenteng
+  // SD DP, Kampung Betawi
+  // SD DP, Nanat
+  // SD DP, Pasar Lenteng
+  // SD DP, Asem
+  // Pasar Lenteng, Asem
 
-let graph = Object.create(null)
+let bagusGraph = Object.create(null)
 
-const addEdge = (from, to) => {
-  if (graph[from] == null) {
-    graph[from] = [to];
+const bagusEdge = (from, to) => {
+  if (bagusGraph[from] == null) {
+    bagusGraph[from] = [to];
   } else {
-    graph[from].push(to);
+    bagusGraph[from].push(to);
   }
-  return graph;
+  return bagusGraph;
 };
 
-console.log(graph);
-// [Object: null prototype] {}
-console.log(addEdge('Setiabudi', 'Mb. Pipit'));
-// [Object: null prototype] { Setiabudi: [ 'Mb. Pipit' ] }
-console.log(addEdge(null, 'Mb. Pipit'));
-// [Object: null prototype] {
-//   Setiabudi: [ 'Mb. Pipit' ],
-//   null: [ 'Mb. Pipit' ]
-// }
-console.log(addEdge('Setiabudi', null));
-// [Object: null prototype] {
-//   Setiabudi: [ 'Mb. Pipit', null ],
-//   null: [ 'Mb. Pipit' ]
-// }
+// console.log(bagusGraph);
+  // [Object: null prototype] {}
+// console.log(bagusEdge('Setiabudi', 'Mb. Pipit'));
+  // [Object: null prototype] { Setiabudi: [ 'Mb. Pipit' ] }
+// console.log(bagusEdge(null, 'Mb. Pipit'));
+  // [Object: null prototype] {
+  //   Setiabudi: [ 'Mb. Pipit' ],
+  //   null: [ 'Mb. Pipit' ]
+  // }
+
+
+function buildGraph(edges) {
+  let graph = Object.create(null);
+  function addEdge(from, to) {
+    if (graph[from] == null) {
+      graph[from] = [to];
+    } else {
+      graph[from].push(to);
+    }
+  }
+  for (let [from, to] of edges.map(r => r.split("-"))) {
+    addEdge(from, to);
+    addEdge(to, from);
+    console.log(from, ', ', to);
+    console.log(`GRAPH:\n`, graph, `\n ================`);
+  }
+  return graph;
+}
+
+const roadGraph = buildGraph(jalan);
+roadGraph;
+
+console.log(roadGraph);
+  //  [Object: null prototype] {
+  //   'Setiabudi': [ 'Mb. Pipit', 'Om Dul', 'Nanat' ],
+  //   'Mb. Pipit': [ 'Setiabudi', 'Asem' ],
+  //   'Om Dul': [ 'Setiabudi' ],
+  //   'Nanat': [ 'Setiabudi', 'SD DP' ],
+  //   'Asem': [ 'Mb. Pipit', 'SMP DP', 'SD DP', 'Pasar Lenteng' ],
+  //   'SMP DP': [ 'Puskesmas DP', 'Asem' ],
+  //   'Puskesmas DP': [ 'SMP DP', 'Boncel' ],
+  //   'Boncel': [ 'Puskesmas DP', 'Kampung Betawi', 'Pasar Lenteng' ],
+  //   'Kampung Betawi': [ 'Boncel', 'SD DP' ],
+  //   'Pasar Lenteng': [ 'Boncel', 'SD DP', 'Asem' ],
+  //   'SD DP': [ 'Kampung Betawi', 'Nanat', 'Pasar Lenteng', 'Asem' ]
+  // }
+
+console.log( Object.keys(roadGraph)[3] ); // Nanat
+console.log( roadGraph[Object.keys(roadGraph)[3]] ); // [ 'Setiabudi', 'SD DP' ]
+console.log( Object.keys(roadGraph)[6] ); // Puskesmas DP
+console.log( roadGraph[Object.keys(roadGraph)[6]] ); // [ 'SMP DP', 'Boncel' ]
