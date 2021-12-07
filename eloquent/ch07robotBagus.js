@@ -78,8 +78,8 @@ function buildGraph(edges) {
   for (let [from, to] of edges.map(r => r.split("-"))) {
     addEdge(from, to);
     addEdge(to, from);
-    console.log(from, ', ', to);
-    console.log(`GRAPH:\n`, graph, `\n ================`);
+    // console.log(from, ', ', to);
+    // console.log(`GRAPH:\n`, graph, `\n ================`);
   }
   return graph;
 }
@@ -87,7 +87,7 @@ function buildGraph(edges) {
 const roadGraph = buildGraph(jalan);
 roadGraph;
 
-console.log(roadGraph);
+// console.log(roadGraph);
   //  [Object: null prototype] {
   //   'Setiabudi': [ 'Mb. Pipit', 'Om Dul', 'Nanat' ],
   //   'Mb. Pipit': [ 'Setiabudi', 'Asem' ],
@@ -102,7 +102,39 @@ console.log(roadGraph);
   //   'SD DP': [ 'Kampung Betawi', 'Nanat', 'Pasar Lenteng', 'Asem' ]
   // }
 
-console.log( Object.keys(roadGraph)[3] ); // Nanat
-console.log( roadGraph[Object.keys(roadGraph)[3]] ); // [ 'Setiabudi', 'SD DP' ]
-console.log( Object.keys(roadGraph)[6] ); // Puskesmas DP
-console.log( roadGraph[Object.keys(roadGraph)[6]] ); // [ 'SMP DP', 'Boncel' ]
+// console.log( Object.keys(roadGraph)[3] ); // Nanat
+// console.log( roadGraph[Object.keys(roadGraph)[3]] ); // [ 'Setiabudi', 'SD DP' ]
+// console.log( Object.keys(roadGraph)[6] ); // Puskesmas DP
+// console.log( roadGraph[Object.keys(roadGraph)[6]] ); // [ 'SMP DP', 'Boncel' ]
+
+
+class VillageState {
+  constructor(place, parcels) {
+    this.place = place;
+    this.parcels = parcels;
+  }
+  move(destination) {
+    if (!roadGraph[this.place].includes(destination)) {
+      return this;
+    } else {
+      let parcels = this.parcels.map(p => {
+        if (p.place != this.place) return p;
+        return {place: destination, address: p.address};
+      }).filter(p => p.place != p.address);
+      return new VillageState(destination, parcels);
+    }
+  }
+}
+
+let first = new VillageState(
+  "Nanat",
+  [{place: "Nanat", address: "Setiabudi"}]
+);
+let next = first.move("Setiabudi");
+
+console.log(next.place);
+// → Setiabudi
+console.log(next.parcels);
+// → []
+console.log(first.place);
+// → Nanat
