@@ -35,22 +35,23 @@ const Invoices = () => {
           }}
         >
           <input
-            value={searchParams.get("filter") || ""}
+            value={searchParams.get("pilih") || ""}
             onChange={e => {
-              let filter = e.target.value;
-              if (filter) {
-                setSearchParams({ filter });
+              let pilih = e.target.value;
+              if (pilih) {
+                setSearchParams({ pilih });
               } else {
                 setSearchParams({});
               }
+              console.log(pilih);
             }}
           />
           {invoices
             .filter(invoice => {
-              let filter = searchParams.get("filter");
-              if (!filter) return true;
+              let saring = searchParams.get("pilih");
+              if (!saring) return true;
               let name = invoice.name.toLowerCase();
-              return name.startsWith(filter.toLowerCase());
+              return name.startsWith(saring.toLowerCase());
             })
             .map(invoice => (
               <NavLink
