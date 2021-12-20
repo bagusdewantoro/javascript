@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import App from './App';
+import App from './01_GetAndPost/App';
 import './index.css';
 
 // REDUCERS =====================
-import reducers from './reducers';
+import reducers from './01_GetAndPost/reducers';
 
 // STORE =======================
 const myStore = createStore(reducers, compose(applyMiddleware(thunk)));
