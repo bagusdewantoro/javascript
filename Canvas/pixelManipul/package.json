@@ -1,0 +1,14 @@
+{
+  "name": "pixelmanipul",
+  "version": "1.0.0",
+  "description": "Pixel Manipulation in Canvas",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "author": "Bagus",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

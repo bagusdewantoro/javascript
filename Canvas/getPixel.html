@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Getting pixel information
+    from html canvas.
+  </title>
+</head>
+
+<body>
+  <center>
+    <h3>
+      Getting pixel information from html canvas
+    </h3>
+
+    <canvas id="my-canvas" width="200" height="100"
+      style="border:1px solid blue;">
+    </canvas>
+
+    <script>
+      /* Retrieve canvas with id my-canvas, and store it in getElement */
+      const getElement = document.getElementById("my-canvas");
+
+      /* Retrieve a 2D context for the canvas */
+      const myCanvas = getElement.getContext("2d");
+
+      const myGradient = myCanvas.createLinearGradient(0, 0, 200, 0);
+      myGradient.addColorStop(0, "yellow");
+      myGradient.addColorStop(1, "blue");
+
+      myCanvas.fillStyle = myGradient;
+      myCanvas.fillRect(10, 10, 185, 70);
+
+      /* Define a function find(), that prints
+      the array containing pixel information
+      returned by the getImageData() method */
+      function find() {
+        /* Store the pixel information of
+        the canvas at (x,y) coordinate of
+        (20,20) */
+        const ImageData = myCanvas.getImageData(20, 20, 60, 60);
+        console.log(ImageData);
+      }
+
+      find();
+      
+    </script>
+  </center>
+</body>
+
+</html>
