@@ -6,12 +6,11 @@ import { createPost } from './myAction';
 
 const Form = () => {
   const [postData, setPostData] = useState({
-    title: '', message: '', selectedFile: '', postNumber: 1
+    title: '', message: '', selectedFile: ''
   })
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPostData({...postData, postNumber: postData.postNumber + 1})
     dispatch(createPost(postData));
     setPostData({...postData, title: '', message: '', selectedFile: ''})
   };

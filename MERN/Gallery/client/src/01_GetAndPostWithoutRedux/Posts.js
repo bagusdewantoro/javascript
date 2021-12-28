@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 const Post = ({ post }) => {
@@ -11,7 +10,6 @@ const Post = ({ post }) => {
         alt='This is just title and description'
       />
       <h3>{post.message}</h3>
-      <p>This is post number {post.postNumber}</p>
       <p>Created at {moment(post.createdAt).fromNow()}</p>
       <br />
       <br />
@@ -19,15 +17,13 @@ const Post = ({ post }) => {
   )
 }
 
-const Posts = () => {
-  const postData = useSelector((state) => state.myPostData)
-  console.log(postData);
+const Posts = ({ collection }) => {
   return (
-    !postData.length ?
+    !collection.length ?
       <h3>There is no post</h3> :
       (
         <div>
-          { postData.map((post) => (
+          { collection.map((post) => (
             <Post key={post._id} post={post} />
           ))}
         </div>
