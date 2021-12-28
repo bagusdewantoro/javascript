@@ -1,0 +1,19 @@
+{
+  "name": "server-base64",
+  "version": "1.0.0",
+  "description": "MERN upload using file-base-64",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "author": "bagus",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4",
+    "nodemon": "^2.0.15",
+    "uuid": "^8.3.2"
+  }
+}
