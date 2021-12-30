@@ -1,3 +1,5 @@
+Use `yarn dev`
+
 ### Important for /server/controllers/auth.controller.js:
 
 ```

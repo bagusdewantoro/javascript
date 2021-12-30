@@ -6,11 +6,6 @@ import compress from 'compression';
 import cors from 'cors';
 import helmet from 'helmet';
 
-//comment out before building for production
-// import devBundle from './devBundle'
-// devBundle.compile(app)
-
-const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
 app.use(bodyParser.json())
@@ -19,7 +14,6 @@ app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
 app.use(cors());
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 // serve the template
 import Template from './../template';
