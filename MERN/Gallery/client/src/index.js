@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './02_EditWithoutRedux/App';
+import App from './01_GetAndPostWithoutRedux/App';
+// import App from './02_EditWithoutRedux/App';
 import './index.css';
 
 ReactDOM.render(

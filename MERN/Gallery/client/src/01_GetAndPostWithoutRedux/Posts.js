@@ -17,13 +17,13 @@ const Post = ({ post }) => {
   )
 };
 
-const Posts = ({ collection }) => {
+const Posts = ({ postData }) => {
   return (
-    !collection.length ?
+    !postData.length ?
       <h3>There is no post</h3> :
       (
         <div>
-          { collection.map((post) => (
+          { postData.map((post) => (
             <Post key={post._id} post={post} />
           ))}
         </div>
