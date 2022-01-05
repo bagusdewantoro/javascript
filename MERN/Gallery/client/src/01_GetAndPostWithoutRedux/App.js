@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Posts from './Posts';
 import Form from './Form';
-import axios from 'axios';
+// import axios from 'axios';
 
 const App = () => {
   const [postData, setPostData] = useState({
@@ -14,7 +14,7 @@ const App = () => {
 
 
   // // CARA PERTAMA: ====================================
-  // // if link exist: sukses fetch || if link not exist: page still looks ok
+  // // if link exist: success fetch || if link not exist: page still looks ok
   // const getPosts = async () => {
   //   try {
   //     axios.get(apiUrl)
@@ -28,9 +28,8 @@ const App = () => {
   //   getPosts();
   // }, []);
 
-
   // // CARA KEDUA: =====================================
-  // // if link exist: sukses fetch || if link not exist: page broken
+  // // if link exist: success fetch || if link not exist: page broken
   // const fetchTasks = async () => {
   //   const res = await fetch(apiUrl);
   //   const data = await res.json();
@@ -44,7 +43,6 @@ const App = () => {
   //   }
   //   getTasks()
   // }, []);
-
 
   // // CARA KETIGA: ========================================
   // // if link exist: Nothing fetch || if link not exist: page still looks ok
@@ -74,25 +72,40 @@ const App = () => {
   //   get()
   // }, []);
 
+  // // CARA KEEMPAT: ========================================
+  // // if link exist: Success fetch || if link not exist: page still looks ok
+  const getPosts = () => {
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => setPostData(data))
+      .catch(err => console.error("error: ", err));
+  }
+  useEffect(() => {
+    getPosts()
+  })
 
-  const handleSubmit = (newTask) => {
-    // Making POST request
-    fetch(apiUrl, {
+  // CREATE DATA
+  const handleSubmit = async () => {
+    const data = await fetch(apiUrl, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: newTask.title
+        title: newPostData.title,
+        message: newPostData.message,
+        selectedFile: newPostData.selectedFile
       })
     })
+      .then(res => res.json())
       .then(console.log(`Added ${newPostData}`)); // This is optional
     // Refresh form
+    setPostData([...postData, data])
     setNewPostData({...newPostData, title: '', message: '', selectedFile: ''})
   };
 
 
   return (
     <>
-      <Form postData={newPostData} setPostData={setNewPostData} handleSubmit={handleSubmit} />
+      <Form newPostData={newPostData} setNewPostData={setNewPostData} handleSubmit={handleSubmit} />
       <Posts postData={postData} />
     </>
   )

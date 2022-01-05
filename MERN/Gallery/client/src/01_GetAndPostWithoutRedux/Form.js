@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import FileBase from 'react-file-base64';
 
-const Form = ({ handleSubmit }) => {
-  const [newPostData, setNewPostData] = useState({
-    title: '', message: '', selectedFile: ''
-  })
+const Form = ({ handleSubmit, newPostData, setNewPostData }) => {
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   // Making POST request
@@ -20,10 +16,10 @@ const Form = ({ handleSubmit }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit({ newPostData });
+    handleSubmit();
     setNewPostData({ ...newPostData, title: ''});
     setNewPostData({ ...newPostData, message: ''});
-    setNewPostData({ ...newPostData, selectedFile: ''});
+    setNewPostData({ ...newPostData, selectedFile: null});
   }
 
 
