@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Posts from './Posts';
 import Form from './Form';
-import axios from 'axios';
+
 
 
 const App = () => {
@@ -9,6 +9,8 @@ const App = () => {
   // const [currentId, setCurrentId] = useState(null);
 
   // // CARA PERTAMA: =====================================
+  // // if link exist: sukses fetch || if link not exist: page still ok
+  // import axios from 'axios';
   // const fetchTasks = async () => {
   //   const res = await fetch('http://localhost:5000/posts');
   //   const data = await res.json();
@@ -31,24 +33,25 @@ const App = () => {
   //       console.log(data);
   //       setCollection(data);
   //     });
-  // }, [collection]);
+  // }, []);
 
-  // // CARA KETIGA: ====================================
-  const url = 'http://localhost:5000/posts';
-  const getPosts = async () => {
-    try {
-      const { data } = axios.get(url)
-        .then(res => setCollection(res.data));
+  // // // CARA KETIGA: ====================================
+  // const url = 'http://localhost:5000/posts';
+  // const getPosts = async () => {
+  //   try {
+  //     const { data } = axios.get(url)
+  //       .then(res => setCollection(res.data));
+  //
+  //     // setCollection(data);
+  //     console.log(collection)
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getPosts();
+  // }, [ ]);
 
-      // setCollection(data);
-      console.log(collection)
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getPosts();
-  }, [ ]);
 
   return (
     <>
