@@ -17,11 +17,7 @@ const Form = ({ handleSubmit, newPostData, setNewPostData }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     handleSubmit();
-    setNewPostData({ ...newPostData, title: ''});
-    setNewPostData({ ...newPostData, message: ''});
-    setNewPostData({ ...newPostData, selectedFile: null});
   }
-
 
   return (
     <form className='add-form' autoComplete='off' noValidate onSubmit={onSubmit}>

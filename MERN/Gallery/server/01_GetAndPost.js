@@ -16,6 +16,17 @@ const postSchema = mongoose.Schema({
 });
 const PostMessage = mongoose.model('PostMessage', postSchema);
 
+// BASIC 'GET' CODE FOR ROUTES & CONTROLLER without separate them
+// JUST FOR TEST
+app.use('/basic', express.Router().get('/', async (req, res) => {
+  try {
+    const post = await PostMessage.find();
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message })
+  }
+}));
+
 // CONTROLLERS ===========================
 const getPosts = async (req, res) => {
   try {

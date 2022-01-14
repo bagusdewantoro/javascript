@@ -4,9 +4,7 @@ import Form from './Form';
 // import axios from 'axios';
 
 const App = () => {
-  const [postData, setPostData] = useState({
-    title: '', message: '', selectedFile: ''
-  });
+  const [postData, setPostData] = useState([]]);
   const [newPostData, setNewPostData] = useState({
     title: '', message: '', selectedFile: ''
   });
