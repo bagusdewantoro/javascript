@@ -48,7 +48,7 @@ const updatePost = async (req, res) => {
 const router = express.Router();
 router.get('/', getPosts);
 router.post('/', createPost);
-router.patch('/', updatePost);
+router.patch('/:id', updatePost);
 
 // MIDDLEWARE ========================
 app.use(bodyParser.json({ limit: '30mb', extended: true }));

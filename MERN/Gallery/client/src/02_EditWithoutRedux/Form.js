@@ -1,9 +1,11 @@
 import FileBase from 'react-file-base64';
 
-const Form = ({ postData, newPostData, setNewPostData, currentId, setCurrentId, handleSubmit }) => {
+const Form = ({ postData, setPostData, newPostData, setNewPostData, currentId, setCurrentId, handleSubmit, editPost }) => {
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit();
+    currentId ?
+      editPost(currentId) :
+      handleSubmit();
   }
 
   return (
@@ -12,14 +14,16 @@ const Form = ({ postData, newPostData, setNewPostData, currentId, setCurrentId, 
         <div className='form-control'>
           <label>Title</label>
           <input
-            type='text' placeholder='Input Title...'
-            value={currentId ? (postData.find(post => post._id === currentId)).title : newPostData.title}
+            type='text'
+            placeholder={currentId ? postData.find(post => post._id === currentId).title : 'Input Title...'}
+            value={newPostData.title}
             onChange={(e) => setNewPostData({ ...newPostData, title: e.target.value })}
           />
           <label>Message</label>
           <input
-            type='text' placeholder='Input Message...'
-            value={currentId ? (postData.find(post => post._id === currentId)).message : newPostData.message}
+            type='text'
+            placeholder={currentId ? postData.find(post => post._id === currentId).message : 'Input Message...'}
+            value={newPostData.message}
             onChange={(e) => setNewPostData({ ...newPostData, message: e.target.value })}
           />
           <div>

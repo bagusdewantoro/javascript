@@ -80,7 +80,7 @@ const App = () => {
   }
   useEffect(() => {
     getPosts()
-  })
+  }, [])
 
   // CREATE DATA
   const handleSubmit = async () => {
