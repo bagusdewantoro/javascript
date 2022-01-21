@@ -1,6 +1,5 @@
 
 # HEROKU DEPLOYMENT (SERVER)
----
 ## Preparation
 * Move secret code, key, etc to .env
 ```
@@ -8,7 +7,7 @@ npm i dotenv
 ```
 * In main js file (i.e. index.js):
 ```
-require('dotenv/config');
+require('dotenv').config();
 ```
 Or if "type": "module"
 ```
@@ -92,7 +91,7 @@ heroku logs --tail
 ```
 * Open https://bagusgallery.herokuapp.com/posts to check API
 ---
----
+
 
 # NETLIFY DEPLOYMENT (CLIENT)
 ---

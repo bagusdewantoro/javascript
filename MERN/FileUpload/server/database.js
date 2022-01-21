@@ -1,8 +1,11 @@
 'use strict';
 const mongoose = require('mongoose');
+require('dotenv').config();
+
+const mongoDB = process.env.mongoDB;
 
 module.exports = () => {
-    mongoose.connect('mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/fileUpload?retryWrites=true&w=majority', {
+    mongoose.connect(mongoDB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
