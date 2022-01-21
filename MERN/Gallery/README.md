@@ -90,7 +90,7 @@ heroku open
 ```
 heroku logs --tail
 ```
-* Open https://bagusgallery.herokuapp.com/post to check API
+* Open https://bagusgallery.herokuapp.com/posts to check API
 ---
 ---
 
@@ -98,5 +98,5 @@ heroku logs --tail
 ---
 * In App.js, change apiUrl for fetch to heroku server
 ```
-const apiUrl = "https://bagusgallery.herokuapp.com/post"
+const apiUrl = "https://bagusgallery.herokuapp.com/posts"
 ```
