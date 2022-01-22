@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:8080/api/' || 'https://uploadmern.herokuapp.com/api/';
+// const apiUrl = 'http://localhost:8080/api/';
+const apiUrl = 'https://uploadmern.herokuapp.com/api/';
 
 export const singleFileUpload = async (data, options) => {
     try {
