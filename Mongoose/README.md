@@ -22,7 +22,7 @@ mongoose.connect(
 );
 ```
 You should see 'server running'.
----
+
 * Create Basic Model
 ```
 const belajarSchema = mongoose.Schema({
@@ -33,7 +33,7 @@ const belajarSchema = mongoose.Schema({
 const belajar = mongoose.model('belajars', belajarSchema);
 ```
 Open mongodb atlas. You should see your models
----
+
 * Create first data
 ```
 const belajar1 = new belajar({
@@ -46,7 +46,7 @@ Now save to database
 belajar1.save()
 ```
 Reload your mongodb atlas. Boom! The data has been stored!
----
+
 * Create second data
 ```
 const belajar2 = new belajar({
@@ -55,7 +55,7 @@ const belajar2 = new belajar({
 console.log(belajar2)
 belajar1.save()
 ```
----
+
 
 * below is under testing to delete one data
 ```
