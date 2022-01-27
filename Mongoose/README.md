@@ -56,8 +56,7 @@ console.log(belajar2)
 belajar1.save()
 ```
 
-
-* below is under testing to delete one data
+* Delete data by its ID
 ```
-belajar.findByIdAndDelete('insert one of id')
+belajar.findByIdAndDelete('insert one of id').exec()
 ```
