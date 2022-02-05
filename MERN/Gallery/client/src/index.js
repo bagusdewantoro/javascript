@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 // import App from './01_GetAndPostWithoutRedux/App';
 // import App from './02_EditWithoutRedux/App';
 // import App from './03_DeleteWithoutRedux/App';
-import App from './04_LikeWithoutRedux/App';
+// import App from './04_LikeWithoutRedux/App';
+import App from './05_AuthWithoutRedux/App';
 import './index.css';
 
 ReactDOM.render(
