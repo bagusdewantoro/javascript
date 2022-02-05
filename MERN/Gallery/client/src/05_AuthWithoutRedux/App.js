@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
+import {  BrowserRouter, Routes, Route, Outlet, Link } from 'react-router-dom';
+import Navbar from './Navbar';
+import Auth from './Auth';
 import Form from './Form';
 import Posts from './Posts';
 
-const App = () => {
+const Home = () => {
   const [postData, setPostData] = useState([]);
   const [newPostData, setNewPostData] = useState({
     title: '', message: '', selectedFile: '', like: 0
   });
   const [currentId, setCurrentId] = useState(null);
+  const user = null;
   const apiUrl = 'http://localhost:5000/posts';
 
   // GET DATA
@@ -79,6 +83,15 @@ const App = () => {
 
   return (
     <>
+      {
+        user ? (
+          <button>Sign Out</button>
+        ) : (
+          <Link to='/auth'>
+            <button>Sign In</button>
+          </Link>
+        )
+      }
       <Form
         postData={postData}
         setPostData={setPostData}
@@ -96,6 +109,19 @@ const App = () => {
         likePost={likePost}
       />
     </>
+  )
+}
+
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='auth' element={<Auth />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
