@@ -67,7 +67,7 @@ class Board {
     }
     //If no winner but the board is full, then it's a draw
     if (this.isFull()) {
-      return 'draw';
+      return {'winner': 'draw'};
     }
     //return false otherwise
     return false;
