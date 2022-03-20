@@ -17,6 +17,7 @@ const typeDefs = gql`
   type Query {
     hello: String
     notes: [Note!]!
+    note(id: ID!): Note!
   }
   type Note {
     id: ID!
@@ -29,7 +30,10 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     hello: () => 'hello world!!',
-    notes: () => notes
+    notes: () => notes,
+    note: (parent, args) => {
+      return notes.find(note => note.id === args.id);
+    }
   }
 };
 
