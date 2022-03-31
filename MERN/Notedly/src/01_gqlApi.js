@@ -1,8 +1,5 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
-require('dotenv').config();
-const DB_HOST = process.env.DB_HOST;
-// const db = require('./db');
 
 const port = process.env.PORT || 4000;
 
@@ -54,17 +51,6 @@ const resolvers = {
   }
 };
 
-// connect to the database
-// FIRST WAY FROM BOOK :
-// db.connect(DB_HOST);
-// SECOND WAY STANDARD :
-// const mongoose = require('mongoose');
-// mongoose.connect("mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/notedly?retryWrites=true&w=majority", {
-// 	useNewUrlParser: true,
-// 	useUnifiedTopology: true
-// }).then(() => console.log("Connected to MongoDB")).catch(console.error);
-
-
 // apollo server setup FIRST OPTION
 async function startServer() {
   const server = new ApolloServer({
@@ -76,18 +62,7 @@ async function startServer() {
   server.applyMiddleware({ app, path: '/api' });
   app.listen(port, () => console.log(`Server ready at http://localhost:4000${server.graphqlPath}`));
 }
-// startServer();
-
-const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/notedly?retryWrites=true&w=majority", {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-}).then(() => {
-    startServer();
-    console.log('connected to mongoDB')
-  })
-  .catch(console.error);
-
+startServer();
 
 // // apollo server setup SECOND OPTIONS (from docs))
 // async function startApolloServer() {
