@@ -8,7 +8,7 @@ module.exports = {
     // mongoose.set('useFindAndModify', false);
     // mongoose.set('useCreateIndex', true);
     // mongoose.set('useUnifiedTopology', true);
-    mongoose.connect("mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/notedly?retryWrites=true&w=majority");
+    mongoose.connect(DB_HOST);
     mongoose.connection.on('error', err => {
       console.log(err);
       console.log('Make sure mongoDB is running');
