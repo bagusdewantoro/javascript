@@ -8,6 +8,7 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 const client = new ApolloClient({
   uri: "https://rickandmortyapi.com/graphql",
   cache: new InMemoryCache(),
+  // uploads: false,
 });
 
 // ====== react 18 way
