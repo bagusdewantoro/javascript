@@ -1,4 +1,8 @@
-import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache
+} from '@apollo/client';
 import CharactersList from './pages/CharactersList';
 
 const client = new ApolloClient({
@@ -6,10 +10,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default App = () => {
+const App = () => {
   return (
     <ApolloProvider client={client}>
       <CharactersList />
     </ApolloProvider>
   )
 }
+
+export default App;

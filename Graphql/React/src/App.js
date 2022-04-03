@@ -3,7 +3,7 @@ import CharactersList from './pages/CharactersList';
 
 function App() {
   return (
-      <CharactersList />
+    <CharactersList />
   )
 }
 
