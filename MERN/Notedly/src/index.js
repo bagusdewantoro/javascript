@@ -2,6 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 require('dotenv').config();
 const mongoose = require('mongoose');
+
 const models = require('./models');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
@@ -21,8 +22,8 @@ const app = express();
 
 
 // connect to the database
-const db = require('./db');
-db.connect(DB_HOST);
+// const db = require('./db');
+// db.connect(DB_HOST);
 mongoose.connect(DB_HOST, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
