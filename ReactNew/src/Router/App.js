@@ -29,7 +29,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        // Main layout
+        {/* Main layout */}
         <Route path="/" element={<Main />}>
           <Route path="expenses" element={<Expenses />}>
             <Route path="sub1" element={<ExpensesSub1 />} />
@@ -56,7 +56,7 @@ const App = () => {
           />
         </Route>
 
-        // Other layout
+        {/* Other layout */}
         <Route path="other/layout" element={<Other />} />
 
       </Routes>

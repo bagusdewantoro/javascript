@@ -6,9 +6,9 @@ const Invoice = () => {
   let params = useParams();
   let invoice = getInvoice(parseInt(params.invoiceId, 10));
 
-  console.log('useParams() =', params);
-  console.log('useParams().invoiceId =', params.invoiceId); // 1995 or 2000 or 2003 etc..
-  console.log('invoice =', invoice);
+  // console.log('useParams() =', params);
+  // console.log('useParams().invoiceId =', params.invoiceId); // 1995 or 2000 or 2003 etc..
+  // console.log('invoice =', invoice);
 
   return (
     <main style={{ padding: "1rem" }}>
