@@ -38,8 +38,8 @@ const askMom = async () => {
 
 askMom()
 // before asking Mom
-// I have a new black Samsung phone
 // after asking mom
+// I have a new black Samsung phone
 
 // // Other Way, using immediately invoked function
 // (async () => {
