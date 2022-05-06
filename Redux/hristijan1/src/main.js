@@ -1,5 +1,5 @@
 import store from './store/store';
-import { addNote } from './actions/actions';
+import { addNote, removeNote } from './actions/actions';
 
 // Use store.getState() to get our app state from the store
 
@@ -9,7 +9,6 @@ store.dispatch(addNote('Two', 'Content Two'));
 store.dispatch(addNote('Three', 'Content Three'));
 console.log('After: ', store.getState());
 
-
 // ------ HTML references ------
 let notesUList = document.getElementById('notes');
 let addNoteForm = document.getElementById('add-note');
@@ -18,8 +17,10 @@ let addNoteContent = addNoteForm['content'];
 
 // ------ Redux ------
 store.subscribe(() => renderNotes());
+
 const deleteNote = index => {
-  // console.log(index);
+  console.log(index);
+  store.dispatch(removeNote(index))
 }
 
 function renderNotes() {
@@ -36,6 +37,8 @@ function renderNotes() {
     `;
     notesUList.innerHTML += noteItem
   })
+  addNoteTitle.value = '';
+  addNoteContent.value = '';
   setDeleteNoteButtonsEventListeners();
 }
 
@@ -44,13 +47,12 @@ addNoteForm.addEventListener('submit', (e) => {
   e.preventDefault();
   let title = addNoteTitle.value;
   let content = addNoteContent.value;
-  store.dispatch(addNote(title, content));
   console.log('Title:', addNoteTitle.value, 'Content:', addNoteContent.value);
+  store.dispatch(addNote(title, content));
 });
 
 function setDeleteNoteButtonsEventListeners() {
   let buttons = document.querySelectorAll('ul#notes li button');
-
   for (let button of buttons) {
     button.addEventListener('click', () => {
       deleteNote(button.dataset.id);
