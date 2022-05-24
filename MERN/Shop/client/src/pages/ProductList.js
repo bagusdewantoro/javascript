@@ -4,13 +4,14 @@ import Announcement from '../components/Announcement';
 import Products from '../components/Products';
 import Newsletter from '../components/Newsletter';
 import Footer from '../components/Footer';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
-
 `;
 
 const Title = styled.h1`
   margin: 20px;
+  ${mobile({ margin: '0px 20px' })}
 `;
 
 const FilterContainer = styled.div`
@@ -20,17 +21,24 @@ const FilterContainer = styled.div`
 
 const Filter = styled.div`
   margin: 20px;
+  ${mobile({
+    margin: '0px 20px',
+    display:'flex',
+    flexDirection: 'column'
+  })}
 `;
 
 const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
+  ${mobile({ margin: '0px' })}
 `;
 
 const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
+  ${mobile({ margin: '10px 0px' })}
 `;
 
 const Option = styled.option`
@@ -47,13 +55,13 @@ const ProductList = () => {
         <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select>
-            <Option disabled selected>Model</Option>
+            <Option disabled defaultValue>Model</Option>
             <Option>Les Paul</Option>
             <Option>Stratocaster</Option>
             <Option>Rock</Option>
           </Select>
           <Select>
-            <Option disabled selected>Color</Option>
+            <Option disabled defaultValue>Color</Option>
             <Option>Black</Option>
             <Option>Brown</Option>
             <Option>White</Option>
@@ -62,7 +70,7 @@ const ProductList = () => {
         <Filter>
           <FilterText>Sort Products:</FilterText>
           <Select>
-            <Option selected>Newest</Option>
+            <Option defaultValue>Newest</Option>
             <Option>Price (asc)</Option>
             <Option>Price (desc)</Option>
           </Select>

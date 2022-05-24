@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Send } from '@material-ui/icons';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
   height: 60vh;
@@ -19,6 +20,7 @@ const Desc = styled.div`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
+  ${mobile({ textAlign: 'center' })}
 `;
 
 const InputContainer = styled.div`
@@ -28,6 +30,7 @@ const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
   border: 1px solid lightgrey;
+  ${mobile({ width: '80%', justifyContent: 'center' })}
 `;
 
 const Input = styled.input`
@@ -47,7 +50,7 @@ const Button = styled.button`
 const Newsletter = () => {
   return (
     <Container>
-      <Title>Newsletter</Title>
+      <Title>Subscribe</Title>
       <Desc>Play it loud! special prize for your favourite instruments.</Desc>
       <InputContainer>
         <Input placeholder='Your Email' />

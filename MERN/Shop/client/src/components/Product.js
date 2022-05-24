@@ -4,6 +4,7 @@ import {
   SearchOutlined,
   FavoriteBorderOutlined
 } from '@material-ui/icons';
+import { mobile } from '../responsive';
 
 const Info = styled.div`
   opacity: 0;
@@ -36,6 +37,7 @@ const Container = styled.div`
   &:hover ${Info}{
     opacity: 1;
   }
+  ${mobile({ minWidth: '180px', height: '200px' })}
 `;
 
 // const Circle = styled.div`

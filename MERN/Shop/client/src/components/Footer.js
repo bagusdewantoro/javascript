@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import { Facebook, Instagram, Twitter, Pinterest, Room, Phone, MailOutline } from '@material-ui/icons';
 import './Navbar.css';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
   display: flex;
   background-color: #021e29;
   color: white;
+  ${mobile({
+    flexDirection: 'column',
+    color: 'black',
+    backgroundColor: 'white'
+  })}
 `;
 
 const Left = styled.div`
@@ -39,6 +45,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: 'none' })}
 `;
 
 const Title = styled.h3`
@@ -61,6 +68,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: 'lightgrey' })}
 `;
 
 const ContactItem = styled.div`
