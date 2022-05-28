@@ -9,18 +9,20 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
 `;
 
 const Title = styled.h1`
   font-size: 70px;
   margin-bottom: 20px;
+  ${mobile({ fontSize: '45px', marginBottom: '10px' })}
 `;
 
 const Desc = styled.div`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
-  ${mobile({ textAlign: 'center' })}
+  ${mobile({ fontSize: '18px', textAlign: 'center' })}
 `;
 
 const InputContainer = styled.div`

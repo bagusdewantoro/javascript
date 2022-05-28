@@ -37,7 +37,11 @@ const Container = styled.div`
   &:hover ${Info}{
     opacity: 1;
   }
-  ${mobile({ minWidth: '180px', height: '200px' })}
+  ${mobile({
+    maxWidth: '180px',
+    minWidth: '150px',
+    height: '200px'
+  })}
 `;
 
 // const Circle = styled.div`
