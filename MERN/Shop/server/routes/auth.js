@@ -38,14 +38,22 @@ router.post('/login', async(req, res) => {
     const OriginalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
     // console.log(OriginalPassword, typeof OriginalPassword)
     // console.log(req.body.password, typeof req.body.password)
-    // if decrypted password retrieved from DB !== our request in the post body
+    // if decrypted password retrieved from DB !== our request in the post body:
     if (OriginalPassword !== req.body.password) {
       res.status(401).json('Wrong credentials');
     }
+    // authorization
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin
+      }, process.env.JWT_SEC,
+      { expiresIn: '3d'}
+    );
     // retrieve user data without password
-    const { password, ...others } = user._doc;
-    res.status(200).json(others);
-  } catch {
+    const { password, ...others } = user._doc; // in mongo cloud, data is inside _doc
+    res.status(200).json({...others, accessToken});
+  } catch(err) {
     res.status(500).json(err);
   }
 })
