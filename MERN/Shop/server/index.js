@@ -4,11 +4,11 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 
-const userRoute = require('./routes/user');
+const authRoute = require('./routes/auth');
 
 app.use(cors());
 app.use(json);
-app.use('/api/user', userRoute);
+app.use('/api/auth', authRoute);
 
 mongoose.connect(process.env.cloudDB)
   .then(() => app.listen(process.env.PORT, () => {
