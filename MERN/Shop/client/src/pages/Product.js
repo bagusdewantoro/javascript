@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
-import Navbar from '../components/Navbar';
-import Announcement from '../components/Announcement';
-import Newsletter from '../components/Newsletter';
-import Footer from '../components/Footer';
 // import { popularProducts } from '../data';
 import { mobile } from '../responsive';
 
@@ -122,8 +118,6 @@ const Button = styled.button`
 const Product = () => {
   return (
     <Container>
-      <Navbar />
-      <Announcement />
       <Wrapper>
         <ImgContainer>
           <Image src='https://images.pexels.com/photos/3714523/pexels-photo-3714523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
@@ -158,8 +152,6 @@ const Product = () => {
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
-      <Footer />
     </Container>
   )
 };

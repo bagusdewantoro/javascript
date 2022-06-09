@@ -38,17 +38,20 @@ export const categories = [
   {
     id: 1,
     img: 'https://images.pexels.com/photos/2646825/pexels-photo-2646825.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
-    title: 'ELECTRIC GUITAR'
+    title: 'ELECTRIC GUITAR',
+    cat: 'electric'
   },
   {
     id: 2,
     img: 'https://images.pexels.com/photos/3714523/pexels-photo-3714523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'ACOUSTIC GUITAR'
+    title: 'ACOUSTIC GUITAR',
+    cat: 'acoustic'
   },
   {
     id: 3,
     img: 'https://images.pexels.com/photos/3428498/pexels-photo-3428498.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    title: 'CLASSIC GUITAR'
+    title: 'CLASSIC GUITAR',
+    cat: 'classic'
   },
 ];
 
