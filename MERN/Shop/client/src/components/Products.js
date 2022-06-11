@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
-import { urlProduct } from '../api.js';
-import { popularProducts } from '../data';
+// import { popularProducts } from '../data';
+import { publicRequest } from '../requestMethods';
 import Product from './Product';
 import { mobile } from '../responsive';
 
@@ -20,21 +19,39 @@ const Products = ({ cat, filters, sort }) => {
   const [filteredProducts, setFilterProducts] = useState([]);
 
   useEffect(() => {
-    const getProducts = async () => {
+    (async function getProducts() {
       try {
-        const res = await axios.get(`${urlProduct}?category=${cat}`);
-        console.log(res);
-      } catch(err) {
-
-      }
-    };
-    getProducts();
+        const res = await publicRequest.get(
+          cat
+            ? `products?category=${cat}`
+            : `products`
+        );
+        // console.log(res);
+        setProducts(res.data)
+      } catch(err) {}
+    })();
+    // getProducts();
   }, [cat]);
+
+  useEffect(() => {
+    cat && setFilterProducts(
+      products.filter(item =>
+        Object.entries(filters).every(([key, value]) =>
+          item[key].includes(value)
+        )
+      )
+    )
+  }, [products, cat, filters]);
+  // console.dir(products);
 
   return (
     <Container>
-      {popularProducts.map(item => (
-        <Product key={item.id} item={item} />
+      {cat ? filteredProducts.map(item => (
+        <Product key={item._id} item={item} />
+      )) : products
+        .slice(0,8) // to show only 8 items in Home Page
+        .map(item => (
+        <Product key={item._id} item={item} />
       ))}
     </Container>
   )

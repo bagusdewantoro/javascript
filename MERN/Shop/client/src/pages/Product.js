@@ -1,6 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 // import { popularProducts } from '../data';
+
+import { publicRequest } from '../requestMethods';
 import { mobile } from '../responsive';
 
 const Container = styled.div``;
@@ -8,6 +12,7 @@ const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  flex-wrap: wrap;
   ${mobile({ padding: '10px', flexDirection: 'column' })}
 `;
 
@@ -17,6 +22,7 @@ const ImgContainer = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  min-width: 300px;
   height: 90vh;
   object-fit: cover;
   ${mobile({ height: '60vh' })}
@@ -116,37 +122,74 @@ const Button = styled.button`
 
 
 const Product = () => {
+  const location = useLocation();
+  // console.log(location);
+  const id = location.pathname.split('/')[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState('');
+  const [model, setModel] = useState('');
+
+  const handleQuantity = (type) => {
+    if (type === 'dec') {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  }
+
+  useEffect(() => {
+    (async function getProduct() {
+      try {
+        const res = await publicRequest.get(`products/find/${id}`);
+        setProduct(res.data);
+        // console.log(res.data)
+      } catch(err) {}
+    })();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
         <ImgContainer>
-          <Image src='https://images.pexels.com/photos/3714523/pexels-photo-3714523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Les Paul</Title>
-          <Desc>Les Paul™ Standard returns to the classic design that made it relevant, played, and loved -- shaping sound across generations and genres of music.</Desc>
-          <Price>Rp 25.000 K</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>{`${product.price / 1000} K`}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color='black' />
-              <FilterColor color='brown' />
-              <FilterColor color='lightgrey' />
+              {product.color?.map(c => (
+                <FilterColor
+                  key={c}
+                  color={c}
+                  onClick={() => setColor(c)}
+                />
+              ))}
             </Filter>
             <Filter>
               <FilterTitle>Model</FilterTitle>
-              <FilterModel>
-                <FilterModelOption>Les Paul</FilterModelOption>
-                <FilterModelOption>Stratocaster</FilterModelOption>
-                <FilterModelOption>Rock</FilterModelOption>
+
+              <FilterModel
+                onChange={e => setModel(e.target.value)}
+              >
+                {product.model?.map(m => (
+                  <FilterModelOption
+                    key={m}
+                  >
+                    {m}
+                  </FilterModelOption>
+                ))}
               </FilterModel>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={() => handleQuantity('dec')} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
             <Button>ADD TO CART</Button>
           </AddContainer>

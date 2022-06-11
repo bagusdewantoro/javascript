@@ -10,6 +10,9 @@ const Container = styled.div`
 
 const Title = styled.h1`
   margin: 20px;
+  &::first-letter {
+    text-transform: uppercase
+  }
   ${mobile({ margin: '0px 20px' })}
 `;
 
@@ -66,21 +69,27 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Title>Guitar</Title>
+      <Title>{cat}</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select name='model' onChange={handleFilters}>
-            <Option disabled defaultValue>Model</Option>
-            <Option>Les Paul</Option>
-            <Option>Stratocaster</Option>
-            <Option>Rock</Option>
+          <Select defaultValue='model' name='model' onChange={handleFilters}>
+            <Option disabled value='model'>Model</Option>
+            <Option value='lp'>Les Paul</Option>
+            <Option value='hollow'>Hollow Body</Option>
+            <Option value='strat'>Stratocaster</Option>
+            <Option value='tele'>Telecaster</Option>
+            <Option value='folk'>Folk</Option>
+            <Option value='classic'>Classic</Option>
+            <Option value='gypsy'>Gypsy</Option>
+            <Option value='flamenco'>Flamenco</Option>
           </Select>
-          <Select name='color' onChange={handleFilters}>
-            <Option disabled defaultValue>Color</Option>
-            <Option>Black</Option>
-            <Option>Brown</Option>
-            <Option>White</Option>
+          <Select defaultValue='color' name='color' onChange={handleFilters}>
+            <Option disabled value='color'>Color</Option>
+            <Option value='black'>Black</Option>
+            <Option value='brown'>Brown</Option>
+            <Option value='white'>White</Option>
+            <Option value='red'>Red</Option>
           </Select>
         </Filter>
         <Filter>
