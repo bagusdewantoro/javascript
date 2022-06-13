@@ -138,6 +138,11 @@ const Product = () => {
     }
   }
 
+  const handleClick = () => {
+    // update CART
+
+  }
+
   useEffect(() => {
     (async function getProduct() {
       try {
@@ -146,7 +151,7 @@ const Product = () => {
         // console.log(res.data)
       } catch(err) {}
     })();
-  }, []);
+  }, [id]);
 
   return (
     <Container>
@@ -191,7 +196,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
