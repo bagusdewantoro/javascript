@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../responsive';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div``;
 
@@ -154,6 +155,9 @@ const Button = styled.button`
 
 
 const Cart = () => {
+  const cart = useSelector(state => state.cart);
+  // console.log(cart);
+
   return (
     <Container>
       <Wrapper>
@@ -168,63 +172,40 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src='https://cdn.mos.cms.futurecdn.net/2d2c23111fdc8f0a02337b71f48b4dad.jpg'/>
-                <Details>
-                  <ProductName>
-                    <b>Name: </b>YAMAHA SILENT GUITAR
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>986154-6584
-                  </ProductId>
-                  <ProductColor color='black' />
-                  <ProductModel>
-                    <b>Model: </b>Acoustic Electric
-                  </ProductModel>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Rp 7,590K</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.prdcts.map((product, index) => (
+              <Product key={index}>
+                <ProductDetail>
+                  <Image src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Name: </b>{product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID: </b>{product._id}
+                    </ProductId>
+                    <ProductColor color={product.color} />
+                    <ProductModel>
+                      <b>Model: </b>{product.model}
+                    </ProductModel>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>Rp {product.price * product.quantity / 1000}K</ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src='https://www.stars-music.com/medias/taylor/110e-walnut-2017-dreadnought-cw-epicea-noyer-es2-hd-8-52261.jpg'/>
-                <Details>
-                  <ProductName>
-                    <b>Name: </b>Taylor 100e
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>354789-114
-                  </ProductId>
-                  <ProductColor color='#ECD9C9' />
-                  <ProductModel>
-                    <b>Model: </b>Acoustic Electric
-                  </ProductModel>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>Rp 14,350K</ProductPrice>
-              </PriceDetail>
-            </Product>
           </Info>
           <Summary>
             <SummaryTitle>YOUR ORDER</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>Rp 29,530K</SummaryItemPrice>
+              <SummaryItemPrice>Rp {cart.ttl / 1000}K</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Est. Shipping</SummaryItemText>
@@ -236,7 +217,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type='total'>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>Rp 30,010K</SummaryItemPrice>
+              <SummaryItemPrice>Rp {cart.ttl / 1000}K</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT</Button>
           </Summary>

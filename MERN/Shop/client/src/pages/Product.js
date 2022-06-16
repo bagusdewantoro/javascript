@@ -6,6 +6,8 @@ import { Add, Remove } from '@material-ui/icons';
 
 import { publicRequest } from '../requestMethods';
 import { mobile } from '../responsive';
+import { addProduct } from '../redux/cartRedux';
+import { useDispatch } from 'react-redux';
 
 const Container = styled.div``;
 
@@ -129,6 +131,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState('');
   const [model, setModel] = useState('');
+  const dispatch = useDispatch();
 
   const handleQuantity = (type) => {
     if (type === 'dec') {
@@ -139,8 +142,7 @@ const Product = () => {
   }
 
   const handleClick = () => {
-    // update CART
-
+    dispatch(addProduct({ ...product, quantity, color, model }))
   }
 
   useEffect(() => {
