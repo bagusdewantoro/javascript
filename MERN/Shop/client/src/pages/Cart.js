@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../responsive';
 import { useSelector } from 'react-redux';
+import StripeCheckout from "react-stripe-checkout";
+import { useState } from 'react';
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
@@ -157,6 +161,12 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector(state => state.cart);
   // console.log(cart);
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const onToken = token => {
+    setStripeToken(token);
+  }
+  console.log(stripeToken);
 
   return (
     <Container>
@@ -172,8 +182,8 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.prdcts.map((product, index) => (
-              <Product key={index}>
+            {cart.prdcts.map(product => (
+              <Product key={product._id + product.color + product.model}>
                 <ProductDetail>
                   <Image src={product.img} />
                   <Details>
@@ -219,7 +229,18 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>Rp {cart.ttl / 1000}K</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT</Button>
+            <StripeCheckout
+              name="Bagus test"
+              image="https://avatars.githubusercontent.com/u/69944435?v=4"
+              billingAddress
+              shippingAddress
+              description={`Total is ${cart.ttl}`}
+              amount={cart.ttl}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
