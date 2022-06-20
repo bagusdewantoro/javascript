@@ -82,7 +82,12 @@ const Navbar = () => {
             <Search style={{ color: 'grey', fontSize: 16}} />
           </SearchContainer>
         </Left>
-        <Center><h1 className='logo'>dom&sko</h1></Center>
+        <Link
+          to='/'
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <Center><h1 className='logo'>dom&sko</h1></Center>
+        </Link>
         <Right>
           <MenuItem>REGISTER</MenuItem>
           <MenuItem>SIGN IN</MenuItem>
