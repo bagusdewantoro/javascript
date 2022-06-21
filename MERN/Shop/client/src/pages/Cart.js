@@ -169,7 +169,7 @@ const Cart = () => {
   const onToken = token => {
     setStripeToken(token);
   }
-  console.log(stripeToken.id);
+  // console.log(stripeToken);
 
   useEffect(() => {
     async function makeRequest () {
@@ -179,7 +179,8 @@ const Cart = () => {
           amount: cart.ttl
         });
         navigate('/success', {data:res.data});
-        // console.log(navigate())
+        console.log('success: ' + stripeToken);
+        // navigate('/success');
       } catch {}
     };
     stripeToken && makeRequest();
