@@ -90,7 +90,12 @@ const Navbar = () => {
         </Link>
         <Right>
           <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <Link
+            to='/login'
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>
           <Link to='/cart'>
             <MenuItem>
               <Badge badgeContent={quantity} color='primary' overlap='rectangular'>
