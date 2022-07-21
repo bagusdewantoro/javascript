@@ -4,39 +4,55 @@ import {
   ArrowUpward,
 } from '@material-ui/icons';
 
+
 export const FeaturedInfo = () => {
+  const featuredData = [
+    {
+      title: 'Revenue',
+      money: 250000,
+      rate: -11.4,
+    },
+    {
+      title: 'Sales',
+      money: 125000,
+      rate: -1.4,
+    },
+    {
+      title: 'Cost',
+      money: 300000,
+      rate: 2.4,
+    },
+  ];
   return (
     <div className='featured'>
-      <div className='featuredItem'>
-        <span className='featuredTitle'>Revenue</span>
-        <div className='featuredMoneyContainer'>
-          <span className='featuredMoney'>Rp 250K</span>
-          <span className='featuredMoneyRate'>
-            -11.4 <ArrowDownward className='featuredIcon negative' />
-          </span>
-        </div>
-        <span className='featuredSub'>Compared to last month</span>
+      {featuredData.map((data, index) => (
+        <FeaturedItem
+          key={index}
+          title={data.title}
+          money={data.money}
+          rate={data.rate}
+        />
+      ))}
+    </div>
+  )
+}
+
+
+const FeaturedItem = (props) => {
+  const {title, money, rate} = props;
+  const formatIDR = amount => `Rp ${amount/1000}K`;
+
+  return (
+    <div className='featuredItem'>
+      <span className='featuredTitle'>{title}</span>
+      <div className='featuredMoneyContainer'>
+        <span className='featuredMoney'>{formatIDR(money)}</span>
+        <span className='featuredMoneyRate'>
+          {rate}
+          {rate > 0 ? <ArrowUpward className='featuredIcon' /> : <ArrowDownward className='featuredIcon negative' />}
+        </span>
       </div>
-      <div className="featuredItem">
-        <span className="featuredTitle">Sales</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">Rp 125K</span>
-          <span className="featuredMoneyRate">
-            -1.4 <ArrowDownward className="featuredIcon negative"/>
-          </span>
-        </div>
-        <span className="featuredSub">Compared to last month</span>
-      </div>
-      <div className="featuredItem">
-        <span className="featuredTitle">Cost</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">Rp 300K</span>
-          <span className="featuredMoneyRate">
-            +2.4 <ArrowUpward className="featuredIcon"/>
-          </span>
-        </div>
-        <span className="featuredSub">Compared to last month</span>
-      </div>
+      <span className='featuredSub'>Compared to last month</span>
     </div>
   )
 }
