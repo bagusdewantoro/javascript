@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './sidebar.css';
 import {
   LineStyle,
@@ -28,7 +29,7 @@ export const Sidebar = () => {
     {
       title: 'Quick Menu',
       submenu: [
-        {icon: PermIdentity, name: 'Users'},
+        {icon: PermIdentity, name: 'Users', link: 'users'},
         {icon: Storefront, name: 'Product'},
         {icon: AttachMoney, name: 'Transactions'},
         {icon: BarChart, name: 'Reports'},
@@ -65,19 +66,31 @@ const SideBarTitle = ({ title, menus }) => {
   return (
     <div className='sidebarMenu'>
       <h3 className="sidebarTitle">{title}</h3>
-      {menus.map((el, index) => <SubMenu key={index} icon={el.icon} name={el.name} />)}
+      {menus.map((el, index) => (
+        <SubMenu
+          key={index}
+          icon={el.icon}
+          name={el.name}
+          link={!el.link ? '/' : el.link}
+        />
+      ))}
     </div>
   )
 }
 
 
-const SubMenu = ({icon: Icon, name}) => {
+const SubMenu = ({icon: Icon, name, link}) => {
   return (
-    <ul className='sidebarList'>
-      <li className="sidebarListItem">
-        <Icon className="sidebarIcon" />
-        {name}
-      </li>
-    </ul>
+    <Link
+      to={link}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
+      <ul className='sidebarList'>
+        <li className="sidebarListItem">
+          <Icon className="sidebarIcon" />
+          {name}
+        </li>
+      </ul>
+    </Link>
   )
 }
