@@ -9,7 +9,27 @@ import {
 } from '@material-ui/icons'
 import './user.css'
 
+
 export const User = () => {
+  const userAccount = [
+    [PermIdentity, 'kurt1'],
+    [CalendarToday, '05.11.1976'],
+  ]
+
+  const userContact =[
+    [PhoneAndroid, '+65 968 5426'],
+    [MailOutline, 'kurt1@gmail.com'],
+    [LocationSearching, 'Seattle | USA'],
+  ]
+
+  const editUser = [
+    ['Username', 'text', 'kurt1'],
+    ['Full Name', 'text', 'Kurt 1'],
+    ['Email', 'email', 'kurt@gmail.com'],
+    ['Phone', 'text', '+65 968 5426'],
+    ['Address', 'text', 'Seattle | USA'],
+  ]
+
   return (
     <div className='user'>
       <div className='userTitleContainer'>
@@ -33,27 +53,21 @@ export const User = () => {
           </div>
           <div className='userShowBottom'>
             <span className='userShowTitle'>Account</span>
-            <div className='userShowInfo'>
-              <PermIdentity className='userShowIcon' />
-              <span className='userShowInfoTitle'>kurt1</span>
-            </div>
-            <div className='userShowInfo'>
-              <CalendarToday className='userShowIcon' />
-              <span className='userShowInfoTitle'>05.11.1976</span>
-            </div>
+            {userAccount.map((data, index) => (
+              <UserShowInfo
+                key={index}
+                icon={data[0]}
+                string={data[1]}
+              />
+            ))}
             <span className='userShowTitle'>Contact</span>
-            <div className='userShowInfo'>
-              <PhoneAndroid className='userShowIcon' />
-              <span className='userShowInfoTitle'>+65 968 5426</span>
-            </div>
-            <div className='userShowInfo'>
-              <MailOutline className='userShowIcon' />
-              <span className='userShowInfoTitle'>kurt1@gmail.com</span>
-            </div>
-            <div className='userShowInfo'>
-              <LocationSearching className='userShowIcon' />
-              <span className='userShowInfoTitle'>Seattle | USA</span>
-            </div>
+            {userContact.map((data, index) => (
+              <UserShowInfo
+                key={index}
+                icon={data[0]}
+                string={data[1]}
+              />
+            ))}
           </div>
         </div>
 
@@ -61,46 +75,14 @@ export const User = () => {
           <span className='userUpdateTitle'>Edit</span>
           <form className='userUpdateForm'>
             <div className='userUpdateLeft'>
-              <div className='userUpdateItem'>
-                <label>Username</label>
-                <input
-                  type='text'
-                  placeholder='kurt1'
-                  className='userUpdateInput'
+              {editUser.map((data, index) => (
+                <UserUpdateItem
+                  key={index}
+                  label={data[0]}
+                  type={data[1]}
+                  placeHolder={data[2]}
                 />
-              </div>
-              <div className='userUpdateItem'>
-                <label>Full Name</label>
-                <input
-                  type='text'
-                  placeholder='Kurt 1'
-                  className='userUpdateInput'
-                />
-              </div>
-              <div className='userUpdateItem'>
-                <label>Email</label>
-                <input
-                  type='text'
-                  placeholder='kurt@gmail.com'
-                  className='userUpdateInput'
-                />
-              </div>
-              <div className='userUpdateItem'>
-                <label>Phone</label>
-                <input
-                  type='text'
-                  placeholder='+65 968 5426'
-                  className='userUpdateInput'
-                />
-              </div>
-              <div className='userUpdateItem'>
-                <label>Address</label>
-                <input
-                  type='text'
-                  placeholder='Seattle | USA'
-                  className='userUpdateInput'
-                />
-              </div>
+              ))}
             </div>
             <div className='userUpdateRight'>
               <div className='userUpdateUpload'>
@@ -123,6 +105,28 @@ export const User = () => {
           </form>
         </div>
       </div>
+    </div>
+  )
+}
+
+const UserUpdateItem = ({ label, type, placeHolder}) => {
+  return (
+    <div className='userUpdateItem'>
+      <label>{label}</label>
+      <input
+        type={type}
+        placeholder={placeHolder}
+        className='userUpdateInput'
+      />
+    </div>
+  )
+}
+
+const UserShowInfo = ({ icon: Icon, string }) => {
+  return (
+    <div className='userShowInfo'>
+      <Icon className='userShowIcon' />
+      <span className='userShowInfoTitle'>{string}</span>
     </div>
   )
 }

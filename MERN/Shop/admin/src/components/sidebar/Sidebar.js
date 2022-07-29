@@ -30,7 +30,7 @@ export const Sidebar = () => {
       title: 'Quick Menu',
       submenu: [
         {icon: PermIdentity, name: 'Users', link: 'users'},
-        {icon: Storefront, name: 'Product'},
+        {icon: Storefront, name: 'Product', link: 'products'},
         {icon: AttachMoney, name: 'Transactions'},
         {icon: BarChart, name: 'Reports'},
       ]
