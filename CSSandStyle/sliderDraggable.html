@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Draggable Slider | Vanilla JS</title>
+    <style>
+      .card {
+        height: 300px;
+        width: 400px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 300px;
+        font-size: 50px;
+        font-family: sans-serif;
+        color: white;
+      }
+      .card:nth-child(odd) {
+        background-color: blue;
+      }
+      .card:nth-child(even) {
+        background-color: rgb(0, 183, 255);
+      }
+      .slider-container {
+        width: 80%;
+        height: 350px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+      .inner-slider {
+        width: 150%;
+        display: flex;
+        gap: 10px;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="slider-container">
+      <div class="inner-slider">
+        <div class="card">1</div>
+        <div class="card">2</div>
+        <div class="card">3</div>
+        <div class="card">4</div>
+        <div class="card">5</div>
+        <div class="card">6</div>
+        <div class="card">7</div>
+        <div class="card">8</div>
+      </div>
+    </div>
+
+    <script>
+      let sliderContainer = document.querySelector('.slider-container');
+      let innerSlider = document.querySelector('.inner-slider');
+
+      let pressed = false;
+      let startX;
+      let x;
+
+      sliderContainer.addEventListener('mousedown', e => {
+        pressed = true;
+        startX = e.offsetX - innerSlider.offsetLeft;
+        sliderContainer.style.cursor = 'grabbing';
+        console.log(`=== ${e.type} ===`)
+        // console.log(`   e.offsetX = ${e.offsetX}`)
+        // console.log(`   innerSlider.offsetLeft = ${innerSlider.offsetLeft}`)
+        console.log(`   pressed = ${pressed}`)
+      })
+
+      sliderContainer.addEventListener('mouseenter', e => {
+        sliderContainer.style.cursor = 'grab';
+        console.log(`=== ${e.type} ===`)
+        console.log(`   pressed = ${pressed}`)
+      })
+
+      sliderContainer.addEventListener('mouseup', e => {
+        sliderContainer.style.cursor = 'grab';
+        pressed = false;
+        console.log(`=== ${e.type} ===`)
+        console.log(`   pressed = ${pressed}`);
+      })
+
+      sliderContainer.addEventListener('mouseleave', e => {
+        pressed = false;
+        console.log(`=== ${e.type} ===`)
+        console.log(`   pressed = ${pressed}`)
+      })
+
+      sliderContainer.addEventListener('mousemove', e => {
+        if (!pressed) {
+          // console.log(`=== ${e.type} | pressed = ${String(pressed).toUpperCase()} ===`)
+          return;
+        }
+        e.preventDefault();
+        x = e.offsetX;
+        innerSlider.style.left = `${x - startX}px`;
+        checkBoundary();
+        // console.log(innerSlider.style.left)
+        // console.log(`=== ${e.type} | pressed = ${String(pressed).toUpperCase()} | e.offsetX = ${e.offsetX} ===`)
+      })
+
+      const checkBoundary = () => {
+        let outer = sliderContainer.getBoundingClientRect();
+        let inner = innerSlider.getBoundingClientRect();
+        if (parseInt(innerSlider.style.left) > 0) {
+          innerSlider.style.left = "0px";
+        }
+        if (inner.right < outer.right) {
+          innerSlider.style.left = `-${inner.width - outer.width}px`;
+        }
+      };
+
+
+    </script>
+  </body>
+</html>
