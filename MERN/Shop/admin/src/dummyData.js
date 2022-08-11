@@ -49,23 +49,6 @@ export const userData = [
   },
 ];
 
-
-export const productData = [
-  {
-    name: "Jan",
-    "Sales": 4000,
-  },
-  {
-    name: "Feb",
-    "Sales": 3000,
-  },
-  {
-    name: "Mar",
-    "Sales": 5000,
-  },
-];
-
-
 export const userRows = [
   {
     id: 1,
@@ -159,6 +142,7 @@ export const userRows = [
   },
 ];
 
+
 export const productRows = [
   {
     id: 1,
@@ -249,5 +233,20 @@ export const productRows = [
     stock: 123,
     status: "active",
     price: "$120.00",
+  },
+];
+
+export const productData = [
+  {
+    name: "Jan",
+    "Sales": 4000,
+  },
+  {
+    name: "Feb",
+    "Sales": 3000,
+  },
+  {
+    name: "Mar",
+    "Sales": 9000,
   },
 ];
