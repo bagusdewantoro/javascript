@@ -9,10 +9,12 @@ Add scripts to package.json:
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently -k \"npm run server\" \"npm run client\""
+    "devClient": "concurrently -k \"npm run server\" \"npm run client\""
   },
 ```
 And then run:
 ```
-npm run dev
+npm run devClient
 ```
+
+Also add similar codes for admin and also run as devAdmin

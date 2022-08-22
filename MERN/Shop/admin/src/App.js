@@ -13,6 +13,7 @@ import { NewUser } from './pages/newUser/NewUser';
 import { ProductList } from './pages/productList/ProductList';
 import { Product } from './pages/product/Product';
 import { NewProduct } from './pages/newProduct/NewProduct';
+import Login from './pages/login/Login';
 import './app.css';
 
 const App =() => {
@@ -28,6 +29,7 @@ const App =() => {
           <Route path='product/:productId' element={<Product />} />
           <Route path='newproduct' element={<NewProduct />} />
         </Route>
+        <Route path='login' element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

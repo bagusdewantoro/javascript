@@ -7,7 +7,10 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently -k \"npm run server\" \"npm run client\""
+    "devClient": "concurrently -k \"npm run server\" \"npm run client\"",
+    "admin": "npm start --prefix admin",
+    "devAdmin": "concurrently -k \"npm run server\" \"npm run admin\"",
+    "dev": "concurrently \"npm run server\" \"npm run admin\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

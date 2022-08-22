@@ -8,3 +8,11 @@ Simply check the case in powershale (check lowercase or uppercase).
 
 Make sure:
 `C:\Users\octavianus.bagus\Documents\JavaScript\MERN\Shop\client`
+
+Change port:
+```
+"scripts": {
+  "start": "set PORT=3001 && react-scripts start",
+  ...
+},
+```
