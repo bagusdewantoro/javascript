@@ -2,7 +2,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  // Navigate
+  Navigate
 } from 'react-router-dom';
 
 import { Main } from './Main';
@@ -17,10 +17,19 @@ import Login from './pages/login/Login';
 import './app.css';
 
 const App =() => {
+  const admin =
+    localStorage.getItem('persist:root')
+    ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser === null
+      ? ''
+      : JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.isAdmin
+    : ''
   return (
     <BrowserRouter>
       <Routes className='app'>
-        <Route path='/' element={<Main />}>
+        <Route
+          path='/'
+          element = {admin ? <Main /> : <Navigate to='login' />}
+        >
           <Route index element={<Home />} />
           <Route path='users' element={<UserList />} />
           <Route path='user/:userId' element={<User />} />
@@ -29,7 +38,10 @@ const App =() => {
           <Route path='product/:productId' element={<Product />} />
           <Route path='newproduct' element={<NewProduct />} />
         </Route>
-        <Route path='login' element={<Login />} />
+        <Route
+          path='login'
+          element = {admin ? <Navigate to='/' /> : <Login />}
+        />
       </Routes>
     </BrowserRouter>
   )
