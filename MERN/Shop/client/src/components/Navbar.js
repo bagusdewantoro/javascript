@@ -89,7 +89,12 @@ const Navbar = () => {
           <Center><h1 className='logo'>dom&sko</h1></Center>
         </Link>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
+          <Link
+            to='/register'
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
           <Link
             to='/login'
             style={{ textDecoration: 'none', color: 'inherit' }}
