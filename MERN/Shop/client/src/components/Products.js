@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+// import axios from 'axios'
 
 // import { popularProducts } from '../data';
 import { publicRequest } from '../requestMethods';
