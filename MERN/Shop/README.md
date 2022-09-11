@@ -37,7 +37,20 @@ $ git checkout -b <new_branch>
 $ git branch --show-current
 ```
 
-## GIT : Create difference branches for each folder di powershell
+## GIT : Delete remote branch
+```
+git push -d <remote_name> <branchname>
+```
+
+## GIT : Delete local branch
+```
+git branch -d <branch_name>
+git branch -D <branch_name>
+```
+The -d option is an alias for --delete, which only deletes the branch if it has already been fully merged in its upstream branch.
+The -D option is an alias for --delete --force, which deletes the branch "irrespective of its merged status." 
+
+## GIT : Create difference branches for each folder in powershell
 ```
 $ C:\Shop> cd admin
 PS C:\Users\octavianus.bagus\Documents\JavaScript2\Shop\admin> git init
@@ -110,3 +123,6 @@ To https://github.com/bagusdewantoro/ecommerce.git
  * [new branch]      server -> server
 PS C:\Users\octavianus.bagus\Documents\JavaScript2\Shop\server>
 ```
+
+## Heroku
+Heroku branch must be 'main'

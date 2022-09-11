@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-// const BASE_URL = 'http://localhost:5000/api';
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = 'http://localhost:5000/api';
 const TOKEN =
   localStorage.getItem('persist:root')
   ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser === null
@@ -23,5 +23,5 @@ export const publicRequest = axios.create({
 
 export const userRequest = axios.create({
   baseURL: BASE_URL,
-  header: {token: `Bearer ${TOKEN}`},
+  headers: {token: `Bearer ${TOKEN}`},
 });

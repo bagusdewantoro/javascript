@@ -12,3 +12,10 @@ Adding environment variables:
 https://create-react-app.dev/docs/adding-custom-environment-variables/#referencing-environment-variables-in-the-html
 * variable name should start with REACT_APP_
 * during development, app must be restarted after adding new variable
+
+
+Eslint 'Failed to parse source map'
+To remove this warning, add to .env :
+```
+GENERATE_SOURCEMAP=false
+```
