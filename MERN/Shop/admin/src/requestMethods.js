@@ -1,7 +1,15 @@
 import axios from 'axios';
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
-const BASE_URL = 'http://localhost:5000/api';
+const prodURL = process.env.REACT_APP_BASE_URL;
+const devURL = 'http://localhost:5000/api'
+
+const BASE_URL = process.env.NODE_ENV === 'development'
+  ? devURL
+  : prodURL;
+
+console.log(BASE_URL)
+console.log(process.env.NODE_ENV)
+
 const TOKEN =
   localStorage.getItem('persist:root')
   ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser === null
