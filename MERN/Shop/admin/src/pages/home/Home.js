@@ -4,7 +4,7 @@ import './home.css';
 // } from '@material-ui/icons';
 import { FeaturedInfo } from '../../components/featuredInfo/FeaturedInfo'
 import { Chart } from '../../components/chart/Chart'
-import { userData } from '../../dummyData'
+// import { userData } from '../../dummyData'
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { userRequest } from '../../requestMethods';
@@ -23,7 +23,7 @@ export const Home = () => {
     (async() => {
       try {
         const res = await userRequest.get('/users/stats')
-        res.data.map(item => {
+        res.data.map(item =>
           setUserStats(prev => [
             ...prev,
             {
@@ -31,7 +31,7 @@ export const Home = () => {
               'Active User': item.total,
             },
           ])
-        })
+        )
       } catch {}
     })()
   }, [MONTHS])
@@ -42,7 +42,7 @@ export const Home = () => {
       <FeaturedInfo />
       <Chart
         title='User Analytics'
-        data={userData}
+        data={userStats}
         grid
         dataKey='Active User'
       />
