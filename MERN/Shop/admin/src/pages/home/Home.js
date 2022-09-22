@@ -35,7 +35,7 @@ export const Home = () => {
       } catch {}
     })()
   }, [MONTHS])
-  console.log(userStats)
+  // console.log(userStats)
 
   return (
     <div className='home'>
