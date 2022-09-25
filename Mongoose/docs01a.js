@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
 
+
 async function main() {
-  await mongoose.connect('mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/docs?retryWrites=true&w=majority', () => console.log('connected to DB'));
 
   const kittySchema = new mongoose.Schema({
     name: String
@@ -26,5 +26,6 @@ async function main() {
 
   const kittens = await Kitten.find();
   console.log(kittens);
-}
 
+  await mongoose.connect('mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/docs?retryWrites=true&w=majority', () => console.log('connected to DB'));
+}

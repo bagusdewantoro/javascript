@@ -1,0 +1,6 @@
+.bar1 {
+  display: inline-block;
+  width: 20px;
+  height: 75px;  /* initial height before override by the data */
+  background-color: teal;
+}
