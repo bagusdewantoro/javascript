@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 app.get('/', (req, res) => {
   res.send('We are at home');

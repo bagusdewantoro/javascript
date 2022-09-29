@@ -21,7 +21,7 @@ export const FeaturedInfo = () => {
     })()
   }, [])
   // console.log(income)
-  console.log(perc)
+  // console.log(perc)
   const featuredData = [
     {
       title: 'Revenue',

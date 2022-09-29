@@ -1,17 +1,29 @@
-# Learn Mongoose Directly From NODE REPL (Powershell)
+## PART I | Top Level Await
+
+Below node 14.8, to use top level await, you should flag '--harmony-top-level-await' and module type, so in your package.json:
+
+```
+"type": "module",
+"scripts": {
+  "start": "nodemon --harmony-top-level-await index.js"
+},
+```
+
+## PART II | Learn Mongoose Directly From NODE REPL (Powershell)
 
 * Basic Setup
 ```
 npm init -y
 
 npm i mongoose express
+```
 
+* Run node repl
+```
 node
+```
 
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-
+```
 app.get('/', (req, res) => {
   res.send('We are at home');
 });
