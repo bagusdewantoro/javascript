@@ -92,7 +92,10 @@ const dog = new Animal({ type: 'dog' });
 const Thing = model('Thing', new Schema({ name: 'string' }, { versionKey: '_versiBagus' }));
 const thing = new Thing({ name: 'Test Versioning'});
 await thing.save();
-console.log(thing)
+
+// Other way WITHOUT declare const
+// await new Thing({ name: 'Test Versioning'}).save()
+console.log(`thing document: ${thing}`)
 /* {
   name: 'Test Versioning',
   _id: new ObjectId("6335c5d47ba781ebc93e88f5"),
@@ -100,6 +103,15 @@ console.log(thing)
 } */
 
 
+/**
+ * Option: Timestapms
+ */
+
+//  With custom name for 'createdAt' fields
+const Thing2 = model('Thing2', new Schema({ name: 'string' }, { timestamps: { createdAt: 'dibuat_pada'}}));
+const thing2 = new Thing2({ name: 'Test Timestamps' });
+await thing2.save();
+console.log(`thing2 document: ${thing2.dibuat_pada}`)
 
 
 /**
