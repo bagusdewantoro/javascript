@@ -4,7 +4,21 @@ mongoose.connect('mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/doc
 // mongoose.connect('mongodb+srv://netninja:test1234@nodetuts.y6vzw.mongodb.net/docs?retryWrites=true&w=majority', () => console.log('connected to DB'));
 
 // Shorthand
-const { Schema, model } = mongoose;
+const { Schema, model, connection } = mongoose;
+
+// Check our list of collections' name
+// connection.on('open', function (ref) {
+//   try {
+//     console.log('Connected to server. List of collections:');
+//     // Get list of collections
+//     connection.db.listCollections().toArray(function (err, coll) {
+//       coll
+//       .map(obj => {
+//         console.log(obj.name) // list of collections name
+//       })
+//     });
+//   } catch(e) {}
+// })
 
 
 /**
@@ -47,6 +61,8 @@ const schema2 = new Schema({ _id: Number });
 const model2 = model('model2', schema2);
 const doc2 = new model2();
 const addDocumentDoc2 = async () => {
+  // Delete all existing model2 documents
+  await model2.deleteMany()
   // ==== without top level await:
   // (async () => {
   //   try {
@@ -81,8 +97,11 @@ const animalSchema = new Schema(
 
 // Now our animal instances have a "findSimilarTypes" method available for them
 const Animal = model('Animal', animalSchema);
+// Delete all existing Animal documents
+await Animal.deleteMany()
 const dog = new Animal({ type: 'dog' });
-// dog.findSimilarTypes((err, dogs) => console.log(dogs))
+await dog.save();
+// await dog.methods.findSimilarTypes((err, dogs) => console.log(dogs))
 
 
 /**
@@ -90,9 +109,10 @@ const dog = new Animal({ type: 'dog' });
  */
 
 const Thing = model('Thing', new Schema({ name: 'string' }, { versionKey: '_versiBagus' }));
+// Delete all existing Thing2 documents
+await Thing.deleteMany()
 const thing = new Thing({ name: 'Test Versioning'});
 await thing.save();
-
 // Other way WITHOUT declare const
 // await new Thing({ name: 'Test Versioning'}).save()
 console.log(`thing document: ${thing}`)
@@ -109,6 +129,8 @@ console.log(`thing document: ${thing}`)
 
 //  With custom name for 'createdAt' fields
 const Thing2 = model('Thing2', new Schema({ name: 'string' }, { timestamps: { createdAt: 'dibuat_pada'}}));
+// Delete all existing Thing2 documents
+await Thing2.deleteMany()
 const thing2 = new Thing2({ name: 'Test Timestamps' });
 await thing2.save();
 console.log(`thing2 document: ${thing2.dibuat_pada}`)
