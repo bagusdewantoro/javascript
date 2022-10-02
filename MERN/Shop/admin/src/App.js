@@ -5,7 +5,7 @@ import {
   Navigate
 } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 
 import { Main } from './Main';
 import { Home } from './pages/home/Home';
@@ -21,45 +21,25 @@ import './app.css';
 const App =() => {
   const user = useSelector(state => state.user.currentUser)
   // console.log(user)
-  const [userCurrent, setUserCurrent] = useState(false)
 
-  const admin =
-    localStorage.getItem('persist:root')
-    ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser === null
-      ? ''
-      : JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.isAdmin
-    : ''
-  // console.log('admin=', admin)
-  // ABOVE CODES (TERNARY) IS SAME WITH BELOW:
-  // let admin2;
-  // if (!localStorage.getItem('persist:root')) {
-  //   admin2 = ''
-  // } else if (JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser === null) {
-  //   admin2 = ''
-  // } else {
-  //   admin2 = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.isAdmin
-  // }
-  // console.log('admin2=', admin2)
-
-  // let user2;
-  // if (!user) {
-  //   user2 = ''
-  // } else {
-  //   user2 = user
-  // }
-  // console.log('user2=', user2)
-
-  useEffect(() => {
-    setUserCurrent( !user ? '' : user.isAdmin)
-  }, [userCurrent])
-  console.log(userCurrent)
+  // const [token, setToken] = useState(null)
+  // const checkToken =
+  //   localStorage.getItem('persist:root')
+  //   ? JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser === null
+  //     ? ''
+  //     : JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.accessToken
+  //   : ''
+  // useEffect(() => {
+  //   setToken(checkToken)
+  // }, [])
+  // console.log(token)
 
   return (
     <BrowserRouter>
       <Routes className='app'>
         <Route
           path='/'
-          element = {userCurrent ? <Main /> : <Navigate to='login' />}
+          element = {user ? <Main /> : <Navigate to='login' />}
           // element = <Main />
         >
           <Route index element={<Home />} />
@@ -72,7 +52,7 @@ const App =() => {
         </Route>
         <Route
           path='login'
-          element = {userCurrent ? <Navigate to='/' /> : <Login />}
+          element = {user ? <Navigate to='/' /> : <Login />}
         />
       </Routes>
     </BrowserRouter>
