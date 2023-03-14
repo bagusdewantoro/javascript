@@ -81,23 +81,51 @@ function render(element, container) {
 		element.type == "TEXT_ELEMENT"
 			? document.createTextNode("")
 			: document.createElement(element.type)
-	console.log("current 1 dom =", dom)
+	console.log("current 1 dom =", dom) // <div id="foo"><h1>bar</h1><b></b></div>
+
 
 	const isProperty = key => key !== "children"
 	Object.keys(element.props)
 		.filter(isProperty)
 		.forEach(name => {
 			dom[name] = element.props[name]
-			console.log("dom[name] =", dom[name])
+			console.log("dom[name] =", dom[name]) // foo
 		})
 	console.log("element.props =", element.props)
-	console.log("Object.keys(element.props) =", Object.keys(element.props))
+	// {
+	//   "id": "foo",
+	//   "children": [
+	//     {
+	//       "type": "h1",
+	//       "props": {
+	//         "children": [
+	//           {
+	//             "type": "TEXT_ELEMENT",
+	//             "props": {
+	//               "nodeValue": "bar",
+	//               "children": []
+	//             }
+	//           }
+	//         ]
+	//       }
+	//     },
+	//     {
+	//       "type": "b",
+	//       "props": {
+	//         "children": []
+	//       }
+	//     }
+	//   ]
+	// }
+	
+	console.log("Object.keys(element.props) =", Object.keys(element.props)) 
+	// ["id", "children"]
 
 	element.props.children.forEach(child => 
 		render(child, dom)
 	)
 	container.appendChild(dom)
-	console.log("current 2 dom =", dom)
+	console.log("current 2 dom =", dom) // "bar"
 }
 
 const Didact = {
