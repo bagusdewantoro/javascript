@@ -1,0 +1,32 @@
+
+/*
+React Version:
+
+const element = <h1 title="foo">Hello</h1>
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+*/
+
+
+// Our Own React:
+
+const element = {
+	type: "h1",
+	props: {
+		title: "foo",
+		children: "hello",
+	},
+}
+
+const body = document.getElementsByTagName("body")[0]
+const container = document.createElement("div")
+body.appendChild(container)
+
+const node = document.createElement(element.type)
+node["title"] = element.props.title
+
+const text = document.createTextNode("")
+text["nodeValue"] = element.props.children
+
+node.appendChild(text)
+container.appendChild(node)
