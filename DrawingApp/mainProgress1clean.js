@@ -1,13 +1,9 @@
-const Vec2D = (function () {
-    function Vec2D(x, y) {
-        if (x === void 0) { x = 0; }
-        if (y === void 0) { y = 0; }
+class Vec2D {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
-    return Vec2D;
-}());
-
+};
 
 const windowSize = new Vec2D(window.innerWidth, window.innerHeight);
 const cnv = document.createElement("canvas");
@@ -18,26 +14,27 @@ const ctx = cnv.getContext("2d");
 
 const mouseLoc = new Vec2D(0, 0);
 
-cnv.onmousemove = function (e) {
+cnv.onmousemove = e => {
     mouseLoc.x = e.clientX;
     mouseLoc.y = e.clientY;
 };
 
-function drawCursor(pos) {
-    // ctx.fillStyle = state == State.Finishing ? "#f00" : "#000";
+const drawCursor = pos => {
     ctx.fillStyle = "#000";
     ctx.beginPath();
     ctx.arc(pos.x, pos.y, 4, 0, Math.PI * 2);
     ctx.fill();
 }
 
-function loop() {
+const loop = () => {
+    // Clear screen
     ctx.fillStyle = "#ccc";
     ctx.fillRect(0, 0, windowSize.x, windowSize.y);
-
+    // Draw mouse cursor
     drawCursor(mouseLoc);
-
+    // Repeat
     window.requestAnimationFrame(loop);
 }
 
+// Start
 window.requestAnimationFrame(loop);
