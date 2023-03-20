@@ -9,9 +9,9 @@ class Vec2D {
     // div(scalar) {
     //     return new Vec2D(this.x / scalar, this.y / scalar);
     // };
-    // len() {
-    //     return Math.sqrt(this.x * this.x + this.y * this.y);
-    // };
+    len() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    };
 };
 
 
@@ -108,20 +108,20 @@ cnv.onmousemove = e => {
     mouseLoc.x = e.clientX;
     mouseLoc.y = e.clientY;
 
-    // switch (state) {
-        // case State.AddingPoints:
-    //     case State.Finishing:
-            // mouseLoc.minus(scene[scene.length - 1].points[0]).len() < 20
-            //     ? state = State.Finishing
-            //     : state = State.AddingPoints;
-            // break;
+    switch (state) {
+        case State.AddingPoints:
+        case State.Finishing:
+            mouseLoc.minus(scene[scene.length - 1].points[0]).len() < 20 // snap radius from first point
+                ? state = State.Finishing
+                : state = State.AddingPoints;
+            break;
     //     case State.Nothing:
     //         closePoint = spatialIdx.get(mouseLoc, 20);
     //         break;
     //     case State.DraggingPoint:
     //         closePoint.x = mouseLoc.x;
     //         closePoint.y = mouseLoc.y;
-    // }
+    }
 };
 
 cnv.onmousedown = e => {
@@ -149,16 +149,15 @@ cnv.onmouseup = e => {
                 const lastShape = scene[scene.length - 1];
                 lastShape.points.push(p);
                 // spatialIdx.insert(p);
-                console.log('lastShape.points = ', lastShape.points)
                 break;
-//             case State.Finishing:
-//                 scene[scene.length - 1].fillColor =
-//                     document.getElementById("colorPicker").value;
-//                 scene[scene.length - 1].closed = true;
-//                 state = State.Nothing;
+            case State.Finishing:
+                scene[scene.length - 1].fillColor = document.getElementById("colorPicker").value;
+                scene[scene.length - 1].closed = true;
+                state = State.Nothing; // create new shape
         }
     }
     console.log('p = ', p)
+    console.log(scene[scene.length - 1])
 };
 
 const drawCursor = pos => {
@@ -183,10 +182,10 @@ const loop = () => {
             for (let i = 1; i < shape.points.length; i++) {
                 ctx.lineTo(shape.points[i].x, shape.points[i].y);
             }
-            // if (shape.closed) {
-            //     ctx.closePath();
-            //     ctx.fill();
-            // }
+            if (shape.closed) {
+                ctx.closePath();
+                ctx.fill();
+            }
             ctx.stroke();
         }
     });
@@ -197,13 +196,13 @@ const loop = () => {
         const lastShape = scene[scene.length - 1];
         const lastVert = lastShape.points[lastShape.points.length - 1];
         ctx.moveTo(lastVert.x, lastVert.y);
-        // if (state == State.Finishing) {
-        //     // Snap
-        //     ctx.lineTo(lastShape.points[0].x, lastShape.points[0].y);
-        // }
-        // else {
+        if (state == State.Finishing) {
+            // Snap
+            ctx.lineTo(lastShape.points[0].x, lastShape.points[0].y);
+        }
+        else {
             ctx.lineTo(mouseLoc.x, mouseLoc.y);
-        // }
+        }
         ctx.stroke();
     }
 
