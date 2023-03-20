@@ -1,0 +1,94 @@
+
+@font-face {
+  font-family: 'HankenGrotesk-Bold';
+  src: url('/assets/fonts/static/HankenGrotesk-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HankenGrotesk-Medium';
+  src: url('/assets/fonts/static/HankenGrotesk-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HankenGrotesk-ExtraBold';
+  src: url('/assets/fonts/static/HankenGrotesk-ExtraBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "HankenGrotesk-Medium";
+}
+
+h1,
+h2,
+p {
+	text-align: center;
+}
+
+h1 {
+	font-size: 1.3rem;
+	font-family: "HankenGrotesk-Bold";
+}
+
+h2 {
+	font-size: 1.3rem;
+	font-family: "HankenGrotesk-ExtraBold";
+}
+
+p {
+	font-size: 1.3rem;
+	font-family: "HankenGrotesk-Medium";
+}
+
+ul {
+	list-style-type: none;
+	font-size: 0.7rem;
+}
+
+li {
+	display: flex;
+}
+
+li div {
+	flex: 1 1 0;
+}
+
+.container {
+	position: absolute;
+        left: 50%;
+        top: 50%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	height: 350px;
+	display: flex;
+	border-radius: 30px;
+	box-shadow: 10px 10px 20px 5px lightgrey;
+}
+
+.result {
+	display: flex;
+	flex-direction: column;
+	background: #5C3DFA;
+	flex: 50%;
+	border-radius: 30px;
+	align-items: center;
+	padding: 25px 35px;
+}
+
+.summary {
+	background: inherit;
+	display: flex;
+	flex-direction: column;
+	flex: 50%;
+	padding: 25px 35px;
+}
+
