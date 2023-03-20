@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload Image and Preview</title>
+</head>
+
+<body>
+	<input 	type="file" 
+					name="image" 
+					class="form-control" 
+					accept="image/*"
+					onchange="updatePreview(this, 'image-preview')"
+	>
+	<img 	id="image-preview" 
+				src="https://via.placeholder.com/400"
+				style="width:400px"
+				class="rounded rounded-circle"
+				alt="placeholder"
+	>	
+
+	<script src="script.js"></script>
+</body>
+
+</html>
