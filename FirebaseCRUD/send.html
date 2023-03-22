@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Firebase Form</title>
+	<style>
+		.container {
+			max-width: 520px;
+			margin: auto;
+			margin-top: 100px;
+			font-family: sans-serif;
+		}
+		h1 {
+			margin-bottom: 30px;
+		}
+		input, textarea {
+			width: calc(100% - 20px);
+			display: block;
+			padding: 6px;
+			font-size: 20px;
+			margin-bottom: 15px;
+			outline: none;
+		}
+		textarea {
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Send Data to Firebase Database</h1>
+		<div class="form">
+			<label>Name</label>
+			<input type="text">
+			<label>Email</label>
+			<input type="text">
+			<label>Message</label>
+			<textarea></textarea>
+			<button>Submit</button>
+		</div>
+	</div>
+
+	<!-- add firebase CDN -->
+	<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-database-compat.js"></script>
+
+	<script>
+		const firebaseConfig = {
+			databaseURL : "https://baguscrudfirebase-default-rtdb.asia-southeast1.firebasedatabase.app"
+		}
+		firebase.initializeApp(firebaseConfig);
+
+		// create connection with firebase
+		const database = firebase.database()
+
+		// create a function to send data
+		const sendData = () => {
+			const name = document.querySelectorAll("input")[0];
+			const email = document.querySelectorAll("input")[1];
+			const message = document.querySelector("textarea");
+			// console.log("It Works!");
+
+			// set path where the data is stored
+			const listRef = database.ref("messages/")
+
+			// push() to generate unique id's
+			const newRef = listRef.push()
+
+			// now set data in db on given path
+			newRef.set({
+				"name": name.value,
+				"email": email.value,
+				"message": message.value,
+			})
+		}
+
+		// run function on click submit button
+		const submit = document.querySelector("button");
+		submit.onclick = () => sendData();
+
+	</script>
+</body>
+</html>
