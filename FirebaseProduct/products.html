@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Products</title>
+	<style>
+		.container {
+			display: flex;
+		}
+		.productsDiv {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.productcard {
+			border: 1px lightgray solid;
+			display: flex;
+			flex-direction: column;
+			width: 290px;
+			margin: 20px;
+		}
+		.productcard:hover {
+			border-color: darkblue;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container" id="productsDiv">
+		<div class="productcard">
+			<img src="Images/img (1).jpg" class="thumb mt-2" id="thumb1">
+			<p class="title" id="title1">Laptop asdf asdf</p>
+			<ul class="points">
+				<li>laptop asdf asdf asfd asfd</li>
+				<li>laptop asdf asdf asfd asfd</li>
+				<li>laptop asdf asdf asfd asfd</li>
+				<li>laptop asdf asdf asfd asfd</li>
+			</ul>
+			<h5>Rp 300K</h5>
+			<button id="detbtn" class="btn">View Details</button>
+		</div>
+	</div>
+
+	<script>
+		function getSortTitle() {
+			if (title.length > 49){
+				title = title.substring(0, 47)
+			}
+			else return title;
+			return title + "..."
+		}
+	</script>
+</body>
+</html>

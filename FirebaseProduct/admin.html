@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin</title>
+</head>
+
+<body>
+	<label>Name</label> <input type="text" id="nameinp"> <br>	
+	<label>Price</label> <input type="text" id="priceinp">	<br>
+	<label>Stock</label> <input type="text" id="stockinp">	<br>
+	<label>Category</label><br>
+	<select id="catinp">
+		<option value="Keyboard">Keyboard</option>
+		<option value="Laptop">Laptop</option>
+		<option value="Monitor">Monitor</option>
+		<option value="Graphic">Graphic</option>
+		<option value="PS">PS</option>
+	</select>	
+	<label>Points #1</label> <input type="text" class="pointers" id="p1inp"><br>
+	<label>Points #2</label> <input type="text" class="pointers" id="p2inp"><br>
+	<label>Points #3</label> <input type="text" class="pointers" id="p3inp"><br>
+	<label>Points #4</label> <input type="text" class="pointers" id="p4inp"><br>
+
+	<label id="pdlab">Description</label> <textarea id="desarea"></textarea>
+
+	<div id="imagesDiv"></div>
+
+	<div id="controldiv">
+		<label id="loadlab">Uploading 1 of 3</label>
+		<button id="addprodbtn">Add Product</button>
+		<button id="selimsgbtn">Select Image</button>
+	</div>
+
+	<script type="module">
+
+		// IMPORTS + CONFIGURATION
+
+		// Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-analytics.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyCouwa6TLrf4qdjFfqIa2o4O_JsS6cwdJs",
+	    authDomain: "products-20b13.firebaseapp.com",
+	    projectId: "products-20b13",
+	    storageBucket: "products-20b13.appspot.com",
+	    messagingSenderId: "1017828957937",
+	    appId: "1:1017828957937:web:0616610d3cbe6c502f9350",
+	    measurementId: "G-HE9Y9K22JK"
+	  };
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+
+	  // Import firebase storage function
+	  import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-storage.js"
+	  
+	  // Import Realtime Database
+	  import { getDatabase, ref, set, child, get} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js"
+	  const realdb = getDatabase()
+
+
+
+
+	  
+		var Files = [];
+		var FileReaders = [];
+		var ImageLinksArray = [];
+
+		let imgdiv = document.getElementById("imagesDiv");
+		const selBtn = document.getElementById("selimsgbtn");
+		const addBtn = document.getElementById("addprodbtn");
+		const proglab = document.getElementById("loadlab");
+
+		const name = document.getElementById("nameinp");
+		const category = document.getElementById("catinp");
+		const description = document.getElementById("desarea");
+		const price = document.getElementById("priceinp");
+		const stock = document.getElementById("stockinp");
+		
+		const p1 = document.getElementById("p1inp");
+		const p2 = document.getElementById("p2inp");
+		const p3 = document.getElementById("p3inp");
+		const p4 = document.getElementById("p4inp");
+
+		function OpenFileDialog() {
+			let inp = document.createElement('input')
+			inp.type = 'file';
+			inp.multiple = 'multiple';
+
+			inp.onchange = e => {
+				AssignImgsToFilesArray(e.target.files)
+				CreateImgTags()
+			}
+
+			inp.click();
+		}
+
+		function AssignImgsToFilesArray(thefiles) {
+			let num = Files.length + thefiles.length;
+			let looplim = (num <= 10)
+				? thefiles.length 
+				: (10 - Files.length)
+
+			for (let i = 0; i < looplim; i++) {
+				Files.push(thefiles[i])
+			}
+
+			if (num>10) alert("Maximum 10 images!")
+		}
+
+		function CreateImgTags() {
+			imgdiv.innerHTML = '';
+			imgdiv.classList.add('imagesDivStyle')
+
+			for (let i = 0; i < Files.length; i++) {
+				FileReaders[i] = new FileReader();
+
+				FileReaders[i].onload = function() {
+					var img = document.createElement('img');
+					img.id = 'imgNo'+i;
+					img.classList.add('imgs');
+					img.src = FileReaders[i].result;
+					imgdiv.append(img);
+				}
+
+				FileReaders[i].readAsDataURL(Files[i]);
+			}
+
+			let lab = document.getElementById('label')
+			lab.innerHTML = 'clear images';
+			lab.style = 'cursor: pointer; display: block;'
+			lab.addEventListener('click', ClearImages)
+			imgdiv.append(lab) 
+		}
+
+		function ClearImages() {
+			Files = []
+			ImageLinksArray = []
+			imgdiv.innerHTML = ''
+			imgdiv.classList.remove('imagesDivStyle')
+		}
+
+		function getShortTitle() {
+			let namey = name.value.substring(0, 50)
+			return namey.replace(/[^a-zA-Z0-9]/g, "")
+		}
+
+		function GetImgUploadProgress() {
+			return 'Images Uploaded ' + ImageLinksArray.length + ' of ' + Files.length
+		}
+
+		function IsAllImagesUploaded() {
+			return ImageLinksArray.length == Files.length
+		}
+
+		function GetPoints() {
+			let points = []
+			if (p1.value.length > 0) points.push(p1.value)
+			if (p2.value.length > 0) points.push(p2.value)
+			if (p3.value.length > 0) points.push(p3.value)
+			if (p4.value.length > 0) points.push(p4.value)
+			return points
+		}
+
+		function RestoreBack() {
+			selBtn.disabled = false
+			addBtn.disabled = false
+			proglab.innerHTML = ''
+		}
+
+
+		selBtn.addEventListener('click', OpenFileDialog); 
+		selBtn.addEventListener('click', UploadAllImages); 
+
+
+		// UPLOAD TO FIREBASE
+
+		function UploadAllImages() {
+			selBtn.disabled = true;
+			addBtn.disabled = true;	
+			ImageLinksArray=[]
+
+			for (let i= 0; i < Files.length; i++) {
+				UploadAnImage(Files[i], i)
+			}
+		}
+
+		function UploadAnImage(imgToUpload, imgNo) {
+			const metadata = {
+				contentType: imgToUpload.type
+			}
+			const storage = getStorage();
+			const ImageAddress = 
+			`TheImages/${getShortTitle()}img#${imgNo+1}`
+			// console.log(ImageAdress)
+			// "TheImages/" + getShortTitle()  "/img#" + (imgNo+1);
+			const storageRef = sRef(storage, ImageAddress)
+			const UploadTask = uploadBytesResumable(storageRef, imgToUpload, metadata)
+			UploadTask.on('state_changed', (snapshot) => {
+				proglab.innerHTML = GetImgUploadProgress()
+			},
+			(error) => { alert("upload failed")},
+			() => {
+				getDownloadURL(UploadTask.snapshot.ref).then(downloadURL => {
+					ImageLinksArray.push(downloadURL)
+					if (IsAllImagesUploaded) {
+						proglab.innerHTML = "all images uploaded";
+						UploadAProduct()
+					}
+				})
+			})
+		}
+
+
+		
+
+
+	  // UPLOAD A PRODUCT
+	  function UploadAProduct() {
+	  	set(ref(realdb, "TheProductRealdb/"+getShortTitle()), {
+	  		ProductTitle: name.value,
+	  		Category: category.value,
+	  		Description: description.value,
+	  		Price: price.value,
+	  		Stock: stock.value,
+	  		Points: GetPoints(),
+	  		LinksOfImagesArray: ImageLinksArray
+	  	})
+
+	  	alert("upload successful")
+	  	RestoreBack()
+	  }
+	</script>
+</body>
+</html>
