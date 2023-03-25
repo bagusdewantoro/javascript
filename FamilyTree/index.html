@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>my-family-chart</title>
+    <script src="https://unpkg.com/d3@6"></script>
+    <script src="https://unpkg.com/family-chart"></script>
+    <link rel="stylesheet" href="family-chart.css" />
+    <!-- create file 'family-chart.css' in same directory, copy/paste css from examples/create-tree -->
+  </head>
+  <body>
+    <div id="FamilyChart" class="f3"></div>
+
+<!-- 
+    Cara Updatenya:
+    - Buka web "https://donatso.github.io/family-chart/examples/create-tree/"
+    - Copy data JSON string dari file 'data.js' ke dalam field Data di website tersebut, lalu tekan tombol "UPDATE CHART" 
+    - Lalu edit anggota keluarga lewat UI nya, lebih mudah, sehingga nanti JSON baru bisa di-generate
+    - Copy string baru dari field Data itu, dan replace string yang sudah ada
+
+    Supaya ngga terlalu lebar, tips:
+    - Coba tampilan awal hanya dari keluarga mbah kakung
+ -->
+
+    <script type="module">
+      import JSONdata from './data.js'
+      const jsonData = JSON.parse(JSONdata);
+
+      const store = f3.createStore({
+          data: data(),
+          node_separation: 250,
+          level_separation: 150
+        }),
+        view = f3.d3AnimationView({
+          store,
+          cont: document.querySelector("#FamilyChart")
+        }),
+        Card = f3.elements.Card({
+          store,
+          svg: view.svg,
+          card_dim: {
+            w: 220,
+            h: 70,
+            text_x: 75,
+            text_y: 15,
+            img_w: 60,
+            img_h: 60,
+            img_x: 5,
+            img_y: 5
+          },
+          card_display: [
+            (d) => `${d.data["first name"] || ""} ${d.data["last name"] || ""}`,
+            (d) => `${d.data["birthday"] || ""}`
+          ],
+          mini_tree: true,
+          link_break: false
+        });
+
+      view.setCard(Card);
+      store.setOnUpdate((props) => view.update(props || {}));
+      store.update.tree({ initial: true });
+
+      function data() {
+        return jsonData
+      }
+
+
+      // // Modifikasi view
+      // function getTampilan() {
+      //   const tampilan = document.querySelector('.view')
+      //   console.log(tampilan)
+
+      //   let matrixCurrent = window.getComputedStyle(tampilan).transform
+      //   const matrixValues = matrixCurrent.match(/matrix.*\((.+)\)/)[1].split(', ')
+      //   matrixValues[0] = '0.6'
+      //   matrixValues[3] = '0.6'
+      //   console.log(matrixCurrent)
+      //   console.log(matrixValues)
+      //   matrixCurrent = `matrix(${matrixValues})`
+      //   console.log(matrixCurrent)
+      //   return matrixCurrent
+      // }
+
+      // function edit2() {
+      //   const tampilan = document.querySelector('.view')
+      //   tampilan.trans
+      //   console.log(tampilan)
+      // }
+
+      // // pake callback karena tunggu fitur dari library dijalankan dulu
+      // setTimeout(getTampilan, 500)
+      // setTimeout(edit2, 1000)
+
+    </script>
+
+
+  </body>
+</html>
