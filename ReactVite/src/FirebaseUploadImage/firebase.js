@@ -3,14 +3,14 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-// Your web app's Firebase configuration
+// Your web app's Firebse configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDCkDeMEU2u2gK2RTdJoDSMR6GdAnW8kKU",
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "upload-image-react-bagus.firebaseapp.com",
   projectId: "upload-image-react-bagus",
   storageBucket: "upload-image-react-bagus.appspot.com",
   messagingSenderId: "564993836645",
-  appId: "1:564993836645:web:6b9df9123382e60f4b288c"
+  appId: import.meta.VITE_APP_ID
 };
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
