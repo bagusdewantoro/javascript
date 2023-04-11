@@ -20,6 +20,7 @@ app.use('/api/carts', cartRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/checkout', stripeRoute);
 
+mongoose.set('strictQuery', false);
 mongoose.connect(process.env.cloudDB)
   .then(() => app.listen(process.env.PORT, () => {
     console.log(`Database and Server is running at ${process.env.PORT}`)
