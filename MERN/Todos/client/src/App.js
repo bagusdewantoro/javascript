@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-const api_base = 'http://localhost:3001';
+
+const prodURL = 'https://bagus-todo.cyclic.app';
+const devURL = 'http://localhost:3001';
+const api_base = process.env.NODE_ENV === 'development' ? devURL : prodURL;
+// const api_base = prodURL;
+console.log(process.env.NODE_ENV, api_base);
 
 function App() {
 	const [todos, setTodos] = useState([]);
