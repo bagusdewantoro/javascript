@@ -90,6 +90,12 @@ app.get('/profile', (req, res) => {
 })
 
 
+// LOGOUT
+app.post('/logout', (req, res) => {
+	res.cookie('token', '').json(true)
+})
+
+
 mongoose.connect(process.env.MONGO_URL)
 	.then(() => app.listen(4000, () => {
 		console.log('connected to DB and running at 4000')
