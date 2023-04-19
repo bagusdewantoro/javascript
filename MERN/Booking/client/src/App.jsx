@@ -9,7 +9,8 @@ import Layout from "./Layout";
 import axios from 'axios'
 import {UserContextProvider} from './UserContext.jsx'
 
-axios.defaults.baseURL = "http://localhost:4000"
+// axios.defaults.baseURL = "http://localhost:4000"
+axios.defaults.baseURL = "https://booking-api-duhj.onrender.com/"
 axios.defaults.withCredentials = true
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 	        <Route path="/login" element={<LoginPage />} />
 	        <Route path="/register" element={<RegisterPage />} />
 	        <Route path="/account/:subpage?" element={<AccountPage />} />
+	        <Route path="/account/:subpage/:action" element={<AccountPage />} />
 	      </Route>
 	    </Routes>
   	</UserContextProvider>
