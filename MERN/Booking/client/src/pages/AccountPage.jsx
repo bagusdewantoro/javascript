@@ -43,7 +43,6 @@ export default function AccountPage() {
 	}
 
 	return (
-		// <div>Account page for {user?.name}</div>
 		<div>
 
 			<nav className="w-full flex justify-center mt-8 gap-4 mb-8">

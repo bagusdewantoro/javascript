@@ -7,10 +7,10 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import Layout from "./Layout";
 import axios from 'axios'
+import {api} from './apiConfig'
 import {UserContextProvider} from './UserContext.jsx'
 
-// axios.defaults.baseURL = "http://localhost:4000"
-axios.defaults.baseURL = "https://booking-api-duhj.onrender.com/"
+axios.defaults.baseURL = api.defaults.baseURL
 axios.defaults.withCredentials = true
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
 	        <Route index element={<IndexPage />} />
 	        <Route path="/login" element={<LoginPage />} />
 	        <Route path="/register" element={<RegisterPage />} />
-	        <Route path="/account/:subpage?" element={<AccountPage />} />
-	        <Route path="/account/:subpage/:action" element={<AccountPage />} />
+	      	<Route path="/account/:subpage?" element={<AccountPage />} />
+	      	<Route path="/account/:subpage/:action" element={<AccountPage />} />
 	      </Route>
 	    </Routes>
   	</UserContextProvider>

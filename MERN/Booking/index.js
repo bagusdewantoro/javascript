@@ -5,6 +5,9 @@ const User = require('./models/User.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
+const imageDownloader = require('image-downloader')
+const multer = require('multer')
+const fs = require('fs')
 require('dotenv').config()
 const app = express()
 
@@ -16,6 +19,8 @@ app.use(express.json())
 
 // to read cookies here
 app.use(cookieParser())
+
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 app.use(cors({
 	credentials: true,
@@ -93,6 +98,32 @@ app.get('/profile', (req, res) => {
 // LOGOUT
 app.post('/logout', (req, res) => {
 	res.cookie('token', '').json(true)
+})
+
+// UPLOAD PHOTOS BY LINK
+app.post('/upload-by-link', async (req, res) => {
+	const {link} = req.body;
+	const newName = 'Photo' + Date.now() + '.jpg'
+	await imageDownloader.image({
+		url: link,
+		dest: __dirname + '/uploads/' + newName,
+	})
+	res.json(newName)
+})
+
+// UPLOAD PHOTOS FROM FILE
+const photosMiddleware = multer({dest: 'uploads/'})
+app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
+	const uploadedFiles = []
+	for (let i=0; i<req.files.length; i++){
+		const {path, originalname} = req.files[i]
+		const parts = originalname.split('.')
+		const ext = parts[parts.length - 1]
+		const newPath = path + '.' + ext
+		fs.renameSync(path, newPath)
+		uploadedFiles.push(newPath.replace('uploads\\', ''))
+	}
+	res.json(uploadedFiles)
 })
 
 
