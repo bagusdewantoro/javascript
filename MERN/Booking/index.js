@@ -102,28 +102,36 @@ app.post('/logout', (req, res) => {
 
 // UPLOAD PHOTOS BY LINK
 app.post('/upload-by-link', async (req, res) => {
-	const {link} = req.body;
-	const newName = 'Photo' + Date.now() + '.jpg'
-	await imageDownloader.image({
-		url: link,
-		dest: __dirname + '/uploads/' + newName,
-	})
-	res.json(newName)
+	try {
+		const {link} = req.body;
+		const newName = 'Photo' + Date.now() + '.jpg'
+		await imageDownloader.image({
+			url: link,
+			dest: __dirname + '/uploads/' + newName,
+		})
+		res.json(newName)
+	} catch(e) {
+		res.json(405)
+	}
 })
 
 // UPLOAD PHOTOS FROM FILE
 const photosMiddleware = multer({dest: 'uploads/'})
 app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
 	const uploadedFiles = []
-	for (let i=0; i<req.files.length; i++){
-		const {path, originalname} = req.files[i]
-		const parts = originalname.split('.')
-		const ext = parts[parts.length - 1]
-		const newPath = path + '.' + ext
-		fs.renameSync(path, newPath)
-		uploadedFiles.push(newPath.replace('uploads\\', ''))
+	try {
+		for (let i=0; i<req.files.length; i++){
+			const {path, originalname} = req.files[i]
+			const parts = originalname.split('.')
+			const ext = parts[parts.length - 1]
+			const newPath = path + '.' + ext
+			fs.renameSync(path, newPath)
+			uploadedFiles.push(newPath.replace('uploads\\', ''))
+		}
+		res.json(uploadedFiles)
+	} catch (e){
+		res.status(405).json(e)
 	}
-	res.json(uploadedFiles)
 })
 
 

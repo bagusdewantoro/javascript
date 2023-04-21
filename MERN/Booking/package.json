@@ -6,7 +6,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run dev --prefix client",
-    "devClient": "concurrently -k \"npm run server\" \"npm run client\""
+    "all": "concurrently -k \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",

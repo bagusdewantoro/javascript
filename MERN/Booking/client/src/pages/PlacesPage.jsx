@@ -42,11 +42,19 @@ export default function PlacesPage() {
 
   async function addPhotoByLink(e) {
     e.preventDefault()
-    const {data:filename} = await axios.post('/upload-by-link', {link: photoLink})
-    setAddedPhotos(prev => {
-      return [...prev, filename]
-    })
-    setPhotoLink('')
+    try {
+      const {data:filename} = await axios.post('/upload-by-link', {link: photoLink})
+      if (filename === 405) {
+        alert('URL Not exist')
+      } else {
+        setAddedPhotos(prev => {
+          return [...prev, filename]
+        })
+      }
+      setPhotoLink('')
+    } catch (e){
+      alert('Something happen')
+    }
   }
 
   function uploadPhoto(e) {
@@ -107,8 +115,8 @@ export default function PlacesPage() {
             </div>
             <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
               {addedPhotos.length > 0 && addedPhotos.map(link => (
-                <div key={link}>
-                  <img className="rounded-2xl object-cover h-48" 
+                <div className="h-32 flex" key={link}>
+                  <img className="rounded-2xl w-full object-cover" 
                     src={'http://localhost:4000/uploads/' + link} alt={link} />
                 </div>
               ))}
