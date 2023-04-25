@@ -81,7 +81,7 @@ export default function PlacesFormPage() {
   }
   
   return (
-    <div className="">
+    <div className="mb-32">
       <AccountNav />
       
       <form onSubmit={savePlace}>
