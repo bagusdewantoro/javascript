@@ -36,7 +36,7 @@ export default function PlacesPage() {
           <Link to={'/account/places/' + place._id}
             key={place._id}
             className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
-            <div className="flex h-32 w-32 bg-gray-300 grow shrink-0">
+            <div className="flex h-32 w-32 bg-gray-300 shrink-0">
               {place.addedPhotos.length && (
                 <img 
                   className='object-cover'
