@@ -7,12 +7,13 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import PlacesPage from './pages/PlacesPage';
 import PlacesFormPage from './pages/PlacesFormPage';
+import PlacePage from './pages/PlacePage';
 import Layout from "./Layout";
 import axios from 'axios'
-import {api} from './apiConfig'
+import {url} from './apiConfig'
 import {UserContextProvider} from './UserContext.jsx'
 
-axios.defaults.baseURL = api.defaults.baseURL
+axios.defaults.baseURL = url
 axios.defaults.withCredentials = true
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 	      	<Route path="/account/places" element={<PlacesPage />} />
 	      	<Route path="/account/places/new" element={<PlacesFormPage />} />
 	      	<Route path="/account/places/:id" element={<PlacesFormPage />} />
+	      	<Route path="/place/:id" element={<PlacePage />} />
 	      </Route>
 	    </Routes>
   	</UserContextProvider>

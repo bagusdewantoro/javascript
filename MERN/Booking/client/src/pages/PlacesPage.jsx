@@ -2,17 +2,14 @@ import { Link, useParams } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from 'axios'
-import {api} from '../apiConfig.js'
+import {url} from '../apiConfig.js'
 
-
-axios.defaults.baseURL = api.defaults.baseURL
 
 export default function PlacesPage() {
   const [places, setPlaces] = useState([])
   useEffect(() => {
     axios.get('/user-places').then(({data}) => {
       setPlaces(data)
-      // console.log(data[0].addedPhotos[0])
     })
   }, [])
   
@@ -40,7 +37,7 @@ export default function PlacesPage() {
               {place.addedPhotos.length && (
                 <img 
                   className='object-cover'
-                  src={axios.defaults.baseURL + '/uploads/' + place.addedPhotos[0]} alt='' />
+                  src={url + '/uploads/' + place.addedPhotos[0]} alt='' />
               )}
             </div>
             <div className="grow-0 shrink">
