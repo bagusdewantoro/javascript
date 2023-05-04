@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {useParams} from "react-router-dom"
 import axios from 'axios'
+import Image from '../Image.jsx'
 import {url} from '../apiConfig.js'
 
 
@@ -35,7 +36,7 @@ export default function PlacePage() {
           </div>
           {place?.addedPhotos?.length > 0 && place.addedPhotos.map(photo => (
             <div key={photo}>
-              <img src={url + '/uploads/' + photo} alt="" />
+              <Image src={photo} alt="" />
             </div>
           ))}
         </div>
@@ -61,20 +62,20 @@ export default function PlacePage() {
           <div>
             {place.addedPhotos?.[0] && (
               <div className="">
-                <img className="aspect-square object-cover"
-                  src={url + "/uploads/" + place.addedPhotos[0]} alt="" />
+                <Image className="aspect-square object-cover"
+                  src={place.addedPhotos[0]} alt="" />
               </div>
             )}
           </div>
           <div className="grid">
             {place.addedPhotos?.[1] && (
-              <img className="aspect-square object-cover"
-                src={url + "/uploads/" + place.addedPhotos[1]} alt="" />
+              <Image className="aspect-square object-cover"
+                src={place.addedPhotos[1]} alt="" />
             )}
             <div className="overflow-hidden">
               {place.addedPhotos?.[2] && (
-                <img className="aspect-square object-cover relative top-2"
-                  src={url + "/uploads/" + place.addedPhotos[2]} alt="" />
+                <Image className="aspect-square object-cover relative top-2"
+                  src={place.addedPhotos[2]} alt="" />
               )}
             </div>
           </div>

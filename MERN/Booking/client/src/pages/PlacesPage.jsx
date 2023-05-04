@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import AccountNav from "../AccountNav";
 import { useEffect, useState } from "react";
 import axios from 'axios'
-import {url} from '../apiConfig.js'
+import Image from '../Image.jsx'
 
 
 export default function PlacesPage() {
@@ -35,9 +35,9 @@ export default function PlacesPage() {
             className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl">
             <div className="flex h-32 w-32 bg-gray-300 shrink-0">
               {place.addedPhotos.length && (
-                <img 
+                <Image 
                   className='object-cover'
-                  src={url + '/uploads/' + place.addedPhotos[0]} alt='' />
+                  src={place.addedPhotos[0]} alt='' />
               )}
             </div>
             <div className="grow-0 shrink">
