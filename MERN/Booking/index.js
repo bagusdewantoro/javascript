@@ -24,6 +24,32 @@ app.use(express.json())
 // to read cookies here
 app.use(cookieParser())
 
+app.use('/uploads', express.static(__dirname + '/uploads'))
+
+
+// cross origin
+const whitelist = [
+	'http://localhost:5173/', 
+	'https://bagusbooking.netlify.app',
+	'https://booking-api-duhj.onrender.com/',
+];
+
+app.options('*', cors());
+
+const corsOptions = {
+  credentials: true,
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
+
+
 // AWS S3
 async function uploadToS3(path, originalFilename, mimetype) {
 	const client = new S3Client({
@@ -45,14 +71,6 @@ async function uploadToS3(path, originalFilename, mimetype) {
 	}))
 	return `https://${bucket}.s3.amazonaws.com/${newFilename}`
 }
-
-app.use('/uploads', express.static(__dirname + '/uploads'))
-
-app.use(cors({
-	credentials: true,
-	origin: 'http://localhost:5173'
-}))
-
 
 // TEST
 app.get('/test', (req, res) => {
