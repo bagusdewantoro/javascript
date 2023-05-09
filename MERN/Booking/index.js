@@ -29,12 +29,9 @@ app.use('/uploads', express.static(__dirname + '/uploads'))
 
 // cross origin
 const whitelist = [
-	'http://localhost:5173/', 
+	'http://localhost:5173', 
 	'https://bagusbooking.netlify.app',
-	'https://booking-api-duhj.onrender.com/',
 ];
-
-app.options('*', cors());
 
 const corsOptions = {
   credentials: true,
@@ -73,14 +70,14 @@ async function uploadToS3(path, originalFilename, mimetype) {
 }
 
 // TEST
-app.get('/test', (req, res) => {
+app.get('/api/test', (req, res) => {
 	res.json('test ok')
 })
 
 
 
 // REGISTER
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {name, email, password} = req.body
 
@@ -98,7 +95,7 @@ app.post('/register', async (req, res) => {
 
 
 // LOGIN
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {email, password} = req.body
 	const userDoc = await User.findOne({email})
@@ -124,7 +121,7 @@ app.post('/login', async (req, res) => {
 
 
 // PROFILE
-app.get('/profile', (req, res) => {
+app.get('/api/profile', (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {token} = req.cookies
 	if (token) {
@@ -143,13 +140,13 @@ app.get('/profile', (req, res) => {
 
 
 // LOGOUT
-app.post('/logout', (req, res) => {
+app.post('/api/logout', (req, res) => {
 	res.cookie('token', '').json(true)
 })
 
 
 // UPLOAD PHOTOS BY LINK
-app.post('/upload-by-link', async (req, res) => {
+app.post('/api/upload-by-link', async (req, res) => {
 	try {
 		const {link} = req.body;
 		const newName = 'Photo' + Date.now() + '.jpg'
@@ -167,7 +164,7 @@ app.post('/upload-by-link', async (req, res) => {
 
 // UPLOAD PHOTOS FROM FILE
 const photosMiddleware = multer({dest: '/tmp'})
-app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
+app.post('/api/upload', photosMiddleware.array('photos', 100), async (req, res) => {
 	const uploadedFiles = []
 	try {
 		for (let i=0; i<req.files.length; i++){
@@ -183,7 +180,7 @@ app.post('/upload', photosMiddleware.array('photos', 100), async (req, res) => {
 
 
 // ADD PLACES
-app.post('/places', (req, res) => {
+app.post('/api/places', (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {token} = req.cookies
 	const {
@@ -204,7 +201,7 @@ app.post('/places', (req, res) => {
 
 // GET USER-PLACES
 // All
-app.get('/user-places', (req, res) => {
+app.get('/api/user-places', (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {token} = req.cookies
 	jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -213,7 +210,7 @@ app.get('/user-places', (req, res) => {
 	})
 })
 // Only one
-app.get('/places/:id', async (req, res) => {
+app.get('/api/places/:id', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {id} = req.params
 	res.json(await Place.findById(id))
@@ -221,7 +218,7 @@ app.get('/places/:id', async (req, res) => {
 
 
 // EDIT PLACE
-app.put('/places', async (req, res) => {
+app.put('/api/places', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {token} = req.cookies
 	const {
@@ -244,7 +241,7 @@ app.put('/places', async (req, res) => {
 
 
 // GET PLACES FROM ALL USERS
-app.get('/places', async (req, res) => {
+app.get('/api/places', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	res.json(await Place.find())
 })
