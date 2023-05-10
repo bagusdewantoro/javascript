@@ -1,0 +1,13 @@
+/bookPDF
+/netlify
+/vanillawebprojects
+/50projects50days
+/movie-reviews
+**/node_modules/
+
+
+**/.DS_STORE
+**/.vscode
+**/.cache
+**/.eslintcache
+**/.env
