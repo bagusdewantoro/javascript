@@ -80,7 +80,7 @@ app.get('/api/test', (req, res) => {
 app.post('/api/register', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL).then(() => console.log('connected to DB')) // access mongodb cloud from everywhere
 	const {name, email, password} = req.body
-
+	
 	try {
 		const userDoc = await User.create({
 			name,
@@ -113,9 +113,9 @@ app.post('/api/login', async (req, res) => {
 					res.cookie('token', token).json(userDoc)
 				}
 			)
-		} else res.status(422).json('pass not ok')
+		} else res.status(422).json('Wrong password')
 	} else {
-		res.json('not found')
+		res.status(401).json('User not found')
 	}
 })
 

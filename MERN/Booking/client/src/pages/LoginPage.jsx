@@ -13,12 +13,16 @@ export default function LoginPage() {
 	async function handleLoginSubmit(e) {
 		e.preventDefault()
 		try {
-			const {data} = await axios.post('/login', {email, password})
-			setUser(data)
-			alert('Login successful')
-			setRedirect(true)
+			if (email.length > 0 && password.length > 0) {
+				const {data} = await axios.post('/login', {email, password})
+				setUser(data)
+				alert('Login successful')
+				setRedirect(true)
+			} else {
+				alert('Please fill all the fields above')
+			}
 		} catch (e) {
-			alert('Failed')
+			alert(e.response.data)
 		}
 	}
 

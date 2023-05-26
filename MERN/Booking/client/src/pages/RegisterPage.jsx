@@ -10,14 +10,19 @@ export default function RegisterPage() {
 	async function registerUser(e) {
 		e.preventDefault()
 		try {
-			await axios.post('/register', {
-				name,
-				email,
-				password
-			})
-			alert('Registration successful. Now you can log in')
+			if (name.length > 0 && email.length > 0 && password.length > 0) {
+				await axios.post('/register', {
+					name,
+					email,
+					password
+				})
+				alert('Registration successful. Now you can log in')
+			} else {
+				alert('Please fill all the fields')
+			}
 		} catch (e) {
-			alert('Email already used. Please enter another email')
+			const resMessage = e.response.data.keyValue.email
+			alert(`Email ${resMessage} has been used. Please use another email`)
 		}
 	}
 
