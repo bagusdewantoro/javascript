@@ -31,6 +31,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'))
 const whitelist = [
 	'http://localhost:5173', 
 	'https://bagusbooking.netlify.app',
+	'https://booking-vercel.vercel.app',
 ];
 
 const corsOptions = {
