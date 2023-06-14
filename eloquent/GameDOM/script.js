@@ -14,11 +14,33 @@ let simpleLevelPlan = `
 ......##############..
 ......................`;
 
+class Vec {
+  constructor(x, y) {
+    this.x = x
+    this.y = y
+  }
+  plus(other) {
+    return new Vec(this.x + other.x,  this.y + other.y)
+  }
+}
+
+class Player {
+  constructor(pos, speed) {
+    this.pos = pos        // Vec object
+    this.speed = speed;
+  }
+  get type() { return "player" }
+  static create(pos) {
+    return new Player(pos.plus(new Vec(0, -0.5)), new Vec(0, 0))
+  }
+  size = new Vec(0.8, 1.5);
+}
+
 const levelChars = {
   ".": "empty", 
   "#": "wall", 
   "+": "lava",
-  "@": "player", 
+  "@": Player, 
   "o": "coin",
   "=": "lava", 
 };
@@ -28,10 +50,14 @@ class Level {
     let rows = plan.trim().split("\n").map(l => [...l])
     this.height = rows.length
     this.width = rows[0.].length
+    this.startActors = []
     this.rows = rows.map((row, y) => {
       return row.map((ch, x) => {
         let type = levelChars[ch]
         if (typeof type == "string") return type
+        this.startActors.push(
+          type.create(new Vec(x, y), ch)
+        )
         return "empty"
       })
     })
@@ -60,23 +86,34 @@ function elt(name, attrs, ...children) {
   return dom;
 }
 
-document.body.appendChild(elt(
-  "div",                              // name
-  {class: "game"},                    // attrs
-  elt(                                // ...children
-    "table",                              // name
-    {                                     // attrs
-      class: "background",
-      style: `width: ${new Level(simpleLevelPlan).width * scale}px`
-    }, 
-    ...new Level(simpleLevelPlan).rows.map(row => elt(       // ...children
-      "tr",                                   // name
-      {style: `height: ${scale}px`},          // attrs
-      ...row.map(type => elt(                 // ...children
-        "td",                                     // name
-        {class: type}                             // attrs
-      ))
-    ))
-  )
-))
+function drawGrid(level) {
+  return elt("table", {
+    class: "background",
+    style: `width: ${level.width * scale}px`
+  }, ...level.rows.map(row =>
+    elt("tr", {style: `height: ${scale}px`},
+        ...row.map(type => elt("td", {class: type})))
+  ));
+}
 
+function drawActors(actors) {
+  return elt("div", {}, ...actors.map(actor => {
+    let rect = elt("div", {class: `actor ${actor.type}`});
+    rect.style.width = `${actor.size.x * scale}px`;
+    rect.style.height = `${actor.size.y * scale}px`;
+    rect.style.left = `${actor.pos.x * scale}px`;
+    rect.style.top = `${actor.pos.y * scale}px`;
+    return rect;
+  }));
+}
+
+document
+  .body
+  .appendChild(elt(
+    "div", 
+    {class: "game"}, 
+    drawGrid(simpleLevel)
+  ))
+  .appendChild(
+    drawActors(simpleLevel.startActors)
+  )
