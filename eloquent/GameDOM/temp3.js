@@ -33,6 +33,14 @@ class Player {
   static create(pos) {
     return new Player(pos.plus(new Vec(0, -0.5)), new Vec(0, 0))
   }
+  update = function(time, state, keys) {
+    let xSpeed = 0;
+    if (keys.ArrowLeft) xSpeed -= 7;
+    if (keys.ArrowRight) xSpeed += 7;
+    let pos = this.pos;
+    let movedX = pos.plus(new Vec(xSpeed * time, 0));
+    return new Player(movedX, new Vec(xSpeed, 0));
+  };
   size = new Vec(0.8, 1.5);
 }
 
@@ -64,9 +72,8 @@ class Level {
   }
 }
 
+
 let simpleLevel = new Level(simpleLevelPlan)
-
-
 
 /**
   * DRAWING
@@ -107,60 +114,35 @@ function drawActors(actors) {
   }));
 }
 
-
-
-/**
-  * DRAWING
-  * Draw Player & Input Handler
-  */
-
-const speed = 0.4
-
-// Game object later will be changed to State class
-let Game = {
-  level: simpleLevel,
-  actors: simpleLevel.startActors
-}
-
-// DOMDisplay object later will be changed to DOMDisplay class
-let DOMDisplay = {
-  actorLayer: null,
-  dom: elt("div", {class: "game"}, drawGrid(simpleLevel)),
-  get generate(){
-    return document.body.appendChild(this.dom)
+class DOMDisplay {
+  constructor(parent, level) {
+    this.dom = elt("div", {class: "game"}, drawGrid(level));
+    this.actorLayer = null;
+    parent.appendChild(this.dom);
   }
+  syncState = function(state) {
+    if (this.actorLayer) this.actorLayer.remove();
+    this.actorLayer = drawActors(state.actors);
+    this.dom.appendChild(this.actorLayer);
+    this.dom.className = `game ${state.status}`;
+  };
 }
 
-// updatePlayer function later will be changed to update function of Player class
-function updatePlayer(keys) {
-  let xSpeed = 0;
-  if (keys.ArrowLeft) xSpeed -= speed;
-  if (keys.ArrowRight) xSpeed += speed;
-  let pos = Game.actors[0].pos
-  let movedX = pos.plus(new Vec(xSpeed, 0));
-  return new Player(movedX, new Vec(xSpeed, 0));
-};
-
-// updateDisplay function later will be changed to syncState function of DOMDisplay class
-function updateDisplay(game, display) {
-  if (display.actorLayer) display.actorLayer.remove();
-  display.actorLayer = drawActors(game.actors);
-  display.generate.appendChild(display.actorLayer)
-};
-
-// updateGame function later will be changed to update function of State class
-function updateGame( keys){
-  let actors = Game.actors
-    .map(() => updatePlayer(keys));
-  Game.actors = actors
-  return Game;
+class State {
+  constructor(level, actors, status) {
+    this.level = level;
+    this.actors = actors;
+    this.status = status;
+  }
+  update = function(time, keys) {
+    let actors = this.actors
+      .map(actor => actor.update(time, this, keys));
+    let newState = new State(this.level, actors, this.status);
+    if (newState.status != "playing") return newState;
+    let player = newState.player;
+    return newState;
+  };
 }
-
-const logging = () => console.log(('Game.actors[0].pos = ', Game.actors[0].pos))
-
-// initial display before press the key
-updateDisplay(Game, DOMDisplay);
-logging()
 
 function trackKeys(keys) {
   let down = Object.create(null);
@@ -168,10 +150,6 @@ function trackKeys(keys) {
     if (keys.includes(event.key)) {
       down[event.key] = event.type == "keydown";
       event.preventDefault();
-      // update the display after press the key
-      Game = updateGame(arrowKeys);
-      updateDisplay(Game, DOMDisplay);
-      logging()
     }
   }
   window.addEventListener("keydown", track);
@@ -179,4 +157,33 @@ function trackKeys(keys) {
   return down;
 }
 
-const arrowKeys =  trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"]);
+var arrowKeys =
+  trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"]);
+
+function runAnimation(frameFunc) {
+  let lastTime = null;
+  function frame(time) {
+    if (lastTime != null) {
+      let timeStep = Math.min(time - lastTime, 100) / 1000;
+      if (frameFunc(timeStep) === false) return;
+    }
+    lastTime = time;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+let display = new DOMDisplay(document.body, new Level(simpleLevelPlan));
+let state = new State(
+              new Level(simpleLevelPlan), 
+              new Level(simpleLevelPlan).startActors, 
+              "playing"
+            );
+
+runAnimation(time => {
+  state = state.update(time, arrowKeys);
+  display.syncState(state);
+});
+
+
+

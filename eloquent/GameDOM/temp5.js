@@ -67,7 +67,6 @@ class Level {
 let simpleLevel = new Level(simpleLevelPlan)
 
 
-
 /**
   * DRAWING
   * Drawing using HTML DOM
@@ -106,7 +105,6 @@ function drawActors(actors) {
     return rect;
   }));
 }
-
 
 
 /**
@@ -180,3 +178,4 @@ function trackKeys(keys) {
 }
 
 const arrowKeys =  trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"]);
+

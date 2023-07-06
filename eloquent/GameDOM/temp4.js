@@ -33,6 +33,14 @@ class Player {
   static create(pos) {
     return new Player(pos.plus(new Vec(0, -0.5)), new Vec(0, 0))
   }
+  update = function(time, keys) {
+    let xSpeed = 0;
+    if (keys.ArrowLeft) xSpeed -= 7;
+    if (keys.ArrowRight) xSpeed += 7;
+    let pos = this.pos;
+    let movedX = pos.plus(new Vec(xSpeed * time, 0));
+    return new Player(movedX, new Vec(xSpeed, 0));
+  };
   size = new Vec(0.8, 1.5);
 }
 
@@ -65,7 +73,6 @@ class Level {
 }
 
 let simpleLevel = new Level(simpleLevelPlan)
-
 
 
 /**
@@ -107,59 +114,36 @@ function drawActors(actors) {
   }));
 }
 
-
-
-/**
-  * DRAWING
-  * Draw Player & Input Handler
-  */
-
-const speed = 0.4
-
-// Game object later will be changed to State class
-let Game = {
-  level: simpleLevel,
-  actors: simpleLevel.startActors
-}
-
-// DOMDisplay object later will be changed to DOMDisplay class
-let DOMDisplay = {
-  actorLayer: null,
-  dom: elt("div", {class: "game"}, drawGrid(simpleLevel)),
-  get generate(){
-    return document.body.appendChild(this.dom)
+class DOMDisplay {
+  constructor(parent, level) {
+    this.dom = elt("div", {class: "game"}, drawGrid(level));
+    this.actorLayer = null;
+    parent.appendChild(this.dom);
   }
+  syncState = function(state) {
+    if (this.actorLayer) this.actorLayer.remove();
+    this.actorLayer = drawActors(state.actors);
+    this.dom.appendChild(this.actorLayer);
+  };
 }
 
-// updatePlayer function later will be changed to update function of Player class
-function updatePlayer(keys) {
-  let xSpeed = 0;
-  if (keys.ArrowLeft) xSpeed -= speed;
-  if (keys.ArrowRight) xSpeed += speed;
-  let pos = Game.actors[0].pos
-  let movedX = pos.plus(new Vec(xSpeed, 0));
-  return new Player(movedX, new Vec(xSpeed, 0));
-};
-
-// updateDisplay function later will be changed to syncState function of DOMDisplay class
-function updateDisplay(game, display) {
-  if (display.actorLayer) display.actorLayer.remove();
-  display.actorLayer = drawActors(game.actors);
-  display.generate.appendChild(display.actorLayer)
-};
-
-// updateGame function later will be changed to update function of State class
-function updateGame( keys){
-  let actors = Game.actors
-    .map(() => updatePlayer(keys));
-  Game.actors = actors
-  return Game;
+class State {
+  constructor(level, actors) {
+    this.level = level;
+    this.actors = actors;
+  }
+  update = function(time, keys) {
+    let actors = this.actors
+      .map(actor => actor.update(time, keys));
+    return new State(this.level, actors);
+  };
 }
 
-const logging = () => console.log(('Game.actors[0].pos = ', Game.actors[0].pos))
+const logging = () => console.log(('state.actors[0].pos = ', state.actors[0].pos))
 
-// initial display before press the key
-updateDisplay(Game, DOMDisplay);
+let display = new DOMDisplay(document.body, simpleLevel);
+let state = new State(simpleLevel,simpleLevel.startActors);
+display.syncState(state);
 logging()
 
 function trackKeys(keys) {
@@ -168,9 +152,10 @@ function trackKeys(keys) {
     if (keys.includes(event.key)) {
       down[event.key] = event.type == "keydown";
       event.preventDefault();
-      // update the display after press the key
-      Game = updateGame(arrowKeys);
-      updateDisplay(Game, DOMDisplay);
+
+      state = state.update(0.1, arrowKeys);
+
+      display.syncState(state);
       logging()
     }
   }
@@ -180,3 +165,4 @@ function trackKeys(keys) {
 }
 
 const arrowKeys =  trackKeys(["ArrowLeft", "ArrowRight", "ArrowUp"]);
+
